@@ -1,4 +1,3 @@
-
 <?php
 
 use Illuminate\Support\Facades\Route;
@@ -9,7 +8,3 @@ Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/regions/{slug}', [RegionController::class, 'show'])
     ->name('regions.show');
-=======
-Route::get('/', function () {
-    return view('home');
-});

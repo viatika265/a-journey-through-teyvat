@@ -1,11 +1,12 @@
+
 @extends('layouts.app')
 
 @section('title', 'Home')
 
 @section('content')
 
-{{-- HERO SECTION --}}
-<section class="min-h-screen bg-gray-950 text-white flex items-center justify-center">
+{{-- HERO SECTION: PUNYA TEMANMU --}}
+<div class="min-h-screen bg-gray-950 text-white flex items-center justify-center">
     <div class="text-center">
         <h1 class="text-4xl font-bold">
             A Journey Through Teyvat
@@ -22,9 +23,9 @@
             Explore Teyvat
         </a>
     </div>
-</section>
+</div>
 
-{{-- REGION SECTION --}}
+{{-- REGION SECTION: TAMBAHAN DARI KAMU --}}
 <section id="regions" class="min-h-screen bg-gray-900 text-white px-8 py-20">
     <div class="max-w-6xl mx-auto">
         <h2 class="text-3xl font-bold text-center mb-4">
@@ -55,53 +56,3 @@
 </section>
 
 @endsection
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Teyvara Aetheris | A Journey Through Teyvat</title>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-
-<body>
-    <main>
-        <!-- HERO SECTION -->
-        <section class="hero">
-            <div class="hero-content">
-                <p class="eyebrow">A WORLD OF ELEMENTS</p>
-
-                <h1>Teyvara Aetheris</h1>
-
-                <p class="subtitle">
-                    A Journey Through Teyvat
-                </p>
-
-                <button id="explore-btn">
-                    Explore Teyvat
-                </button>
-            </div>
-        </section>
-
-        <!-- INTRO SECTION -->
-        <section class="intro" id="intro">
-            <div class="intro-content">
-                <p class="eyebrow">WELCOME, TRAVELER</p>
-
-                <h2>Your Journey Begins Here</h2>
-
-                <p>
-                    Discover the world of Teyvat,
-                    a land shaped by seven elements
-                    and countless stories waiting to unfold.
-                </p>
-            </div>
-        </section>
-    </main>
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</body>
-</html>
