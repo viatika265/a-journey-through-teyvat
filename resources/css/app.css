@@ -4,6 +4,84 @@
 @source '../../storage/framework/views/*.php';
 
 @theme {
+    /* color neutral */
+    --color-neutral-light:#f6f6f6;
+    --color-neutral-light-hover:#f2f2f2;
+    --color-neutral-light-active:#e4e4e4;
+    --color-neutral-normal:#a8a8a8;
+    --color-neutral-normal-hover:#979797;
+    --color-neutral-normal-active:#868686;
+    --color-neutral-dark:#7e7e7e;
+    --color-neutral-dark-hover:#656565;
+    --color-neutral-dark-active:#4c4c4c;
+    --color-neutral-darker:#3b3b3b;
+
+    /* color Blue */
+    --color-blue-light:#eaecf2;
+    --color-blue-light-hover:#dfe2eb;
+    --color-blue-light-active:#bcc3d5;
+    --c0lor-blue-normal:#283f79;
+    --color-blue-normal-hover:#24396d;
+    --color-blue-normal-active:#203261;
+    --color-blue-dark:#1e2f5b;
+    --color-blue-dark-horver:#182649;
+    --color-blue-dark-active:#121c36;
+    --color-blue-darker:#0e162a;
+
+    /* color yellow */
+    --color-yellow-light:#fcf8f0;
+    --color-yellow-light-hover:#faf4e9;
+    --color-yellow-light-active:#f5e9d1;
+    --color-yellow-normal:#deb76c;
+    --color-yellow-normal-hover:#c8a561;
+    --color-yellow-normal-active:#b29256;
+    --color-yellow-dark:#a78951;
+    --color-yellow-dark-hover:#856e41;
+    --color-yellow-dark-active:#645231;
+    --color-yellow-darker:#4e4026;
+    
+
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+/* typography */
+@theme {
+    /* =========================
+       FONT FAMILY
+       ========================= */
+    --font-display: 'Macondo Swash Caps', cursive;
+    --font-body: 'Itim', cursive;
+
+    /* =========================
+       TYPOGRAPHY
+       ========================= */
+
+    /* Macondo */
+    --text-display: 4rem;
+    --text-display--line-height: 1.13;
+
+    --text-heading-1: 3rem;
+    --text-heading-1--line-height: 1.16;
+
+    --text-heading-2: 2.25rem;
+    --text-heading-2--line-height: 122%;
+
+    --text-heading-3: 1.875rem;
+    --text-heading-3--line-height: 1.26;
+
+    --text-heading-4: 1.5rem;
+    --text-heading-4--line-height: 1.33;
+
+    /* Itim */
+    --text-heading-5: 1.25rem;
+    --text-heading-5--line-height: 1.33;
+
+    --text-body: 1.125rem;
+    --text-body--line-height: 1.55;
+
+    --text-body-small: 1rem;
+    --text-body-small--line-height: 1.55;
+
+}
+
