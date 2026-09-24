@@ -18,7 +18,6 @@
 
         <a
             href="#regions"
-            class="inline-block mt-6 btn-primary btn-lg"
         >
             Explore Teyvat
         </a>
