@@ -3,8 +3,7 @@
 @section('title', 'Home')
 
 @section('content')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
 <head>
     <!-- Tag meta lainnya -->
     @vite(['resources/css/app.css'])
@@ -29,8 +28,8 @@
             Explore Teyfat
         </x-button>
 
-        <x-character-carousel />
-        <x-character-icon />
+        
+        @include('components.characters.index')
         
     </div>
 </div>

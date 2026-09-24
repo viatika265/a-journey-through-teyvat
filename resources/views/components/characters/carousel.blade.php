@@ -39,21 +39,11 @@
     <!-- Wrapper Swiper -->
     <div class="swiper character-swiper w-full max-w-[1319px] mx-auto overflow-hidden px-4">
         <div class="swiper-wrapper h-[260px] md:h-[340px] xl:h-[420px]">
-            
-            <!-- Karakter 1 (Durin) -->
-            <div class="swiper-slide h-full flex justify-center items-center">
-                <img src="{{ asset('images/Durin_Mondstadt.png') }}" class="h-[280px] md:h-[350px] xl:h-[400px] w-auto object-contain" alt="Durin">
-            </div>
-
-            <!-- Karakter 2 (Venti) -->
-            <div class="swiper-slide h-full flex justify-center items-center">
-                <img src="{{ asset('images/Venti_Mondstadt 1.png') }}" class="h-[280px] md:h-[350px] xl:h-[400px] w-auto object-contain" alt="Venti">
-            </div>
-
-            <!-- Karakter 3 (Lohen) -->
-            <div class="swiper-slide h-full flex justify-center items-center">
-                <img src="{{ asset('images/Lohen_Mondstadt.png') }}" class="h-[280px] md:h-[350px] xl:h-[400px] w-auto object-contain" alt="Lohen">
-            </div>
+            @foreach($characters as $character)
+                <div class="swiper-slide h-full flex justify-center items-center">
+                    <img src="{{ asset('images/' . $character['image']) }}" class="h-[280px] md:h-[350px] xl:h-[400px] w-auto object-contain" alt="{{ $character['name'] }}">
+                </div>
+            @endforeach
 
         </div>
     </div>
