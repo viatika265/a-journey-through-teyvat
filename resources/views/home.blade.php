@@ -4,15 +4,22 @@
 @section('title', 'Home')
 
 @section('content')
+<head>
+    <!-- Tag meta lainnya -->
+    @vite(['resources/css/app.css'])
+</head>
 
 {{-- HERO SECTION: PUNYA TEMANMU --}}
 <div class="min-h-screen bg-gray-950 text-white flex items-center justify-center">
     <div class="text-center">
-        <h1 class="text-4xl font-bold">
+        
+        <!-- Menguji font-display, custom text size heading-1, dan warna yellow-normal -->
+        <h1 class="font-display text-heading-1 text-yellow-normal font-bold tracking-wide">
             A Journey Through Teyvat
         </h1>
 
-        <p class="mt-4 text-gray-400">
+        <!-- Menguji ukuran text-body dan warna neutral-normal -->
+        <p class="mt-4 text-body text-neutral-normal">
             Welcome, Traveler.
         </p>
 
