@@ -18,7 +18,7 @@
 
         <a
             href="#regions"
-            class="inline-block mt-6 rounded-lg bg-blue-500 px-6 py-3 font-semibold hover:bg-blue-600 transition"
+            class="inline-block mt-6 btn-primary btn-lg"
         >
             Explore Teyvat
         </a>
