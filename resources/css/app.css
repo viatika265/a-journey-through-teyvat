@@ -1,114 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Macondo+Swash+Caps&display=swap');
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
 
+
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    /* color neutral */
+    --color-neutral-light:#f6f6f6;
+    --color-neutral-light-hover:#f2f2f2;
+    --color-neutral-light-active:#e4e4e4;
+    --color-neutral-normal:#a8a8a8;
+    --color-neutral-normal-hover:#979797;
+    --color-neutral-normal-active:#868686;
+    --color-neutral-dark:#7e7e7e;
+    --color-neutral-dark-hover:#656565;
+    --color-neutral-dark-active:#4c4c4c;
+    --color-neutral-darker:#3b3b3b;
+
+    /* color Blue */
+    --color-blue-light:#eaecf2;
+    --color-blue-light-hover:#dfe2eb;
+    --color-blue-light-active:#bcc3d5;
+    --color-blue-normal:#283f79;
+    --color-blue-normal-hover:#24396d;
+    --color-blue-normal-active:#203261;
+    --color-blue-dark:#1e2f5b;
+    --color-blue-dark-hover:#182649;
+    --color-blue-dark-active:#121c36;
+    --color-blue-darker:#0e162a;
+
+    /* color yellow */
+    --color-yellow-light:#fcf8f0;
+    --color-yellow-light-hover:#faf4e9;
+    --color-yellow-light-active:#f5e9d1;
+    --color-yellow-normal:#deb76c;
+    --color-yellow-normal-hover:#c8a561;
+    --color-yellow-normal-active:#b29256;
+    --color-yellow-dark:#a78951;
+    --color-yellow-dark-hover:#856e41;
+    --color-yellow-dark-active:#645231;
+    --color-yellow-darker:#4e4026;
+    
 }
 
+/* typography */
+@theme {
+    /* =========================
+       FONT FAMILY
+       ========================= */
+    --font-display: 'Macondo Swash Caps', cursive;
+    --font-body: 'Itim', cursive;
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+    /* =========================
+       TYPOGRAPHY
+       ========================= */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    /* Macondo */
+    --text-display: 4rem;
+    --text-display--line-height: 1.13;
+
+    --text-heading-1: 3rem;
+    --text-heading-1--line-height: 1.16;
+
+    --text-heading-2: 2.25rem;
+    --text-heading-2--line-height: 122%;
+
+    --text-heading-3: 1.875rem;
+    --text-heading-3--line-height: 1.26;
+
+    --text-heading-4: 1.5rem;
+    --text-heading-4--line-height: 1.33;
+
+    /* Itim */
+    --text-heading-5: 1.25rem;
+    --text-heading-5--line-height: 1.33;
+
+    --text-body: 1.125rem;
+    --text-body--line-height: 1.55;
+
+    --text-body-small: 1rem;
+    --text-body-small--line-height: 1.55;
+
 }
 
-body {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: #17231f;
-    color: #F7F4EF;
-}
-
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 40px 24px;
-
-    background:
-        linear-gradient(
-            rgba(10, 20, 18, 0.35),
-            rgba(10, 20, 18, 0.75)
-        ),
-        url('/images/teyvat-hero.jpg');
-
-    background-size: cover;
-    background-position: center;
-}
-
-.hero-content {
-    max-width: 800px;
-}
-
-.eyebrow {
-    letter-spacing: 5px;
-    font-size: 12px;
-    margin-bottom: 24px;
-}
-
-h1 {
-    font-size: clamp(42px, 8vw, 88px);
-    margin-bottom: 12px;
-}
-
-.subtitle {
-    font-size: clamp(16px, 2vw, 24px);
-    margin-bottom: 36px;
-}
-
-button {
-    padding: 15px 32px;
-    border: 1px solid #F7F4EF;
-    background: transparent;
-    color: #F7F4EF;
-    font: inherit;
-    cursor: pointer;
-    transition: 0.3s ease;
-}
-
-button:hover {
-    background: #F7F4EF;
-    color: #17231f;
-}
-
-
-/* INTRO SECTION */
-
-.intro {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 80px 24px;
-
-    background: #17231f;
-    color: #F7F4EF;
-}
-
-.intro-content {
-    max-width: 750px;
-}
-
-.intro h2 {
-    font-size: clamp(32px, 5vw, 64px);
-    margin-bottom: 24px;
-}
-
-.intro-content > p:last-child {
-    font-size: 18px;
-    line-height: 1.8;
-    color: #d5d9d5;
-}
-
-/* SMOOTH SCROLL */
-
-html {
-    scroll-behavior: smooth;
-}
