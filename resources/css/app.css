@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Macondo+Swash+Caps&display=swap');
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
+
 
 @theme {
     /* color neutral */
@@ -20,11 +22,11 @@
     --color-blue-light:#eaecf2;
     --color-blue-light-hover:#dfe2eb;
     --color-blue-light-active:#bcc3d5;
-    --c0lor-blue-normal:#283f79;
+    --color-blue-normal:#283f79;
     --color-blue-normal-hover:#24396d;
     --color-blue-normal-active:#203261;
     --color-blue-dark:#1e2f5b;
-    --color-blue-dark-horver:#182649;
+    --color-blue-dark-hover:#182649;
     --color-blue-dark-active:#121c36;
     --color-blue-darker:#0e162a;
 
@@ -40,9 +42,6 @@
     --color-yellow-dark-active:#645231;
     --color-yellow-darker:#4e4026;
     
-
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 /* typography */
