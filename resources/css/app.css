@@ -7,3 +7,108 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: #17231f;
+    color: #F7F4EF;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+
+    background:
+        linear-gradient(
+            rgba(10, 20, 18, 0.35),
+            rgba(10, 20, 18, 0.75)
+        ),
+        url('/images/teyvat-hero.jpg');
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.eyebrow {
+    letter-spacing: 5px;
+    font-size: 12px;
+    margin-bottom: 24px;
+}
+
+h1 {
+    font-size: clamp(42px, 8vw, 88px);
+    margin-bottom: 12px;
+}
+
+.subtitle {
+    font-size: clamp(16px, 2vw, 24px);
+    margin-bottom: 36px;
+}
+
+button {
+    padding: 15px 32px;
+    border: 1px solid #F7F4EF;
+    background: transparent;
+    color: #F7F4EF;
+    font: inherit;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+button:hover {
+    background: #F7F4EF;
+    color: #17231f;
+}
+
+
+/* INTRO SECTION */
+
+.intro {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px;
+
+    background: #17231f;
+    color: #F7F4EF;
+}
+
+.intro-content {
+    max-width: 750px;
+}
+
+.intro h2 {
+    font-size: clamp(32px, 5vw, 64px);
+    margin-bottom: 24px;
+}
+
+.intro-content > p:last-child {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #d5d9d5;
+}
+
+/* SMOOTH SCROLL */
+
+html {
+    scroll-behavior: smooth;
+}
