@@ -30,6 +30,7 @@
         </x-button>
 
         <x-character-carousel />
+        <x-character-icon />
         
     </div>
 </div>
