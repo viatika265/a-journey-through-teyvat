@@ -3,6 +3,8 @@
 @section('title', 'Home')
 
 @section('content')
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <head>
     <!-- Tag meta lainnya -->
     @vite(['resources/css/app.css'])
@@ -23,9 +25,11 @@
         </p>
 
         <!-- Menguji warna button custom (blue-normal) dengan efek hover/active dan teks kuning -->
-        <button class="mt-6 rounded-lg bg-blue-normal px-6 py-3 text-body-small font-semibold text-yellow-light hover:bg-blue-normal-hover active:bg-blue-normal-active transition">
-            Explore Teyvat
-        </button>
+        <x-button size="medium">
+            Explore Teyfat
+        </x-button>
+
+        <x-character-carousel />
         
     </div>
 </div>
