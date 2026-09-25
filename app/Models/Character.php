@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Region;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Character extends Model
 {
@@ -21,4 +23,9 @@ class Character extends Model
         'sort_order',
         'is_featured',
     ];
+
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class);
+    }
 }
