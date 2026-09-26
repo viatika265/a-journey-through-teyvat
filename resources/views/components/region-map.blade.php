@@ -30,7 +30,7 @@
                     </svg>
 
                     <!-- Emblem dinamis -->
-                    <img src="{{ asset('images/' . $region['emblem']) }}" class="region-emblem" alt="{{ $region['name'] }} Emblem">
+                    <img src="{{ asset( $region['emblem']) }}" class="region-emblem" alt="{{ $region['name'] }} Emblem">
                 </div>
             @endforeach
     
