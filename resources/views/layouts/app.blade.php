@@ -10,6 +10,17 @@
 </head>
 
 <body>
+    <nav class="fixed top-0 left-0 z-50 w-full">
+        <div class="flex items-center justify-between px-10 py-5 font-body text-heading-5 text-neutral-light">
+            <a href="#teyvat">Home</a>
+            <a href="#region-map">Teyvat Map</a>
+            <a href="#explore">Explore Teyvat</a>
+            <a href="#trailer">Trailer</a>
+            <a href="#update">Update</a>
+            <a href="#download">Download</a>
+        </div>
+    </nav>
+
     @yield('content')
 </body>
 </html>
