@@ -84,3 +84,28 @@
 
 }
 
+@layer components {
+    .region-pin {
+        @apply absolute cursor-pointer transition-transform hover:scale-110;
+        width: 200px;
+        height: 225px;
+        filter: drop-shadow(0px 10px 10px rgba(0,0,0,0.7));
+    }
+
+    .region-emblem {
+        @apply absolute object-contain;
+        left: 20px;
+        top: 22px;
+        width: 160px;
+        height: 160px;
+    }
+}
+@keyframes moveClouds {
+    0% { background-position: 0% 0; }
+    100% { background-position: 100% 0; }
+}
+
+.animate-clouds {
+    background-size: 200% auto;
+    animation: moveClouds 80s  linear infinite; 
+}

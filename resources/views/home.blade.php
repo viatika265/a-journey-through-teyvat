@@ -10,7 +10,7 @@
 </head>
 
 <!-- Menggunakan bg custom blue-darker dan base font-body -->
-<div class="min-h-screen bg-blue-darker text-neutral-light flex items-center justify-center font-body">
+<div class="min-h-screen bg-blue-darker text-neutral-light flex flex-col font-body overflow-x-hidden">
     <div class="text-center">
         
         <!-- Menguji font-display, custom text size heading-1, dan warna yellow-normal -->
@@ -29,8 +29,13 @@
         </x-button>
 
         
-        @include('components.characters.index')
         
+        
+    </div>
+
+    <!-- Menguji komponen region-map -->
+    <div class="w-full mt-16">
+        <x-region-map :regions="$regions" />
     </div>
 </div>
 @endsection
