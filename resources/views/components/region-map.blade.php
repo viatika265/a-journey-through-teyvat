@@ -21,7 +21,10 @@
             </div>
 
             @foreach($regions as $region)
-                <div class="region-pin group z-10" style="left: {{ $region['x'] }}px; top: {{ $region['y'] }}px;">
+                <div 
+                    class="region-pin group z-10" 
+                    data-region="{{ $region['name'] }}"
+                    style="left: {{ $region['x'] }}px; top: {{ $region['y'] }}px;">
                     
                     <!-- SVG Pin dengan warna dinamis -->
                     <svg viewBox="0 0 100 125" fill="none" xmlns="http://www.w3.org/2000/svg" class="absolute inset-0 w-full h-full">
