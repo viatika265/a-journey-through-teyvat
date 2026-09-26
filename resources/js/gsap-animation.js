@@ -19,15 +19,13 @@ const exploreButton = document.querySelector("#explore-btn");
 
 
 // ==========================================
-// HERO ENTRANCE ANIMATION
+// HERO ENTRANCE
 // ==========================================
 
 const heroTimeline = gsap.timeline({
     paused: true
 });
 
-
-// H1
 if (heroTitle) {
     heroTimeline.fromTo(
         heroTitle,
@@ -38,14 +36,12 @@ if (heroTitle) {
         {
             opacity: 1,
             y: 0,
-            duration: 0.8,
+            duration: 1,
             ease: "power3.out"
         }
     );
 }
 
-
-// Subtitle
 if (heroSubtitle) {
     heroTimeline.fromTo(
         heroSubtitle,
@@ -56,15 +52,13 @@ if (heroSubtitle) {
         {
             opacity: 1,
             y: 0,
-            duration: 0.6,
+            duration: 0.7,
             ease: "power3.out"
         },
-        "-=0.3"
+        "-=0.35"
     );
 }
 
-
-// Explore Button
 if (exploreButton) {
     heroTimeline.fromTo(
         exploreButton,
@@ -77,26 +71,29 @@ if (exploreButton) {
             opacity: 1,
             y: 0,
             scale: 1,
-            duration: 0.5,
-            ease: "back.out(1.7)"
+            duration: 0.4,
+            ease: "power2.out"
         },
-        "-=0.2"
+        "-=0.4"
     );
 }
 
-
-// Jalankan animasi hero
 heroTimeline.play();
 
 
 // ==========================================
-// HERO REPLAY SAAT SCROLL KEMBALI
+// HERO REPLAY
 // ==========================================
 
 if (hero) {
     ScrollTrigger.create({
         trigger: hero,
         start: "top 80%",
+        end: "bottom 20%",
+
+        onEnter: () => {
+            heroTimeline.restart();
+        },
 
         onEnterBack: () => {
             heroTimeline.restart();
@@ -106,134 +103,312 @@ if (hero) {
 
 
 // ==========================================
-// REGION SECTION
+// HERO SCROLL TRANSITION
 // ==========================================
 
-const regionsSection = document.querySelector("#regions");
-const regionsContainer = document.querySelector(
-    "#regions .max-w-6xl"
-);
-const regionGrid = document.querySelector(
-    "#regions .grid"
-);
-const regionCards = document.querySelectorAll(
-    "#regions .grid > a"
-);
+if (hero && heroContent) {
 
+    gsap.to(heroContent, {
+        y: -80,
+        scale: 0.94,
+        opacity: 0.35,
 
-// ==========================================
-// REGION SECTION ENTRANCE
-// ==========================================
-
-if (regionsContainer && regionsSection) {
-
-    gsap.fromTo(
-        regionsContainer,
-        {
-            opacity: 0,
-            y: 80
-        },
-        {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out",
-
-            scrollTrigger: {
-                trigger: regionsSection,
-                start: "top 80%",
-                toggleActions: "play none none none"
-            }
+        scrollTrigger: {
+            trigger: hero,
+            start: "top top",
+            end: "bottom top",
+            scrub: 1.2
         }
-    );
-
-}
-
-
-// ==========================================
-// REGION CARD STAGGER ANIMATION
-// ==========================================
-
-if (regionGrid && regionCards.length > 0) {
-
-    gsap.fromTo(
-        regionCards,
-        {
-            opacity: 0,
-            y: 50,
-            scale: 0.95
-        },
-        {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.6,
-            stagger: 0.15,
-            ease: "power3.out",
-
-            scrollTrigger: {
-                trigger: regionGrid,
-                start: "top 80%",
-                toggleActions: "play none none none"
-            }
-        }
-    );
-
-}
-
-
-// ==========================================
-// REGION CARD HOVER ANIMATION
-// ==========================================
-
-if (regionCards.length > 0) {
-
-    regionCards.forEach((card) => {
-
-        card.addEventListener("mouseenter", () => {
-
-            gsap.to(card, {
-                y: -8,
-                scale: 1.03,
-                duration: 0.25,
-                ease: "power2.out",
-                overwrite: true
-            });
-
-        });
-
-
-        card.addEventListener("mouseleave", () => {
-
-            gsap.to(card, {
-                y: 0,
-                scale: 1,
-                duration: 0.25,
-                ease: "power2.out",
-                overwrite: true
-            });
-
-        });
-
     });
 
 }
 
 
 // ==========================================
-// REGION CARD CLICK FEEDBACK
+// HERO MOUSE PARALLAX
+// ==========================================
+
+if (hero && heroContent) {
+
+    const moveHero = gsap.quickTo(heroContent, "x", {
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    const moveHeroY = gsap.quickTo(heroContent, "y", {
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    hero.addEventListener("mousemove", (e) => {
+
+        const x =
+            (e.clientX / window.innerWidth - 0.5) * 2;
+
+        const y =
+            (e.clientY / window.innerHeight - 0.5) * 2;
+
+        moveHero(x * 15);
+        moveHeroY(y * 15);
+    });
+
+    hero.addEventListener("mouseleave", () => {
+
+        moveHero(0);
+        moveHeroY(0);
+    });
+
+}
+
+
+// ==========================================
+// REGION ELEMENTS
+// ==========================================
+
+const regionsSection = document.querySelector("#regions");
+const regionTitle = document.querySelector("#regions h2");
+const regionSubtitle = document.querySelector("#regions p");
+
+const regionCards = document.querySelectorAll(
+    "#regions .grid > a"
+);
+
+console.log("Jumlah region cards:", regionCards.length);
+
+
+// ==========================================
+// REGION ENTRANCE
+// ==========================================
+
+let regionsTimeline = null;
+
+function animateRegions() {
+
+    if (regionsTimeline && regionsTimeline.isActive()) {
+        return;
+    }
+
+    regionsTimeline = gsap.timeline();
+
+    if (regionTitle) {
+        regionsTimeline.fromTo(
+            regionTitle,
+            {
+                opacity: 0,
+                y: 45
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.9,
+                ease: "power3.out"
+            }
+        );
+    }
+
+    if (regionSubtitle) {
+        regionsTimeline.fromTo(
+            regionSubtitle,
+            {
+                opacity: 0,
+                y: 25
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: "power3.out"
+            },
+            "-=0.45"
+        );
+    }
+
+    if (regionCards.length > 0) {
+
+        regionsTimeline.fromTo(
+            regionCards,
+            {
+                opacity: 0,
+                y: 35,
+                scale: 0.96
+            },
+            {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.9,
+                stagger: 0.12,
+                ease: "power3.out"
+            },
+            "-=0.25"
+        );
+
+    }
+}
+
+
+// ==========================================
+// REGION SCROLL TRIGGER
+// ==========================================
+
+if (regionsSection) {
+
+    ScrollTrigger.create({
+        trigger: regionsSection,
+        start: "top 80%",
+        end: "bottom 20%",
+
+        onEnter: () => {
+            animateRegions();
+        },
+
+        onEnterBack: () => {
+            animateRegions();
+        }
+    });
+
+}
+
+
+// ==========================================
+// REGION TITLE PARALLAX
+// ==========================================
+
+if (regionsSection && regionTitle && regionSubtitle) {
+
+    const moveTitleX = gsap.quickTo(regionTitle, "x", {
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    const moveTitleY = gsap.quickTo(regionTitle, "y", {
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    const moveSubtitleX = gsap.quickTo(regionSubtitle, "x", {
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    const moveSubtitleY = gsap.quickTo(regionSubtitle, "y", {
+        duration: 0.5,
+        ease: "power2.out"
+    });
+
+    regionsSection.addEventListener("mousemove", (e) => {
+
+        const rect = regionsSection.getBoundingClientRect();
+
+        const x =
+            (e.clientX - rect.left) / rect.width - 0.5;
+
+        const y =
+            (e.clientY - rect.top) / rect.height - 0.5;
+
+        moveTitleX(x * 6);
+        moveTitleY(y * 4);
+
+        moveSubtitleX(x * 4);
+        moveSubtitleY(y * 3);
+    });
+
+    regionsSection.addEventListener("mouseleave", () => {
+
+        moveTitleX(0);
+        moveTitleY(0);
+
+        moveSubtitleX(0);
+        moveSubtitleY(0);
+    });
+
+}
+
+
+// ==========================================
+// REGION CARD INTERACTION
 // ==========================================
 
 if (regionCards.length > 0) {
 
     regionCards.forEach((card) => {
 
+        // ----------------------------------
+        // HOVER
+        // ----------------------------------
+
+        card.addEventListener("mouseenter", () => {
+
+            gsap.to(card, {
+                y: -8,
+                scale: 1.03,
+                duration: 0.35,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+
+        });
+
+
+        // ----------------------------------
+        // MOUSE MOVE / 3D TILT
+        // ----------------------------------
+
+        card.addEventListener("mousemove", (e) => {
+
+            const rect = card.getBoundingClientRect();
+
+            const x =
+                (e.clientX - rect.left) / rect.width;
+
+            const y =
+                (e.clientY - rect.top) / rect.height;
+
+            const rotateY = (x - 0.5) * 8;
+            const rotateX = (0.5 - y) * 8;
+
+            gsap.to(card, {
+                rotateX: rotateX,
+                rotateY: rotateY,
+                transformPerspective: 800,
+                duration: 0.35,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+
+        });
+
+
+        // ----------------------------------
+        // MOUSE LEAVE
+        // ----------------------------------
+
+        card.addEventListener("mouseleave", () => {
+
+            gsap.to(card, {
+                y: 0,
+                scale: 1,
+                rotateX: 0,
+                rotateY: 0,
+                duration: 0.45,
+                ease: "power3.out",
+                overwrite: "auto"
+            });
+
+        });
+
+
+        // ----------------------------------
+        // CLICK FEEDBACK
+        // ----------------------------------
+
         card.addEventListener("mousedown", () => {
 
             gsap.to(card, {
                 scale: 0.97,
                 duration: 0.1,
-                ease: "power2.out"
+                ease: "power2.out",
+                overwrite: "auto"
             });
 
         });
@@ -244,7 +419,8 @@ if (regionCards.length > 0) {
             gsap.to(card, {
                 scale: 1.03,
                 duration: 0.15,
-                ease: "power2.out"
+                ease: "power2.out",
+                overwrite: "auto"
             });
 
         });
@@ -255,7 +431,7 @@ if (regionCards.length > 0) {
 
 
 // ==========================================
-// EXPLORE BUTTON
+// EXPLORE BUTTON - SMOOTH SCROLL
 // ==========================================
 
 if (exploreButton) {
@@ -265,15 +441,14 @@ if (exploreButton) {
         e.preventDefault();
 
         gsap.to(window, {
-            duration: 0.25,
+            duration: 1.1,
 
             scrollTo: {
                 y: "#regions",
                 autoKill: false
             },
 
-            ease: "power2.out",
-            overwrite: true
+            ease: "power3.inOut"
         });
 
     });
@@ -291,9 +466,9 @@ if (exploreButton) {
 
         gsap.to(exploreButton, {
             scale: 1.05,
-            duration: 0.2,
+            duration: 0.3,
             ease: "power2.out",
-            overwrite: true
+            overwrite: "auto"
         });
 
     });
@@ -303,9 +478,9 @@ if (exploreButton) {
 
         gsap.to(exploreButton, {
             scale: 1,
-            duration: 0.2,
+            duration: 0.3,
             ease: "power2.out",
-            overwrite: true
+            overwrite: "auto"
         });
 
     });
@@ -314,7 +489,7 @@ if (exploreButton) {
 
 
 // ==========================================
-// EXPLORE BUTTON CLICK ANIMATION
+// EXPLORE BUTTON CLICK FEEDBACK
 // ==========================================
 
 if (exploreButton) {
@@ -324,7 +499,8 @@ if (exploreButton) {
         gsap.to(exploreButton, {
             scale: 0.95,
             duration: 0.1,
-            ease: "power2.out"
+            ease: "power2.out",
+            overwrite: "auto"
         });
 
     });
@@ -333,49 +509,10 @@ if (exploreButton) {
     exploreButton.addEventListener("mouseup", () => {
 
         gsap.to(exploreButton, {
-            scale: 1,
+            scale: 1.05,
             duration: 0.15,
-            ease: "power2.out"
-        });
-
-    });
-
-}
-
-
-// ==========================================
-// HERO MOUSE PARALLAX
-// ==========================================
-
-if (hero && heroContent) {
-
-    hero.addEventListener("mousemove", (e) => {
-
-        const x =
-            (e.clientX / window.innerWidth - 0.5) * 2;
-
-        const y =
-            (e.clientY / window.innerHeight - 0.5) * 2;
-
-
-        gsap.to(heroContent, {
-            x: x * 10,
-            y: y * 10,
-            duration: 0.6,
             ease: "power2.out",
-            overwrite: true
-        });
-
-    });
-
-
-    hero.addEventListener("mouseleave", () => {
-
-        gsap.to(heroContent, {
-            x: 0,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.out"
+            overwrite: "auto"
         });
 
     });
@@ -384,47 +521,7 @@ if (hero && heroContent) {
 
 
 // ==========================================
-// HERO CONTENT RESET
-// ==========================================
-
-if (hero) {
-
-    hero.addEventListener("mouseleave", () => {
-
-        gsap.to(heroContent, {
-            x: 0,
-            y: 0,
-            duration: 0.8,
-            ease: "power3.out"
-        });
-
-    });
-
-}
-
-
-// ==========================================
-// SCROLL PROGRESS EFFECT
-// ==========================================
-
-if (hero) {
-
-    gsap.to(heroContent, {
-        y: -30,
-
-        scrollTrigger: {
-            trigger: hero,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1
-        }
-    });
-
-}
-
-
-// ==========================================
-// REFRESH SCROLLTRIGGER
+// SCROLLTRIGGER REFRESH
 // ==========================================
 
 window.addEventListener("load", () => {
@@ -434,25 +531,8 @@ window.addEventListener("load", () => {
 });
 
 
-// ==========================================
-// RESPONSIVE REFRESH
-// ==========================================
-
 window.addEventListener("resize", () => {
 
     ScrollTrigger.refresh();
-
-});
-
-
-// ==========================================
-// CLEANUP HELPER
-// ==========================================
-
-window.addEventListener("beforeunload", () => {
-
-    ScrollTrigger.getAll().forEach((trigger) => {
-        trigger.kill();
-    });
 
 });
