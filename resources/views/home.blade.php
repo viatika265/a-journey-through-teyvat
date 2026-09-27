@@ -8,7 +8,7 @@
 
     @include('components.story')
 
-    @include('components.region-map')
+    <x-region-map :regions="$regions" />
 
     @include('components.explore')
 
