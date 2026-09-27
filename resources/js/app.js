@@ -2,18 +2,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const viewport = document.getElementById('map-viewport');
     const canvas = document.getElementById('map-canvas');
     const map = document.getElementById('teyvat-map');
-
     if (!viewport || !canvas || !map) return;
 
-    // Atur skala permanen di sini (1 = ukuran asli gambar)
-    // Jika kurang besar, naikkan misal ke 1.5. Jika terlalu besar, turunkan ke 0.8
-    let scale = 0.3; 
-    
+    let scale = 0.3;
     let translateX = 0;
     let translateY = 0;
     let isDragging = false;
+    let hasMoved = false;
     let startX = 0;
     let startY = 0;
+    let activePin = null;
+    const DRAG_THRESHOLD = 5; // px toleransi sebelum dianggap "drag", bukan "klik"
 
     function updateMap() {
         canvas.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
@@ -25,35 +24,40 @@ document.addEventListener('DOMContentLoaded', () => {
         const mw = map.offsetWidth * scale;
         const mh = map.offsetHeight * scale;
 
-        // Batas Horisontal
-        if (mw < vw) {
-            translateX = (vw - mw) / 2;
-        } else {
-            translateX = Math.min(0, Math.max(translateX, vw - mw));
-        }
-
-        // Batas Vertikal
-        if (mh < vh) {
-            translateY = (vh - mh) / 2;
-        } else {
-            translateY = Math.min(0, Math.max(translateY, vh - mh));
-        }
+        translateX = mw < vw ? (vw - mw) / 2 : Math.min(0, Math.max(translateX, vw - mw));
+        translateY = mh < vh ? (vh - mh) / 2 : Math.min(0, Math.max(translateY, vh - mh));
     }
 
     viewport.addEventListener('pointerdown', (event) => {
+        // Guard: kalau target klik ada di dalam card (termasuk tombol close),
+        // jangan mulai drag/capture sama sekali — biarkan event native jalan
+        if (event.target.closest('#region-card')) {
+            return;
+        }
+
         isDragging = true;
+        hasMoved = false;
         startX = event.clientX - translateX;
         startY = event.clientY - translateY;
+        activePin = event.target.closest('.region-pin');
         viewport.setPointerCapture(event.pointerId);
-        
+
         canvas.classList.remove('cursor-grab');
         canvas.classList.add('cursor-grabbing');
     });
 
     viewport.addEventListener('pointermove', (event) => {
         if (!isDragging) return;
-        translateX = event.clientX - startX;
-        translateY = event.clientY - startY;
+
+        const newX = event.clientX - startX;
+        const newY = event.clientY - startY;
+
+        if (Math.abs(newX - translateX) > DRAG_THRESHOLD || Math.abs(newY - translateY) > DRAG_THRESHOLD) {
+            hasMoved = true;
+        }
+
+        translateX = newX;
+        translateY = newY;
         clampPosition();
         updateMap();
     });
@@ -62,17 +66,24 @@ document.addEventListener('DOMContentLoaded', () => {
         isDragging = false;
         canvas.classList.remove('cursor-grabbing');
         canvas.classList.add('cursor-grab');
+
+        // Kalau tidak ada gerakan signifikan dan yang ditekan adalah pin → anggap klik
+        if (!hasMoved && activePin) {
+            openCard(activePin);
+        }
+        activePin = null;
     };
 
     viewport.addEventListener('pointerup', stopDragging);
-    viewport.addEventListener('pointercancel', stopDragging);
+    viewport.addEventListener('pointercancel', () => {
+        isDragging = false;
+        activePin = null;
+        canvas.classList.remove('cursor-grabbing');
+        canvas.classList.add('cursor-grab');
+    });
     map.addEventListener('dragstart', (e) => e.preventDefault());
 
     function initializeMap() {
-        // Jika ingin ukuran peta otomatis menyesuaikan tinggi layar secara permanen, 
-        // hapus komentar pada baris di bawah ini dan hapus 'let scale = 1' di atas:
-        // scale = viewport.clientHeight / (map.naturalHeight || map.offsetHeight);
-
         clampPosition();
         updateMap();
     }
@@ -86,19 +97,5 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', () => {
         clampPosition();
         updateMap();
-    });
-    document.getElementById('map-viewport').addEventListener('dblclick', function(e) {
-        const canvas = document.getElementById('map-canvas');
-        const rect = canvas.getBoundingClientRect();
-        
-        // Mencari rasio zoom/skala yang sedang aktif
-        const currentScale = rect.width / canvas.offsetWidth;
-        
-        // Mengkalkulasi koordinat akurat pada ukuran asli gambar
-        const originalX = (e.clientX - rect.left) / currentScale;
-        const originalY = (e.clientY - rect.top) / currentScale;
-        
-        // Dibulatkan agar tidak ada nilai desimal
-        console.log(`left: ${Math.round(originalX)}px; top: ${Math.round(originalY)}px;`);
     });
 });
