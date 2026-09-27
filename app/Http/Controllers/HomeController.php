@@ -8,67 +8,75 @@ use App\Models\Region;
 class HomeController extends Controller
 {
     public function index(){
-            $regionData = Region::all();
-            $regions = [
-            [
-                'name' => 'Mondstadt',
+        $regions = Region::all();
+        $coordinates = [
+            'Mondstadt'=> [
                 'x' => 4353, // Ganti dengan hasil klik ganda di console
                 'y' => 2846,
                 'color' => '#429C99', // Warna hex pin Mondstadt
-                'emblem' => $regionData->firstWhere('name', 'Mondstadt')->icon, 
+                'gradients'=> 'linear-gradient(180deg, #32C4F7 0%, #3EADDD 39%, #429C99 65%, #0E597A 100%)', // Contoh gradient
             ],
-            [
-                'name' => 'Liyue',
+            'Liyue'=> [
                 'x' => 4068, 
                 'y' => 3684, 
                 'color' => '#E4BF18',
-                'emblem' => $regionData->firstWhere('name', 'Liyue')->icon,
+                'gradients'=> 'linear-gradient(180deg, #E7A481 0%, #CF9160 50%, #A5734D 75%, #5F3B1F 100%)', // Contoh gradient
             ],
-            [
-                'name' => 'Inazuma',
+            'Inazuma'=> [
                 'x' => 5000, 
                 'y' => 4500, 
                 'color' => '#42339C', // Contoh warna ungu
-                'emblem' => $regionData->firstWhere('name', 'Inazuma')->icon
+                'gradients'=> 'linear-gradient(180deg, #F6BFF6 0%, #DC92C1 50%, #CB8CB5 75%, #A46F91 100%)',
             ],
-            [
-                'name' => 'Sumeru',
+            'Sumeru'=> [
                 'x' => 3333, 
                 'y' => 3789, 
                 'color' => '#1F6B32', // Contoh warna hijau
-                'emblem' => $regionData->firstWhere('name', 'Sumeru')->icon
+                'gradients'=> 'linear-gradient(180deg, #63BCFE 0%, #50A5DB 35%, #2E6A76 63%, #638B57 100%)',
             ],
-            [
-                'name' => 'Fontaine',
+            'Fontaine'=> [
                 'x' => 3073, 
                 'y' => 2555, 
                 'color' => '#0666D3', // Contoh warna biru
-                'emblem' => $regionData->firstWhere('name', 'Fontaine')->icon
+                'gradients'=> 'linear-gradient(180deg, #85C6FA 17%, #6194D6 42%, #36A3B1 63%, #639890 83%)',
             ],
-            [
-                'name' => 'Natlan',
+            'Natlan'=> [
                 'x' => 1827, 
                 'y' => 4010, 
                 'color' => '#A32D1F', // Contoh warna oranye
-                'emblem' => $regionData->firstWhere('name', 'Natlan')->icon
+                'gradients'=> 'linear-gradient(180deg, #FEC9BF 0%, #98525B 50%, #324144 91%)',
             ],
-            [
-                'name' => 'Snezhnaya',
+            'Snezhnaya'=> [
                 'x' => 2483, 
                 'y' => 1198, 
                 'color' => '#84C4D0', // Contoh warna abu-abu
-                'emblem' => $regionData->firstWhere('name', 'Snezhnaya')->icon
+                'gradients'=> 'linear-gradient(180deg, #1F67CD 8%, #C0E1FF 34%, #4379C6 50%, #103467 100%)',
             ],
-            [
-                'name' => 'Nodkrai',
+            'Nod-Krai'=> [
                 'x' => 1651, 
                 'y' => 2914, 
                 'color' => '#131536', // Contoh warna merah gelap
-                'emblem' => $regionData->firstWhere('name', 'Nod-Krai')->icon
-
+                'gradients'=> 'linear-gradient(180deg, #032C6E 13%, #AA9148 40%, #002595 75%, #000281 100%)',
             ],
         ];
+        $regions = $regions->map(function ($region) use ($coordinates) {
+            return [
+                'name' => $region->name,
+                'short_description' => $region->short_description,
+                'card_image' => $region->card_image,
+                'icon' => $region->icon,
+                'emblem' => $region->icon,
+
+                'x' => $coordinates[$region->name]['x'],
+                'y' => $coordinates[$region->name]['y'],
+                'color' => $coordinates[$region->name]['color'],
+                'gradients' => $coordinates[$region->name]['gradients'],
+            ];
+        });
         return view('home', compact('regions'));
-        
-    }
+    }         
+                
 }
+
+                
+
