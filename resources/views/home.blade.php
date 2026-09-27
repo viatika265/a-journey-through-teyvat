@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('title', 'Home')
@@ -6,44 +5,44 @@
 @section('content')
 
 <head>
-    <!-- Tag meta lainnya -->
     @vite(['resources/css/app.css'])
 </head>
 
-{{-- HERO SECTION: PUNYA TEMANMU --}}
-<div class="min-h-screen bg-gray-950 text-white flex items-center justify-center">
+<div class="min-h-screen bg-blue-darker text-neutral-light flex flex-col font-body overflow-x-hidden">
+
     <div class="text-center">
-        
-        <!-- Menguji font-display, custom text size heading-1, dan warna yellow-normal -->
+
         <h1 class="font-display text-heading-1 text-yellow-normal font-bold tracking-wide">
             A Journey Through Teyvat
         </h1>
 
-        <!-- Menguji ukuran text-body dan warna neutral-normal -->
         <p class="mt-4 text-body text-neutral-normal">
             Welcome, Traveler.
         </p>
 
-        <a
-            href="#regions"
-        >
+        <a href="#regions">
             Explore Teyvat
         </a>
 
-        <!-- Menguji warna button custom (blue-normal) dengan efek hover/active dan teks kuning -->
         <x-button size="medium">
             Explore Teyfat
         </x-button>
 
-        
+        {{-- Character Interaction --}}
         @include('components.characters.index')
-        
 
     </div>
+
+    {{-- Interactive Teyvat Map --}}
+    <div class="w-full mt-16">
+        <x-region-map :regions="$regions" />
+    </div>
+
 </div>
 
 <section id="regions" class="min-h-screen bg-gray-900 text-white px-8 py-20">
     <div class="max-w-6xl mx-auto">
+
         <h2 class="text-3xl font-bold text-center mb-4">
             Explore the Regions
         </h2>
@@ -68,6 +67,7 @@
                 </a>
             @endforeach
         </div>
+
     </div>
 </section>
 
