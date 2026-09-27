@@ -4,6 +4,7 @@
 @section('title', 'Home')
 
 @section('content')
+
 <head>
     <!-- Tag meta lainnya -->
     @vite(['resources/css/app.css'])
@@ -28,10 +29,19 @@
         >
             Explore Teyvat
         </a>
+
+        <!-- Menguji warna button custom (blue-normal) dengan efek hover/active dan teks kuning -->
+        <x-button size="medium">
+            Explore Teyfat
+        </x-button>
+
+        
+        @include('components.characters.index')
+        
+
     </div>
 </div>
 
-{{-- REGION SECTION: TAMBAHAN DARI KAMU --}}
 <section id="regions" class="min-h-screen bg-gray-900 text-white px-8 py-20">
     <div class="max-w-6xl mx-auto">
         <h2 class="text-3xl font-bold text-center mb-4">
