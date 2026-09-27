@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     viewport.addEventListener("pointerdown", (event) => {
+        // Jangan mulai drag kalau user sedang berinteraksi dengan region card.
         if (event.target.closest("#region-card")) {
             return;
         }
@@ -83,6 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.classList.remove("cursor-grabbing");
         canvas.classList.add("cursor-grab");
 
+        // Kalau tidak benar-benar drag dan yang ditekan adalah pin,
+        // perlakukan sebagai klik untuk membuka card.
         if (!hasMoved && activePin) {
             if (typeof openCard === "function") {
                 openCard(activePin);
@@ -122,6 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
         updateMap();
     });
 
+    // Double click digunakan untuk mendapatkan koordinat asli pada map.
     viewport.addEventListener("dblclick", (event) => {
         const rect = canvas.getBoundingClientRect();
         const currentScale = rect.width / canvas.offsetWidth;

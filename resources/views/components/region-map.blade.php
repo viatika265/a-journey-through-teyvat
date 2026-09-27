@@ -31,6 +31,7 @@
                 <div
                     class="region-pin group z-10 cursor-pointer"
                     data-region="{{ $region['name'] }}"
+                    data-slug="{{ $region['slug'] }}"
                     data-name="{{ $region['name'] }}"
                     data-desc="{{ $region['short_description'] }}"
                     data-image="{{ $region['card_image'] }}"
@@ -72,6 +73,7 @@
 <script>
     function openCard(element) {
         const card = document.getElementById('region-card');
+        const regionSlug = element.getAttribute('data-slug');
 
         document.getElementById('card-title').innerText =
             element.getAttribute('data-name');
@@ -87,6 +89,13 @@
 
         card.style.background =
             element.getAttribute('data-gradients');
+
+        const cardLink = document.getElementById('card-link');
+
+        if (cardLink && regionSlug) {
+            cardLink.href =
+                `/regions/${encodeURIComponent(regionSlug)}`;
+        }
 
         const screenWidth = window.innerWidth;
 

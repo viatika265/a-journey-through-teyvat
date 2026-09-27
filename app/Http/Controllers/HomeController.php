@@ -65,6 +65,7 @@ class HomeController extends Controller
         $regions = $regions->map(function ($region) use ($coordinates) {
             return [
                 'name' => $region->name,
+                'slug' => $region->slug,
                 'short_description' => $region->short_description,
                 'card_image' => $region->card_image,
                 'icon' => $region->icon,
