@@ -53,7 +53,7 @@
                     </svg>
 
                     <img
-                        src="{{ asset('images/' . $region['emblem']) }}"
+                        src="{{ $region['emblem'] }}"
                         class="region-emblem"
                         alt="{{ $region['name'] }} Emblem"
                     >
