@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const map = document.getElementById('teyvat-map');
     if (!viewport || !canvas || !map) return;
 
-    let scale = 0.3;
+    let scale = 1;
     let translateX = 0;
     let translateY = 0;
     let isDragging = false;
@@ -12,10 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
     let startX = 0;
     let startY = 0;
     let activePin = null;
-    const DRAG_THRESHOLD = 5; // px toleransi sebelum dianggap "drag", bukan "klik"
+    const DRAG_THRESHOLD = 5;
 
     function updateMap() {
         canvas.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    function calculateScale() {
+        const naturalW = map.naturalWidth || map.offsetWidth;
+        const naturalH = map.naturalHeight || map.offsetHeight;
+        const vw = viewport.clientWidth;
+        const vh = viewport.clientHeight;
+        // COVER: ambil rasio terbesar supaya map selalu menutupi seluruh viewport
+        scale = Math.max(vw / naturalW, vh / naturalH);
     }
 
     function clampPosition() {
@@ -29,11 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     viewport.addEventListener('pointerdown', (event) => {
-        // Guard: kalau target klik ada di dalam card (termasuk tombol close),
-        // jangan mulai drag/capture sama sekali — biarkan event native jalan
-        if (event.target.closest('#region-card')) {
-            return;
-        }
+        if (event.target.closest('#region-card')) return;
 
         isDragging = true;
         hasMoved = false;
@@ -67,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.classList.remove('cursor-grabbing');
         canvas.classList.add('cursor-grab');
 
-        // Kalau tidak ada gerakan signifikan dan yang ditekan adalah pin → anggap klik
         if (!hasMoved && activePin) {
             openCard(activePin);
         }
@@ -84,6 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
     map.addEventListener('dragstart', (e) => e.preventDefault());
 
     function initializeMap() {
+        if (!map.naturalWidth) {
+            map.addEventListener('load', initializeMap, { once: true });
+            return;
+        }
+        calculateScale();
         clampPosition();
         updateMap();
     }
@@ -91,10 +100,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (map.complete) {
         initializeMap();
     } else {
-        map.addEventListener('load', initializeMap);
+        map.addEventListener('load', initializeMap, { once: true });
     }
 
+    // Recalculate scale setiap resize — bukan cuma clamp ulang
     window.addEventListener('resize', () => {
+        calculateScale();
         clampPosition();
         updateMap();
     });

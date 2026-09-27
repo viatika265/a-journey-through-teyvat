@@ -21,7 +21,7 @@
         {{-- Region Name --}}
         <h2
             id="card-title"
-            class="w-full font-macondo text-[28px] sm:text-[30px] md:text-[32px] leading-tight font-normal text-[#EAECF2]"
+            class="w-full font-display text-[28px] sm:text-[30px] md:text-[32px] leading-tight font-normal text-[#EAECF2]"
         >
         </h2>
 
@@ -31,7 +31,7 @@
             {{-- Description --}}
             <p
                 id="card-desc"
-                class="w-full font-itim text-[18px] sm:text-[19px] md:text-[20px] leading-[24px] font-normal text-[#EAECF2] line-clamp-2"
+                class="w-full font-body text-[18px] sm:text-[19px] md:text-[20px] leading-[24px] font-normal text-[#EAECF2] line-clamp-2"
             >
             </p>
 
@@ -48,13 +48,13 @@
                 </div>
 
                 {{-- Detail Button --}}
-                <a
+                <x-button 
+                    size="medium"
                     id="card-link"
-                    href="#"
-                    class="shrink-0 px-4 py-2 flex items-center justify-center bg-[#DEB76C] rounded-full font-itim text-[16px] leading-[16px] font-normal text-black hover:bg-[#c9a45d] transition-colors"
                 >
-                    View Details
-                </a>
+                Dicover Region
+                </x-button>
+               
 
             </div>
         </div>
