@@ -17,4 +17,11 @@ class RegionController extends Controller
             'characters'
         ));
     }
+
+    public function visited(string $slug)
+    {
+        $region = Region::where('slug', $slug)->firstOrFail();
+
+        return view('region', compact('region'));
+    }
 }

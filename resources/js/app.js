@@ -1,14 +1,6 @@
 const exploreButton = document.getElementById('explore-btn');
 const introSection = document.getElementById('intro');
 
-if (exploreButton && introSection) {
-    exploreButton.addEventListener('click', () => {
-        introSection.scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     const viewport = document.getElementById('map-viewport');
     const canvas = document.getElementById('map-canvas');
@@ -28,7 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const DRAG_THRESHOLD = 5;
 
     function updateMap() {
-        canvas.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        canvas.style.transform =
+            `translate(${translateX}px, ${translateY}px) scale(${scale})`;
     }
 
     function clampPosition() {
@@ -47,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     viewport.addEventListener('pointerdown', (event) => {
+        // Jangan mulai drag kalau klik bagian card
         if (event.target.closest('#region-card')) {
             return;
         }
@@ -91,6 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.classList.remove('cursor-grabbing');
         canvas.classList.add('cursor-grab');
 
+        // Kalau cuma klik pin, buka region card
         if (!hasMoved && activePin) {
             openCard(activePin);
         }

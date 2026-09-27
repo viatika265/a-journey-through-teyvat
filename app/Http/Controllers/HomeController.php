@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Region;
+use App\Models\Character;
 
 class HomeController extends Controller
 {
@@ -64,6 +65,7 @@ class HomeController extends Controller
         $regions = $regions->map(function ($region) use ($coordinates) {
             return [
                 'name' => $region->name,
+                'slug' => $region->slug,
                 'short_description' => $region->short_description,
                 'card_image' => $region->card_image,
                 'icon' => $region->icon,
@@ -76,6 +78,12 @@ class HomeController extends Controller
             ];
         });
 
-        return view('home', compact('regions'));
+        $characters = Character::whereNotNull('additional_image')
+            ->where('additional_image', '!=', '')
+            ->inRandomOrder()
+            ->take(4)
+            ->get();
+
+        return view('home', compact('regions', 'characters'));
     }
 }

@@ -6,5 +6,5 @@ use App\Http\Controllers\RegionController;
 
 Route::get('/', [HomeController::class, 'index']);
 
-Route::get('/regions/{slug}', [RegionController::class, 'show'])
-    ->name('regions.show');
+Route::get('/regions/{slug}', [RegionController::class, 'visited'])
+    ->name('regions.visited');
