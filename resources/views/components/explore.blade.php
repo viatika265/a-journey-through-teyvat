@@ -1,4 +1,4 @@
-<section id="explore">
+<section id="explore" class="bg-black">
   <div></div>
 
   <div></div>

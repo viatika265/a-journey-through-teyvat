@@ -4,14 +4,16 @@
 
 @section('content')
 
-    @include('hero')
+    @include('components.hero')
 
-    @include('story')
+    @include('components.story')
 
-    @include('explore')
+    @include('components.region-map')
 
-    @include('trailer')
+    @include('components.explore')
 
-    @include('download')
+    @include('components.trailer')
+
+    @include('components.download')
 
 @endsection

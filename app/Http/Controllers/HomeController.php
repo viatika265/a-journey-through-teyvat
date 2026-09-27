@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Region;
+use App\Models\Character;
 
 class HomeController extends Controller
 {
@@ -10,6 +11,12 @@ class HomeController extends Controller
     {
         $regions = Region::all();
 
-        return view('home', compact('regions'));
+        $characters = Character::whereNotNull('additional_image')
+            ->where('additional_image', '!=', '')
+            ->inRandomOrder()
+            ->take(4)
+            ->get();
+
+        return view('home', compact('regions', 'characters'));
     }
 }
