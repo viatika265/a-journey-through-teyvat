@@ -1,9 +1,9 @@
 @props(['regions'])
-<section id="region-map" class="relative w-full overflow-hidden">
+<section id="region-map" class="relative w-full overflow-hidden" style="height: 100%;">
     <div
         id="map-viewport"
         class="relative w-full overflow-hidden select-none touch-none"
-        style="height: 700px;"
+        style="height: 100vh;"
     >
         <div
             id="map-canvas"

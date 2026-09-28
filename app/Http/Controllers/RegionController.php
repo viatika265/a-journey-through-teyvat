@@ -8,7 +8,13 @@ use App\Models\Region;
 class RegionController extends Controller
 {
     public function visited($slug) {
-        $region = Region::where('slug', $slug)->firstOrFail();
+        $region = Region::with([
+          'characters.element',
+          'characters.weapon',
+          'characters.artifact',
+        ])
+        ->where('slug', $slug)
+        ->firstOrFail();
 
         return view('region', compact('region'));
     }

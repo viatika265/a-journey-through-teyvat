@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Character extends Model
 {
@@ -21,4 +22,19 @@ class Character extends Model
         'sort_order',
         'is_featured',
     ];
+
+    public function element(): BelongsTo
+    {
+        return $this->belongsTo(Element::class);
+    }
+
+    public function weapon(): BelongsTo
+    {
+        return $this->belongsTo(Weapon::class);
+    }
+
+    public function artifact(): BelongsTo
+    {
+        return $this->belongsTo(Artifact::class);
+    }
 }
