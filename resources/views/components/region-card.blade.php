@@ -47,12 +47,29 @@
                     >
                 </div>
 
+                {{-- Element Icon --}}
+                <div class="flex items-center gap-[14px]">
+                    <img
+                        id="card-icon-2"
+                        src=""
+                        class="w-10 h-10 object-contain"
+                    >
+                </div>
+                {{-- Archon Icon --}}
+                <div class="flex items-center gap-[14px]">
+                    <img
+                        id="card-icon-3"
+                        src=""
+                        class="w-10 h-10 object-contain object-cover rounded-full"
+                    >
+                </div>
+
                 {{-- Detail Button --}}
                 <x-button 
                     size="medium"
                     id="card-link"
                 >
-                Dicover Region
+                Discover Region
                 </x-button>
                
 

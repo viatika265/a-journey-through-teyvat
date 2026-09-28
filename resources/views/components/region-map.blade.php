@@ -31,7 +31,10 @@
                     data-image="{{ $region['card_image'] }}"
                     data-icon1="{{ $region['icon'] }}"
                     data-gradients="{{ $region['gradients'] }}"
-                    
+                    data-element-name="{{ $region['element_name'] }}"
+                    data-element-icon="{{ $region['element_icon'] }}"
+                    data-archon-icon="{{ $region['archon_icon'] }}"
+                    onclick="openCard(this)"
                     >
                     
                 
@@ -58,7 +61,25 @@
         document.getElementById('card-image').src = element.getAttribute('data-image');
         document.getElementById('card-icon-1').src = element.getAttribute('data-icon1');
         card.style.background = element.getAttribute('data-gradients');
-
+        
+        const elementIcon = document.getElementById('card-icon-2');
+        const elementIconUrl = element.getAttribute('data-element-icon');
+        if (elementIconUrl && elementIconUrl !== 'null') {
+            elementIcon.src = elementIconUrl;
+            elementIcon.alt = element.getAttribute('data-element-name');
+            elementIcon.style.display = '';
+        } else {
+            elementIcon.style.display = 'none'; // sembunyikan kalau region tidak punya element
+        }
+        
+        const archonIcon = document.getElementById('card-icon-3');
+        const archonIconUrl = element.getAttribute('data-archon-icon');
+        if (archonIconUrl && archonIconUrl !== 'null' && archonIconUrl !== '') {
+            archonIcon.src = archonIconUrl;
+            archonIcon.style.display = '';
+        } else {
+            archonIcon.style.display = 'none';
+        }
         const screenWidth = window.innerWidth;
 
         if (screenWidth < 768) {
