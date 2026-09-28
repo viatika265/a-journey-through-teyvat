@@ -7,188 +7,259 @@ gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
 console.log("GSAP berhasil dimuat:", gsap.version);
 
 
-// ==========================================
-// HERO ELEMENTS
-// ==========================================
+// ==================================================
+// HERO
+// ==================================================
 
-const hero = document.querySelector(".hero");
-const heroContent = document.querySelector(".hero-content");
-const heroTitle = document.querySelector(".hero-content h1");
-const heroSubtitle = document.querySelector(".hero-content .subtitle");
-const exploreButton = document.querySelector("#explore-btn");
-
-
-// ==========================================
-// HERO ENTRANCE
-// ==========================================
-
-const heroTimeline = gsap.timeline({
-    paused: true
-});
-
-if (heroTitle) {
-    heroTimeline.fromTo(
-        heroTitle,
-        {
-            opacity: 0,
-            y: 50
-        },
-        {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            ease: "power3.out"
-        }
-    );
-}
-
-if (heroSubtitle) {
-    heroTimeline.fromTo(
-        heroSubtitle,
-        {
-            opacity: 0,
-            y: 30
-        },
-        {
-            opacity: 1,
-            y: 0,
-            duration: 0.7,
-            ease: "power3.out"
-        },
-        "-=0.35"
-    );
-}
-
-if (exploreButton) {
-    heroTimeline.fromTo(
-        exploreButton,
-        {
-            opacity: 0,
-            y: 20,
-            scale: 0.9
-        },
-        {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.4,
-            ease: "power2.out"
-        },
-        "-=0.4"
-    );
-}
-
-heroTimeline.play();
-
-
-// ==========================================
-// HERO REPLAY
-// ==========================================
+const hero = document.querySelector("#teyvat");
 
 if (hero) {
-    ScrollTrigger.create({
-        trigger: hero,
-        start: "top 80%",
-        end: "bottom 20%",
+    const heroLogo = hero.querySelector("svg");
+    const heroTitle = hero.querySelector("h1");
+    const heroSubtitle = hero.querySelector("p");
+    const exploreButton = hero.querySelector("button");
 
-        onEnter: () => {
-            heroTimeline.restart();
-        },
+    // ----------------------------------------------
+    // HERO ENTRANCE
+    // ----------------------------------------------
 
-        onEnterBack: () => {
-            heroTimeline.restart();
-        }
-    });
-}
+    const heroTimeline = gsap.timeline();
+
+    if (heroLogo) {
+        heroTimeline.fromTo(
+            heroLogo,
+            {
+                opacity: 0,
+                y: -40,
+                scale: 0.9
+            },
+            {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 1,
+                ease: "power3.out"
+            }
+        );
+    }
+
+    if (heroTitle) {
+        heroTimeline.fromTo(
+            heroTitle,
+            {
+                opacity: 0,
+                y: 50
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power3.out"
+            },
+            "-=0.6"
+        );
+    }
+
+    if (heroSubtitle) {
+        heroTimeline.fromTo(
+            heroSubtitle,
+            {
+                opacity: 0,
+                y: 30
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: "power3.out"
+            },
+            "-=0.45"
+        );
+    }
+
+    if (exploreButton) {
+        heroTimeline.fromTo(
+            exploreButton,
+            {
+                opacity: 0,
+                y: 25,
+                scale: 0.9
+            },
+            {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.5,
+                ease: "back.out(1.5)"
+            },
+            "-=0.35"
+        );
+    }
 
 
-// ==========================================
-// HERO SCROLL TRANSITION
-// ==========================================
+    // ----------------------------------------------
+    // HERO PARALLAX
+    // ----------------------------------------------
 
-if (hero && heroContent) {
-
-    gsap.to(heroContent, {
-        y: -80,
-        scale: 0.94,
-        opacity: 0.35,
-
-        scrollTrigger: {
-            trigger: hero,
-            start: "top top",
-            end: "bottom top",
-            scrub: 1.2
-        }
-    });
-
-}
-
-
-// ==========================================
-// HERO MOUSE PARALLAX
-// ==========================================
-
-if (hero && heroContent) {
-
-    const moveHero = gsap.quickTo(heroContent, "x", {
+    const moveHeroX = gsap.quickTo(heroLogo, "x", {
         duration: 0.5,
         ease: "power2.out"
     });
 
-    const moveHeroY = gsap.quickTo(heroContent, "y", {
+    const moveHeroY = gsap.quickTo(heroLogo, "y", {
         duration: 0.5,
         ease: "power2.out"
     });
 
-    hero.addEventListener("mousemove", (e) => {
+    hero.addEventListener("mousemove", (event) => {
+        if (!heroLogo) return;
 
         const x =
-            (e.clientX / window.innerWidth - 0.5) * 2;
+            (event.clientX / window.innerWidth - 0.5) * 2;
 
         const y =
-            (e.clientY / window.innerHeight - 0.5) * 2;
+            (event.clientY / window.innerHeight - 0.5) * 2;
 
-        moveHero(x * 15);
-        moveHeroY(y * 15);
+        moveHeroX(x * 10);
+        moveHeroY(y * 8);
     });
 
     hero.addEventListener("mouseleave", () => {
+        if (!heroLogo) return;
 
-        moveHero(0);
+        moveHeroX(0);
         moveHeroY(0);
     });
 
+
+    // ----------------------------------------------
+    // HERO SCROLL EFFECT
+    // ----------------------------------------------
+
+    const heroElements = [
+        heroLogo,
+        heroTitle,
+        heroSubtitle,
+        exploreButton
+    ].filter(Boolean);
+
+    if (heroElements.length > 0) {
+        gsap.to(heroElements, {
+            y: -70,
+            opacity: 0.25,
+            scale: 0.96,
+            stagger: 0.02,
+            scrollTrigger: {
+                trigger: hero,
+                start: "top top",
+                end: "bottom top",
+                scrub: 1
+            }
+        });
+    }
+
+
+    // ----------------------------------------------
+    // EXPLORE BUTTON
+    // ----------------------------------------------
+
+    if (exploreButton) {
+
+        // Hapus behavior inline lama secara aman
+        exploreButton.removeAttribute("onclick");
+
+        exploreButton.addEventListener("click", (event) => {
+            event.preventDefault();
+
+            const story = document.querySelector("#story");
+
+            if (!story) return;
+
+            gsap.to(window, {
+                duration: 1.1,
+                scrollTo: {
+                    y: story,
+                    offsetY: 0
+                },
+                ease: "power3.inOut"
+            });
+        });
+
+
+        // Hover
+        exploreButton.addEventListener("mouseenter", () => {
+            gsap.to(exploreButton, {
+                scale: 1.05,
+                duration: 0.25,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+
+        exploreButton.addEventListener("mouseleave", () => {
+            gsap.to(exploreButton, {
+                scale: 1,
+                duration: 0.25,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+
+
+        // Click feedback
+        exploreButton.addEventListener("mousedown", () => {
+            gsap.to(exploreButton, {
+                scale: 0.95,
+                duration: 0.1,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+
+        exploreButton.addEventListener("mouseup", () => {
+            gsap.to(exploreButton, {
+                scale: 1.05,
+                duration: 0.15,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+    }
 }
 
 
-// ==========================================
-// REGION ELEMENTS
-// ==========================================
+// ==================================================
+// REGION SECTION
+// ==================================================
 
 const regionsSection = document.querySelector("#regions");
-const regionTitle = document.querySelector("#regions h2");
-const regionSubtitle = document.querySelector("#regions p");
 
-const regionCards = document.querySelectorAll(
-    "#regions .grid > a"
-);
+if (regionsSection) {
 
-console.log("Jumlah region cards:", regionCards.length);
+    const regionTitle = regionsSection.querySelector("h2");
+    const regionSubtitle = regionsSection.querySelector("p");
+
+    const regionCards = regionsSection.querySelectorAll(
+        ".grid > a"
+    );
+
+    console.log(
+        "Jumlah region cards:",
+        regionCards.length
+    );
 
 
-// ==========================================
-// REGION ENTRANCE
-// ==========================================
+    // ----------------------------------------------
+    // REGION ENTRANCE
+    // ----------------------------------------------
 
-let regionsTimeline = null;
-
-function animateRegions() {
-
-    if (regionsTimeline && regionsTimeline.isActive()) {
-        return;
-    }
-
-    regionsTimeline = gsap.timeline();
+    const regionsTimeline = gsap.timeline({
+        scrollTrigger: {
+            trigger: regionsSection,
+            start: "top 80%",
+            once: true
+        }
+    });
 
     if (regionTitle) {
         regionsTimeline.fromTo(
@@ -224,7 +295,6 @@ function animateRegions() {
     }
 
     if (regionCards.length > 0) {
-
         regionsTimeline.fromTo(
             regionCards,
             {
@@ -236,109 +306,89 @@ function animateRegions() {
                 opacity: 1,
                 y: 0,
                 scale: 1,
-                duration: 0.9,
+                duration: 0.8,
                 stagger: 0.12,
                 ease: "power3.out"
             },
             "-=0.25"
         );
-
     }
-}
 
 
-// ==========================================
-// REGION SCROLL TRIGGER
-// ==========================================
+    // ----------------------------------------------
+    // REGION TITLE PARALLAX
+    // ----------------------------------------------
 
-if (regionsSection) {
+    if (regionTitle && regionSubtitle) {
 
-    ScrollTrigger.create({
-        trigger: regionsSection,
-        start: "top 80%",
-        end: "bottom 20%",
+        const moveTitleX = gsap.quickTo(regionTitle, "x", {
+            duration: 0.5,
+            ease: "power2.out"
+        });
 
-        onEnter: () => {
-            animateRegions();
-        },
+        const moveTitleY = gsap.quickTo(regionTitle, "y", {
+            duration: 0.5,
+            ease: "power2.out"
+        });
 
-        onEnterBack: () => {
-            animateRegions();
-        }
-    });
+        const moveSubtitleX = gsap.quickTo(
+            regionSubtitle,
+            "x",
+            {
+                duration: 0.5,
+                ease: "power2.out"
+            }
+        );
 
-}
+        const moveSubtitleY = gsap.quickTo(
+            regionSubtitle,
+            "y",
+            {
+                duration: 0.5,
+                ease: "power2.out"
+            }
+        );
 
+        regionsSection.addEventListener("mousemove", (event) => {
 
-// ==========================================
-// REGION TITLE PARALLAX
-// ==========================================
+            const rect =
+                regionsSection.getBoundingClientRect();
 
-if (regionsSection && regionTitle && regionSubtitle) {
+            const x =
+                (event.clientX - rect.left) /
+                rect.width -
+                0.5;
 
-    const moveTitleX = gsap.quickTo(regionTitle, "x", {
-        duration: 0.5,
-        ease: "power2.out"
-    });
+            const y =
+                (event.clientY - rect.top) /
+                rect.height -
+                0.5;
 
-    const moveTitleY = gsap.quickTo(regionTitle, "y", {
-        duration: 0.5,
-        ease: "power2.out"
-    });
+            moveTitleX(x * 6);
+            moveTitleY(y * 4);
 
-    const moveSubtitleX = gsap.quickTo(regionSubtitle, "x", {
-        duration: 0.5,
-        ease: "power2.out"
-    });
+            moveSubtitleX(x * 4);
+            moveSubtitleY(y * 3);
+        });
 
-    const moveSubtitleY = gsap.quickTo(regionSubtitle, "y", {
-        duration: 0.5,
-        ease: "power2.out"
-    });
+        regionsSection.addEventListener("mouseleave", () => {
 
-    regionsSection.addEventListener("mousemove", (e) => {
+            moveTitleX(0);
+            moveTitleY(0);
 
-        const rect = regionsSection.getBoundingClientRect();
-
-        const x =
-            (e.clientX - rect.left) / rect.width - 0.5;
-
-        const y =
-            (e.clientY - rect.top) / rect.height - 0.5;
-
-        moveTitleX(x * 6);
-        moveTitleY(y * 4);
-
-        moveSubtitleX(x * 4);
-        moveSubtitleY(y * 3);
-    });
-
-    regionsSection.addEventListener("mouseleave", () => {
-
-        moveTitleX(0);
-        moveTitleY(0);
-
-        moveSubtitleX(0);
-        moveSubtitleY(0);
-    });
-
-}
+            moveSubtitleX(0);
+            moveSubtitleY(0);
+        });
+    }
 
 
-// ==========================================
-// REGION CARD INTERACTION
-// ==========================================
-
-if (regionCards.length > 0) {
+    // ----------------------------------------------
+    // REGION CARD INTERACTION
+    // ----------------------------------------------
 
     regionCards.forEach((card) => {
 
-        // ----------------------------------
-        // HOVER
-        // ----------------------------------
-
         card.addEventListener("mouseenter", () => {
-
             gsap.to(card, {
                 y: -8,
                 scale: 1.03,
@@ -346,45 +396,35 @@ if (regionCards.length > 0) {
                 ease: "power2.out",
                 overwrite: "auto"
             });
-
         });
 
+        card.addEventListener("mousemove", (event) => {
 
-        // ----------------------------------
-        // MOUSE MOVE / 3D TILT
-        // ----------------------------------
-
-        card.addEventListener("mousemove", (e) => {
-
-            const rect = card.getBoundingClientRect();
+            const rect =
+                card.getBoundingClientRect();
 
             const x =
-                (e.clientX - rect.left) / rect.width;
+                (event.clientX - rect.left) /
+                rect.width;
 
             const y =
-                (e.clientY - rect.top) / rect.height;
+                (event.clientY - rect.top) /
+                rect.height;
 
             const rotateY = (x - 0.5) * 8;
             const rotateX = (0.5 - y) * 8;
 
             gsap.to(card, {
-                rotateX: rotateX,
-                rotateY: rotateY,
+                rotateX,
+                rotateY,
                 transformPerspective: 800,
                 duration: 0.35,
                 ease: "power2.out",
                 overwrite: "auto"
             });
-
         });
 
-
-        // ----------------------------------
-        // MOUSE LEAVE
-        // ----------------------------------
-
         card.addEventListener("mouseleave", () => {
-
             gsap.to(card, {
                 y: 0,
                 scale: 1,
@@ -394,145 +434,35 @@ if (regionCards.length > 0) {
                 ease: "power3.out",
                 overwrite: "auto"
             });
-
         });
 
-
-        // ----------------------------------
-        // CLICK FEEDBACK
-        // ----------------------------------
-
         card.addEventListener("mousedown", () => {
-
             gsap.to(card, {
                 scale: 0.97,
                 duration: 0.1,
-                ease: "power2.out",
                 overwrite: "auto"
             });
-
         });
 
-
         card.addEventListener("mouseup", () => {
-
             gsap.to(card, {
                 scale: 1.03,
                 duration: 0.15,
-                ease: "power2.out",
                 overwrite: "auto"
             });
-
         });
-
     });
-
 }
 
 
-// ==========================================
-// EXPLORE BUTTON - SMOOTH SCROLL
-// ==========================================
-
-if (exploreButton) {
-
-    exploreButton.addEventListener("click", (e) => {
-
-        e.preventDefault();
-
-        gsap.to(window, {
-            duration: 1.1,
-
-            scrollTo: {
-                y: "#regions",
-                autoKill: false
-            },
-
-            ease: "power3.inOut"
-        });
-
-    });
-
-}
-
-
-// ==========================================
-// EXPLORE BUTTON HOVER
-// ==========================================
-
-if (exploreButton) {
-
-    exploreButton.addEventListener("mouseenter", () => {
-
-        gsap.to(exploreButton, {
-            scale: 1.05,
-            duration: 0.3,
-            ease: "power2.out",
-            overwrite: "auto"
-        });
-
-    });
-
-
-    exploreButton.addEventListener("mouseleave", () => {
-
-        gsap.to(exploreButton, {
-            scale: 1,
-            duration: 0.3,
-            ease: "power2.out",
-            overwrite: "auto"
-        });
-
-    });
-
-}
-
-
-// ==========================================
-// EXPLORE BUTTON CLICK FEEDBACK
-// ==========================================
-
-if (exploreButton) {
-
-    exploreButton.addEventListener("mousedown", () => {
-
-        gsap.to(exploreButton, {
-            scale: 0.95,
-            duration: 0.1,
-            ease: "power2.out",
-            overwrite: "auto"
-        });
-
-    });
-
-
-    exploreButton.addEventListener("mouseup", () => {
-
-        gsap.to(exploreButton, {
-            scale: 1.05,
-            duration: 0.15,
-            ease: "power2.out",
-            overwrite: "auto"
-        });
-
-    });
-
-}
-
-
-// ==========================================
-// SCROLLTRIGGER REFRESH
-// ==========================================
+// ==================================================
+// REFRESH SCROLLTRIGGER
+// ==================================================
 
 window.addEventListener("load", () => {
-
     ScrollTrigger.refresh();
-
 });
 
-
 window.addEventListener("resize", () => {
-
     ScrollTrigger.refresh();
-
 });
