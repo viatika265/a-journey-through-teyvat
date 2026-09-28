@@ -70,10 +70,18 @@ class HomeController extends Controller
                 'icon' => $region->icon,
                 'emblem' => $region->icon,
 
+                // Masukkan icon element yang sudah dikonversi
+                'element_icon' => $region->element->icon ?? null,
+                'element_name' => $region->element->name ?? null,
+
+                // masukkan archon 
+                'archon_icon' => $region->archon_icon ?? null,
+
                 'x' => $coordinates[$region->name]['x'],
                 'y' => $coordinates[$region->name]['y'],
                 'color' => $coordinates[$region->name]['color'],
                 'gradients' => $coordinates[$region->name]['gradients'],
+
             ];
         });
 
