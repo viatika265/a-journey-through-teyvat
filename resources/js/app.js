@@ -1,5 +1,8 @@
 import "./gsap-animation.js";
 
+const exploreButton = document.getElementById("explore-btn");
+const introSection = document.getElementById("intro");
+
 document.addEventListener("DOMContentLoaded", () => {
     const viewport = document.getElementById("map-viewport");
     const canvas = document.getElementById("map-canvas");

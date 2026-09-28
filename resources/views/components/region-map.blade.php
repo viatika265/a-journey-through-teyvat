@@ -20,11 +20,17 @@
                 class="pointer-events-none block max-w-none"
             >
 
+            {{-- Overlay awan dengan efek animasi --}}
             <div
                 class="absolute inset-0 pointer-events-none animate-clouds"
-                style="background-image: url('{{ asset('images/cloud_maps.png') }}'); background-repeat: repeat; mix-blend-mode: screen; opacity: 0.7; z-index: 5;"
-            >
-            </div>
+                style="
+                    background-image: url('{{ asset('images/cloud_maps.png') }}');
+                    background-repeat: repeat;
+                    mix-blend-mode: screen;
+                    opacity: 0.7;
+                    z-index: 5;
+                "
+            ></div>
 
             @foreach($regions as $region)
 
@@ -40,6 +46,7 @@
                     style="left: {{ $region['x'] }}px; top: {{ $region['y'] }}px;"
                 >
 
+                    {{-- SVG Pin dengan warna dinamis --}}
                     <svg
                         viewBox="0 0 100 125"
                         fill="none"
@@ -52,6 +59,7 @@
                         />
                     </svg>
 
+                    {{-- Emblem dinamis --}}
                     <img
                         src="{{ $region['emblem'] }}"
                         class="region-emblem"
