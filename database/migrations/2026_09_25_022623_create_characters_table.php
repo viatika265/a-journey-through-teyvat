@@ -34,6 +34,8 @@ return new class extends Migration
             $table->text('character_image')->nullable();
             $table->text('additional_image')->nullable();
 
+            $table->text('background')->nullable();
+
             $table->integer('sort_order')->default(0);
             $table->boolean('is_featured')->default(false);
 

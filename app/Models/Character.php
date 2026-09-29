@@ -28,4 +28,19 @@ class Character extends Model
     {
         return $this->belongsTo(Region::class);
     }
+
+    public function element(): BelongsTo
+    {
+        return $this->belongsTo(Element::class);
+    }
+
+    public function weapon(): BelongsTo
+    {
+        return $this->belongsTo(Weapon::class);
+    }
+
+    public function artifact(): BelongsTo
+    {
+        return $this->belongsTo(Artifact::class);
+    }
 }
