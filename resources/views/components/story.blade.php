@@ -23,7 +23,7 @@
             </svg>
           </div>
 
-          <div class="flex flex-col items-center md:items-end w-full my-auto pr-0 md:pr-12 lg:pr-20">
+          <div class="flex flex-col items-center md:items-end w-full my-auto px-6 md:px-0 pr-4 md:pr-12 lg:pr-20">
             <div class="w-full md:w-1/2 space-y-6 text-center md:text-right">
               <p class="font-display text-lg md:text-heading-4 text-neutral-light">
                   You fell into a deep slumber for 500 years before finally awakening in Teyvat, <br>separated from your twin during your battle against the Unknown God.
