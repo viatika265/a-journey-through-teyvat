@@ -27,7 +27,7 @@ class RegionSeeder extends Seeder
                 'background_image' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/mondstadt/background.png',
                 'landmark_image' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/mondstadt/landmark.png',
                 'icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/mondstadt/icon.png',
-                'archon_icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/mondstadt/archon.png',
+                'archon_icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/mondstadt/Mondstadt%20Archon.png',
                 'element_id' => Element::where('slug', 'anemo')->firstOrFail()->id,
             ],
 

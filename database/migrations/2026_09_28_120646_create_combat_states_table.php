@@ -6,34 +6,26 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('elements', function (Blueprint $table) {
-
+        Schema::create('combat_states', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
-
-            $table->string('slug')->unique();
-
-            $table->text('icon')->nullable();
-
-            // GIF / media element
-            $table->text('media_url')->nullable();
-
-            $table->string('media_type')
-                ->nullable();
+            $table->text('description')->nullable();
 
             $table->timestamps();
-
         });
     }
 
-
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('elements');
+        Schema::dropIfExists('combat_states');
     }
-
 };

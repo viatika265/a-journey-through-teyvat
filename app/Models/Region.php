@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Models\Character;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Region extends Model
@@ -11,14 +11,29 @@ class Region extends Model
     protected $fillable = [
         'name',
         'slug',
-        'element',
-        'description',
-        'landmark',
-        'image_path',
+        'title',
+        'short_description',
+        'long_description',
+        'card_image',
+        'background_image',
+        'landmark_image',
+        'icon',
+        'archon_icon',
+        'element_id',
     ];
+
+    public function element(): BelongsTo
+    {
+        return $this->belongsTo(Element::class);
+    }
 
     public function characters(): HasMany
     {
         return $this->hasMany(Character::class);
+    }
+
+    public function quests(): HasMany
+    {
+        return $this->hasMany(Quest::class);
     }
 }
