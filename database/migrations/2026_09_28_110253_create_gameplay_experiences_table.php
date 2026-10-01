@@ -6,34 +6,28 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-
     public function up(): void
     {
-        Schema::create('elements', function (Blueprint $table) {
-
+        Schema::create('gameplay_experiences', function (Blueprint $table) {
             $table->id();
 
-            $table->string('name');
-
+            $table->string('title');
             $table->string('slug')->unique();
 
-            $table->text('icon')->nullable();
+            $table->text('description')->nullable();
 
-            // GIF / media element
             $table->text('media_url')->nullable();
+            $table->string('media_type')->default('gif');
 
-            $table->string('media_type')
-                ->nullable();
+            $table->unsignedInteger('order')->default(0);
+            $table->boolean('is_active')->default(true);
 
             $table->timestamps();
-
         });
     }
 
-
     public function down(): void
     {
-        Schema::dropIfExists('elements');
+        Schema::dropIfExists('gameplay_experiences');
     }
-
 };

@@ -15,7 +15,9 @@
 
     @include('components.region-map')
 
-    @include('components.explore')
+    @include('gameplay.partials.explore')
+    @include('gameplay.partials.combat')
+    @include('gameplay.partials.quests')
 
     @include('components.trailer')
 

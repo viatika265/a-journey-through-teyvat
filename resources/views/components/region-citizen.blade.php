@@ -17,6 +17,7 @@
         padding: 0;
         overflow-x: hidden;
     }
+
     .swiper-slide {
         transition: all 0.5s ease;
         opacity: 0.5;
@@ -80,7 +81,7 @@
 
 
         <!-- SWIPER -->
-        <div class="relative w-full py-6 xl:py-10">
+        <div class="relative w-full py-6 xl:py-10 bg-cover" style=" background-image: url('{{ $region->party_background }}'); background-position: 100% 70%;">
             <div class="swiper character-swiper w-full max-w-[1319px] mx-auto overflow-visible px-4">
                 <div class="swiper-wrapper h-[260px] md:h-[340px] xl:h-[420px]">
                     @foreach($region->characters as $character)
@@ -140,7 +141,7 @@
 
             @foreach($region->characters as $index => $character)
 
-                <div x-show="activeIndex === {{ $index }}" x-transition class="flex flex-col items-center w-full">
+                <div x-show="activeIndex === {{ $index }}" class="flex flex-col items-center w-full">
                     <div class="mb-6 w-full">
                         <h3 class="font-display text-heading-3 text-yellow-normal tracking-wide mb-2">{{ $character->name }}</h3>
                         <p class="font-body text-heading-5 text-white leading-relaxed">{{ $character->description }}</p>

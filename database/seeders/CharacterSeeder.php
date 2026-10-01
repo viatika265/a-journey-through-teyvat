@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\Character;
 use App\Models\Region;
 use App\Models\Element;

@@ -14,6 +14,9 @@ class DatabaseSeeder extends Seeder
             ArtifactSeeder::class,
             RegionSeeder::class,
             CharacterSeeder::class,
+            GameplayExperienceSeeder::class,
+            CombatSeeder::class,
+            ReactionCombinationSeeder::class,
         ]);
     }
 }
