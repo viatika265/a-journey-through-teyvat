@@ -15,7 +15,7 @@
         @include('components.region-intro')
     </div>
 
-    <div class="relative z-20 -mt-[450px]">
+    <div class="relative z-20 -mt-[300px] md:-mt-[450px]">
         @include('components.region-about')
     </div>
 

@@ -42,7 +42,7 @@
 
     @yield('content')
 
-    <div class="w-full bg-white/5 backdrop-blur-md flex flex-col items-center pt-12 mt-25">
+    <div class="w-full bg-white/5 backdrop-blur-md flex flex-col items-center pt-12 mt-5 md:mt-25">
         <div class="flex flex-row gap-8 mb-2 md:mb-4">
         <svg class="mx-auto w-[100px] sm:w-[100px] md:w-[150px] h-auto"
             viewBox="0 0 500 180"
