@@ -12,22 +12,28 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quests', function (Blueprint $table) {
+
             $table->id();
 
-            $table->foreignId('region_id')
-                ->constrained('regions')
-                ->cascadeOnDelete();
-
             $table->string('title');
-            $table->string('type');
+
+            $table->string('subtitle')->nullable();
 
             $table->text('description')->nullable();
-            $table->text('thumbnail_url')->nullable();
 
-            $table->unsignedInteger('order')->default(0);
-            $table->boolean('is_active')->default(true);
+            $table->text('media_url')->nullable();
+
+            $table->enum('type', [
+                'opening',
+                'story',
+                'complete',
+                'event'
+            ]);
+
+            $table->integer('order')->default(0);
 
             $table->timestamps();
+
         });
     }
 

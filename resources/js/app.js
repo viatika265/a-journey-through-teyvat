@@ -136,89 +136,167 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-
 // =====================================================
 // EXPLORE CAROUSEL
 // =====================================================
 
 document.addEventListener('DOMContentLoaded', () => {
 
+
     const carousel =
         document.getElementById('explore-carousel');
+
 
     const cards =
         document.querySelectorAll('.explore-card');
 
-    const buttons =
-        document.querySelectorAll('.explore-indicator button');
 
-    if (!carousel) return;
+    const prev =
+        document.getElementById('explore-prev');
 
 
-    function goSlide(index) {
+    const next =
+        document.getElementById('explore-next');
 
-        const card = cards[index];
 
-        if (card) {
+    const indicators =
+        document.querySelectorAll(
+            '#explore-indicator button'
+        );
 
-            carousel.scrollTo({
-                left: card.offsetLeft - carousel.offsetLeft,
-                behavior: 'smooth'
-            });
 
-        }
+    if (!carousel || cards.length === 0) return;
+
+
+
+    let currentIndex = 0;
+
+
+
+    function updateExplore(index) {
+
+
+        currentIndex = index;
+
+
+        const card =
+            cards[index];
+
+
+        carousel.scrollTo({
+
+            left:
+                card.offsetLeft -
+                carousel.offsetLeft,
+
+            behavior:'smooth'
+
+        });
+
+
+
+        cards.forEach((item,i)=>{
+
+
+            item.classList.toggle(
+                'active',
+                i === index
+            );
+
+
+        });
+
+
+
+        indicators.forEach((dot,i)=>{
+
+
+            dot.classList.toggle(
+                'active',
+                i === index
+            );
+
+
+        });
+
+
     }
 
 
-    buttons.forEach((button, index) => {
 
-        button.onclick = () => {
-            goSlide(index);
-        };
+
+
+    if(next){
+
+        next.addEventListener('click',()=>{
+
+
+            currentIndex++;
+
+
+            if(currentIndex >= cards.length){
+
+                currentIndex = 0;
+
+            }
+
+
+            updateExplore(currentIndex);
+
+
+        });
+
+
+    }
+
+
+
+
+
+    if(prev){
+
+        prev.addEventListener('click',()=>{
+
+
+            currentIndex--;
+
+
+            if(currentIndex < 0){
+
+                currentIndex =
+                    cards.length - 1;
+
+            }
+
+
+            updateExplore(currentIndex);
+
+
+        });
+
+    }
+
+
+
+
+
+    indicators.forEach((dot,index)=>{
+
+
+        dot.addEventListener('click',()=>{
+
+
+            updateExplore(index);
+
+
+        });
+
 
     });
 
 
-    function update() {
-
-        let active = 0;
-        let distance = Infinity;
-
-        cards.forEach((card, index) => {
-
-            const diff =
-                Math.abs(
-                    card.offsetLeft - carousel.scrollLeft
-                );
-
-            if (diff < distance) {
-
-                distance = diff;
-                active = index;
-
-            }
-
-        });
-
-
-        buttons.forEach((button, index) => {
-
-            button.classList.toggle(
-                'active',
-                index === active
-            );
-
-        });
-
-    }
-
-
-    carousel.addEventListener('scroll', update);
-
-    update();
 
 });
-
 
 // =====================================================
 // ELEMENTAL COMBAT
@@ -260,49 +338,41 @@ document.addEventListener('DOMContentLoaded', () => {
     let activeIndex =
         Math.min(5, items.length - 1);
 
-    let animationFrame = null;
+    let isAnimating = false;
+
 
 
     // =================================================
-    // FILTER REACTION PER ELEMENT
+    // FILTER REACTION
     // =================================================
 
     function updateReaction(elementId) {
 
-        if (animationFrame !== null) {
-            cancelAnimationFrame(animationFrame);
-        }
-
-        const matchedReactions = [];
-
 
         reactions.forEach((reaction) => {
+
 
             const name =
                 reaction.dataset.reactionName;
 
+
             let show = false;
 
 
-            // ANEMO
             if (elementId == 1) {
 
-                show =
-                    name === 'Swirl';
+                show = name === 'Swirl';
 
             }
 
 
-            // GEO
             else if (elementId == 2) {
 
-                show =
-                    name === 'Crystallize';
+                show = name === 'Crystallize';
 
             }
 
 
-            // ELECTRO
             else if (elementId == 3) {
 
                 show =
@@ -315,7 +385,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
 
-            // DENDRO
             else if (elementId == 4) {
 
                 show =
@@ -327,7 +396,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
 
-            // HYDRO
             else if (elementId == 5) {
 
                 show =
@@ -339,7 +407,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
 
-            // PYRO
             else if (elementId == 6) {
 
                 show =
@@ -351,7 +418,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
 
-            // CRYO
             else if (elementId == 7) {
 
                 show =
@@ -362,108 +428,233 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
 
-            reaction.classList.remove('show');
+            reaction.classList.toggle(
+                'show',
+                show
+            );
 
-
-            if (show) {
-                matchedReactions.push(reaction);
-            }
 
         });
-
-
-        animationFrame =
-            requestAnimationFrame(() => {
-
-                matchedReactions.forEach((reaction) => {
-
-                    reaction.classList.add('show');
-
-                });
-
-                animationFrame = null;
-
-            });
 
     }
 
 
+
+
+
     // =================================================
-    // ELEMENT CAROUSEL
+    // RENDER ELEMENT
     // =================================================
 
-    function render() {
+    function render(direction = 0) {
+
+
+        if (isAnimating) return;
+
+
+        isAnimating = true;
+
+
+        setTimeout(() => {
+
+            isAnimating = false;
+
+        }, 350);
+
+
+
+
+
+        container.classList.remove(
+            'switch-next',
+            'switch-prev'
+        );
+
+
+        void container.offsetWidth;
+
+
+
+        if (direction > 0) {
+
+            container.classList.add(
+                'switch-next'
+            );
+
+        }
+
+
+
+        if (direction < 0) {
+
+            container.classList.add(
+                'switch-prev'
+            );
+
+        }
+
+
+
+
 
         const total = items.length;
+
         const order = [];
 
 
-        for (let offset = -3; offset <= 3; offset++) {
+
+        for (
+            let offset = -3;
+            offset <= 3;
+            offset++
+        ) {
+
 
             const index =
-                (activeIndex + offset + total) % total;
+                (activeIndex + offset + total)
+                % total;
 
-            if (!order.includes(index)) {
-                order.push(index);
-            }
+
+            order.push(index);
 
         }
+
+
+
 
 
         container.innerHTML = '';
 
 
-        order.forEach((index) => {
 
-            const item = items[index];
+
+
+        order.forEach(index => {
+
+
+            const item =
+                items[index];
+
+
+            const isActive =
+                index === activeIndex;
+
+
 
             item.classList.toggle(
                 'active',
-                index === activeIndex
+                isActive
             );
 
+
+
+            // =====================================
+            // CENTER ELEMENT EFFECT
+            // =====================================
+
+            if (isActive) {
+
+
+                item.classList.remove(
+                    'element-pulse',
+                    'element-glow'
+                );
+
+
+                void item.offsetWidth;
+
+
+                item.classList.add(
+                    'element-pulse',
+                    'element-glow'
+                );
+
+
+                setTimeout(() => {
+
+                    item.classList.remove(
+                        'element-pulse',
+                        'element-glow'
+                    );
+
+                },700);
+
+
+            }
+
+
+
+
             container.appendChild(item);
+
 
         });
 
 
-        // UPDATE DOTS
-        dots.forEach((dot, index) => {
+
+
+
+
+
+        dots.forEach((dot,index)=>{
+
 
             dot.classList.toggle(
                 'active',
                 index === activeIndex
             );
 
+
         });
+
+
+
+
+
 
 
         const activeElement =
             items[activeIndex];
 
+
+
         if (!activeElement) return;
+
+
+
 
 
         const name =
             activeElement.dataset.elementName;
 
+
+
         const id =
             activeElement.dataset.elementId;
+
+
 
         const gif =
             activeElement.dataset.media;
 
 
-        // UPDATE ELEMENT NAME
-        if (elementName) {
 
-            elementName.textContent = name;
+
+
+
+        if(elementName){
+
+            elementName.textContent =
+                name;
 
         }
 
 
-        // UPDATE GIF DARI SUPABASE
-        if (media && gif) {
+
+
+
+
+        if(media && gif){
 
             media.src = gif;
 
@@ -473,87 +664,259 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
 
-        // UPDATE REACTIONS
+
+
+
         updateReaction(id);
 
+
     }
 
 
+
+
+
+
+
+
+
     // =================================================
-    // NEXT
+    // NEXT BUTTON
     // =================================================
 
-    if (next) {
+    if(next){
 
-        next.addEventListener('click', () => {
+        next.addEventListener('click',()=>{
+
 
             activeIndex =
-                (activeIndex + 1) % items.length;
+                (activeIndex + 1)
+                % items.length;
 
-            render();
+
+
+            render(1);
+
 
         });
 
     }
 
 
+
+
+
+
+
+
+
     // =================================================
-    // PREV
+    // PREVIOUS BUTTON
     // =================================================
 
-    if (prev) {
+    if(prev){
 
-        prev.addEventListener('click', () => {
+        prev.addEventListener('click',()=>{
+
 
             activeIndex =
-                (activeIndex - 1 + items.length) % items.length;
+                (activeIndex - 1 + items.length)
+                % items.length;
 
-            render();
+
+
+            render(-1);
+
 
         });
 
     }
+
+
+
+
+
+
+
 
 
     // =================================================
     // CLICK ELEMENT
     // =================================================
 
-    items.forEach((item, index) => {
+    items.forEach((item,index)=>{
 
-        item.addEventListener('click', () => {
+
+        item.addEventListener('click',()=>{
+
 
             activeIndex = index;
 
+
             render();
+
 
         });
 
+
     });
+
+
+
+
+
+
+
 
 
     // =================================================
     // CLICK DOT
     // =================================================
 
-    dots.forEach((dot, index) => {
+    dots.forEach((dot,index)=>{
 
-        dot.addEventListener('click', () => {
 
-            if (index < items.length) {
+        dot.addEventListener('click',()=>{
 
-                activeIndex = index;
 
-                render();
+            activeIndex = index;
 
-            }
+
+            render();
+
 
         });
+
 
     });
 
 
-    // INITIAL RENDER
+
+
+
+
+
+
+
+    // INITIAL
+
     render();
+
+
+
+});
+
+/* =========================================================
+   QUEST JOURNEY ANIMATION
+========================================================= */
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+
+    const questCards = document.querySelectorAll('.quest-card');
+
+
+    if (!questCards.length) return;
+
+
+
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
+
+
+    const observer = new IntersectionObserver((entries) => {
+
+
+        entries.forEach(entry => {
+
+
+            if(entry.isIntersecting){
+
+
+                entry.target.classList.add('show');
+
+
+                observer.unobserve(entry.target);
+
+
+            }
+
+
+        });
+
+
+    }, {
+
+        threshold:0.15
+
+    });
+
+
+
+
+
+
+    questCards.forEach((card,index)=>{
+
+
+        card.style.transitionDelay = `${index * 0.12}s`;
+
+
+        observer.observe(card);
+
+
+    });
+
+
+
+
+
+
+
+    /* =====================================================
+       IMAGE HOVER
+    ===================================================== */
+
+
+    questCards.forEach(card=>{
+
+
+        const image = card.querySelector('.quest-image img');
+
+
+        if(!image) return;
+
+
+
+
+        card.addEventListener('mouseenter',()=>{
+
+
+            image.style.transform = "scale(1.06)";
+
+
+        });
+
+
+
+
+
+        card.addEventListener('mouseleave',()=>{
+
+
+            image.style.transform = "scale(1)";
+
+
+        });
+
+
+
+    });
+
+
 
 });

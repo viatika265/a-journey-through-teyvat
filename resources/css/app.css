@@ -142,6 +142,8 @@
 
     animation: moveClouds 80s linear infinite;
 
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -261,7 +263,6 @@ html {
 
 }
 
-
 /* =========================================================
    EXPLORE TITLE
 ========================================================= */
@@ -302,7 +303,6 @@ html {
 
 }
 
-
 /* =========================================================
    EXPLORE CAROUSEL
 ========================================================= */
@@ -342,7 +342,6 @@ html {
     border-radius: 20px;
 
 }
-
 
 /* =========================================================
    EXPLORE CARD
@@ -406,7 +405,6 @@ html {
 
 }
 
-
 /* =========================================================
    EXPLORE OVERLAY
 ========================================================= */
@@ -424,7 +422,6 @@ html {
         );
 
 }
-
 
 /* =========================================================
    EXPLORE CONTENT
@@ -474,9 +471,12 @@ html {
 
 }
 
-
 /* =========================================================
    EXPLORE INDICATOR
+========================================================= */
+
+/* =========================================================
+   EXPLORE INDICATOR - GAME STYLE
 ========================================================= */
 
 .explore-indicator {
@@ -485,246 +485,539 @@ html {
 
     justify-content: center;
 
-    gap: 10px;
+    align-items: center;
 
-    margin-top: 20px;
+    gap: 12px;
+
+    margin-top: 18px;
 
 }
 
 .explore-indicator button {
 
-    width: 10px;
+    width: 8px;
 
-    height: 10px;
+    height: 8px;
+
+    padding: 0;
 
     border-radius: 50%;
 
     border: none;
 
-    background: #777;
+    background: rgba(255,255,255,.45);
 
-    transition: .3s;
+    transition:
+        transform .35s ease,
+        background .35s ease,
+        opacity .35s ease;
+
+    opacity: .7;
 
 }
 
 .explore-indicator button.active {
 
-    width: 35px;
+    width: 10px;
 
-    border-radius: 20px;
+    height: 10px;
 
     background: #dcb15c;
 
+    opacity: 1;
+
+    transform: scale(1.25);
+
+    box-shadow:
+
+        0 0 8px rgba(220,177,92,.7);
+
 }
-
-
 /* =========================================================
-   EXPLORE RESPONSIVE
+   EXPLORE RESPONSIVE - GAME STYLE FINAL
 ========================================================= */
 
-@media (max-width: 768px) {
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width:1024px){
+
+    .explore-section {
+
+        padding:60px 0;
+
+    }
 
     .explore-title h2 {
 
-        font-size: 1.8rem;
+        font-size:2.3rem;
+
+    }
+
+    .explore-title span {
+
+        font-size:.9rem;
+
+    }
+
+    .explore-card {
+
+        height:65vh;
+
+    }
+
+    .explore-content {
+
+        bottom:40px;
+
+        padding:30px 8%;
+
+    }
+
+    .explore-content h3 {
+
+        font-size:2rem;
+
+    }
+
+    .explore-content h4 {
+
+        font-size:1.2rem;
+
+    }
+
+    .explore-content p {
+
+        font-size:.9rem;
+
+    }
+
+    /* ARROW */
+
+    .explore-arrow {
+
+        width:34px;
+
+        height:34px;
+
+        font-size:22px;
+
+    }
+
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width:768px){
+
+    .explore-section {
+
+        padding:40px 0;
+
+        overflow:hidden;
+
+    }
+
+    .explore-title {
+
+        margin-bottom:25px;
+
+        padding:0 15px;
+
+    }
+
+    .explore-title h2 {
+
+        font-size:1.8rem;
 
     }
 
     .explore-title p {
 
-        font-size: .75rem;
+        font-size:.7rem;
+
+        letter-spacing:3px;
+
+    }
+
+    .explore-title span {
+
+        font-size:.8rem;
+
+    }
+
+    /* CAROUSEL */
+
+    .explore-carousel-wrapper {
+
+        position:relative;
+
+        width:100%;
 
     }
 
     .explore-carousel {
 
-        width: 100%;
+        display:flex;
 
-        position: relative;
+        gap:15px;
 
-        overflow: hidden;
+        overflow:hidden;
 
-    }
+        scroll-behavior:smooth;
 
-    .explore-track {
+        padding:
 
-        display: flex;
-
-        transition: .45s ease;
+        0 5%;
 
     }
 
     .explore-card {
 
-        flex: 0 0 90%;
+        flex:
 
-        width: 90%;
+        0 0 88%;
 
-        height: 420px;
+        width:88%;
 
-        margin: 0 5%;
+        height:420px;
 
-        border-radius: 18px;
+        border-radius:18px;
 
-        overflow: hidden;
+        overflow:hidden;
+
+        position:relative;
+
+        transition:
+
+            transform .45s ease,
+
+            opacity .45s ease;
 
     }
 
+    .explore-card:not(.active){
+
+        opacity:.55;
+
+        transform:scale(.92);
+
+    }
+
+    .explore-card.active {
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+    .explore-image,
+
+    .explore-image img,
+
+    .explore-placeholder {
+
+        width:100%;
+
+        height:100%;
+
+    }
+
+    .explore-image img {
+
+        object-fit:cover;
+
+    }
+
+    .explore-overlay {
+
+        background:
+
+        linear-gradient(
+
+            transparent 35%,
+
+            rgba(0,0,0,.85)
+
+        );
+
+    }
+
+    /* CONTENT */
+
     .explore-content {
 
-        bottom: 25px;
+        bottom:20px;
 
-        padding: 20px;
+        padding:20px;
+
+        text-align:left;
 
     }
 
     .explore-content h3 {
 
-        font-size: 1.5rem;
+        font-size:1.45rem;
 
     }
 
     .explore-content h4 {
 
-        font-size: 1rem;
+        font-size:1rem;
+
+        margin:8px 0;
 
     }
 
     .explore-content p {
 
-        font-size: .8rem;
+        font-size:.78rem;
 
-        line-height: 1.4;
+        line-height:1.4;
 
     }
 
+    /* =====================
+       ARROW SMALL GAME HUD
+    ===================== */
+
     .explore-arrow {
 
-        position: absolute;
+        position:absolute;
 
-        top: 50%;
+        top:50%;
 
-        transform: translateY(-50%);
+        transform:
 
-        width: 35px;
+            translateY(-50%);
 
-        height: 35px;
+        width:30px;
 
-        display: flex;
+        height:30px;
 
-        align-items: center;
+        display:flex;
 
-        justify-content: center;
+        align-items:center;
 
-        border-radius: 50%;
+        justify-content:center;
 
-        background: rgba(0, 0, 0, .65);
+        border-radius:50%;
 
-        border: 1px solid #dcb15c;
+        background:
 
-        color: #dcb15c;
+            rgba(0,0,0,.35);
 
-        font-size: 18px;
+        backdrop-filter:
 
-        cursor: pointer;
+            blur(4px);
 
-        z-index: 10;
+        border:
+
+            1px solid rgba(220,177,92,.45);
+
+        color:#dcb15c;
+
+        font-size:20px;
+
+        line-height:1;
+
+        z-index:20;
+
+        transition:
+
+            transform .3s ease,
+
+            background .3s ease,
+
+            box-shadow .3s ease;
+
+    }
+
+    .explore-arrow:hover {
+
+        background:
+
+            rgba(220,177,92,.12);
+
+        box-shadow:
+
+            0 0 10px rgba(220,177,92,.45);
+
+    }
+
+    .explore-arrow:active {
+
+        transform:
+
+            translateY(-50%)
+
+            scale(.85);
 
     }
 
     .explore-prev {
 
-        left: 10px;
+        left:8px;
 
     }
 
     .explore-next {
 
-        right: 10px;
+        right:8px;
+
+    }
+
+    /* INDICATOR */
+
+    .explore-indicator {
+
+        margin-top:15px;
+
+        gap:9px;
+
+    }
+
+    .explore-indicator button {
+
+        width:7px;
+
+        height:7px;
+
+    }
+
+    .explore-indicator button.active {
+
+        width:9px;
+
+        height:9px;
 
     }
 
 }
 
+/* =========================
+   SMALL PHONE
+========================= */
 
-@media (max-width: 480px) {
+@media (max-width:480px){
 
     .explore-title h2 {
 
-        font-size: 1.4rem;
+        font-size:1.45rem;
 
     }
 
-    .explore-title p {
+    .explore-title span {
 
-        font-size: .6rem;
+        font-size:.75rem;
 
     }
 
     .explore-card {
 
-        flex: 0 0 92%;
+        flex-basis:90%;
 
-        width: 92%;
+        width:90%;
 
-        height: 350px;
-
-        margin: 0 4%;
-
-        border-radius: 15px;
+        height:350px;
 
     }
 
     .explore-content {
 
-        bottom: 15px;
+        bottom:15px;
 
-        padding: 15px;
+        padding:15px;
 
     }
 
     .explore-content h3 {
 
-        font-size: 1.2rem;
+        font-size:1.2rem;
 
     }
 
     .explore-content h4 {
 
-        font-size: .8rem;
+        font-size:.85rem;
 
     }
 
     .explore-content p {
 
-        display: none;
+        font-size:.7rem;
 
     }
 
     .explore-arrow {
 
-        width: 30px;
+        width:26px;
 
-        height: 30px;
+        height:26px;
 
-        font-size: 15px;
+        font-size:16px;
 
     }
 
     .explore-prev {
 
-        left: 5px;
+        left:5px;
 
     }
 
     .explore-next {
 
-        right: 5px;
+        right:5px;
 
     }
 
 }
 
+/* =========================
+   EXTRA SMALL PHONE
+========================= */
+
+@media (max-width:360px){
+
+    .explore-section {
+
+        padding:25px 0;
+
+    }
+
+    .explore-card {
+
+        height:320px;
+
+    }
+
+    .explore-content h3 {
+
+        font-size:1.05rem;
+
+    }
+
+    .explore-content p {
+
+        display:none;
+
+    }
+
+    .explore-arrow {
+
+        width:24px;
+
+        height:24px;
+
+        font-size:14px;
+
+    }
+
+}
 
 /* =========================================================
    ELEMENTAL COMBAT
@@ -759,7 +1052,6 @@ html {
     font-size: 3rem;
 
 }
-
 
 /* =========================================================
    ELEMENT CAROUSEL
@@ -809,7 +1101,6 @@ html {
 
 }
 
-
 /* =========================================================
    ELEMENT ITEM
 ========================================================= */
@@ -841,7 +1132,6 @@ html {
     object-fit: contain;
 
 }
-
 
 /* =========================================================
    ACTIVE ELEMENT
@@ -888,7 +1178,6 @@ html {
 
 }
 
-
 /* =========================================================
    ACTIVE ELEMENT NAME
 ========================================================= */
@@ -914,7 +1203,6 @@ html {
     text-shadow: 0 0 8px rgba(222, 177, 92, .35);
 
 }
-
 
 /* =========================================================
    COMBAT DOT + ARROW
@@ -974,32 +1262,76 @@ html {
 
 }
 
-.combat-arrow {
+/* =========================================================
+COMBAT ARROW - SMOOTH
+========================================================= */
 
-    background: none;
+#combat-prev,
+#combat-next {
+appearance: none !important;
+-webkit-appearance: none !important;
 
-    border: none;
+display: flex !important;
+align-items: center !important;
+justify-content: center !important;
 
-    color: #dcb15c;
+width: 44px !important;
+min-width: 44px !important;
+max-width: 44px !important;
 
-    font-size: 36px;
+height: 44px !important;
+min-height: 44px !important;
+max-height: 44px !important;
 
-    line-height: 1;
+padding: 0 !important;
+margin: 0 !important;
 
-    cursor: pointer;
+background: transparent !important;
+border: none !important;
+border-radius: 50% !important;
+box-shadow: none !important;
 
-    transition: .25s ease;
+color: #dcb15c !important;
+font-size: 32px !important;
+font-weight: 400 !important;
+line-height: 1 !important;
+
+cursor: pointer;
+outline: none;
+
+transition:
+    transform .3s ease,
+    color .3s ease,
+    filter .3s ease !important;
 
 }
 
-.combat-arrow:hover {
-
-    transform: scale(1.12);
-
-    color: #f3d27a;
-
+/* HOVER KIRI */
+#combat-prev:hover {
+color: #f3d27a !important;
+transform: translateX(-4px);
+filter: drop-shadow(0 0 6px rgba(220,177,92,.6));
 }
 
+/* HOVER KANAN */
+#combat-next:hover {
+color: #f3d27a !important;
+transform: translateX(4px);
+filter: drop-shadow(0 0 6px rgba(220,177,92,.6));
+}
+
+/* SAAT DITEKAN */
+#combat-prev:active,
+#combat-next:active {
+transform: scale(.88);
+}
+
+/* FOCUS */
+#combat-prev:focus-visible,
+#combat-next:focus-visible {
+outline: 2px solid #dcb15c !important;
+outline-offset: 4px;
+}
 
 /* =========================================================
    COMBAT MEDIA
@@ -1031,7 +1363,6 @@ html {
 
 }
 
-
 /* =========================================================
    REACTION WRAPPER
 ========================================================= */
@@ -1056,7 +1387,6 @@ html {
 
 }
 
-
 /* =========================================================
    REACTION GRID
 ========================================================= */
@@ -1076,7 +1406,6 @@ html {
     gap: 35px 25px;
 
 }
-
 
 /* =========================================================
    REACTION CARD
@@ -1110,7 +1439,6 @@ html {
 
 }
 
-
 /* =========================================================
    REACTION ANIMATION
 ========================================================= */
@@ -1134,7 +1462,6 @@ html {
     }
 
 }
-
 
 /* =========================================================
    REACTION ICON
@@ -1210,7 +1537,6 @@ html {
 
 }
 
-
 /* =========================================================
    REACTION TEXT
 ========================================================= */
@@ -1243,7 +1569,6 @@ html {
 
 }
 
-
 /* =========================================================
    REACTION INDICATOR
 ========================================================= */
@@ -1254,624 +1579,1964 @@ html {
 
 }
 
+/* Reset style tombol elemen agar tidak muncul kotak bawaan */
+#elemental-combat .combat-elements .combat-element {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    box-sizing: border-box !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    outline: none;
+
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transform-origin: center;
+    transition:
+        width .48s cubic-bezier(.22, 1, .36, 1),
+        height .48s cubic-bezier(.22, 1, .36, 1),
+        opacity .38s ease,
+        filter .45s ease,
+        transform .48s cubic-bezier(.22, 1, .36, 1) !important;
+}
+
+/* Gambar ikon tetap bersih dan tidak membawa kotak dari style tombol */
+#elemental-combat .combat-elements .combat-element img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    pointer-events: none;
+    transition:
+        filter .4s ease,
+        transform .48s cubic-bezier(.22, 1, .36, 1);
+}
+
+/* Hover ikon nonaktif: sedikit terangkat dan lebih terlihat */
+#elemental-combat .combat-elements .combat-element:not(.active):hover {
+    opacity: .72 !important;
+    filter: grayscale(35%) brightness(1.12) !important;
+    transform: translateY(-3px) scale(1.06);
+}
+
+/* Ikon aktif: glow halus, tanpa kotak latar */
+#elemental-combat .combat-elements .combat-element.active {
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    filter:
+        grayscale(0)
+        drop-shadow(0 0 7px rgba(255,255,255,.65))
+        drop-shadow(0 0 17px rgba(220,177,92,.38)) !important;
+    transform: scale(1.04) translateY(-4px);
+}
+
+/* Akses keyboard */
+#elemental-combat .combat-elements .combat-element:focus-visible {
+    outline: 2px solid rgba(220,177,92,.9) !important;
+    outline-offset: 5px;
+}
+
+/* Panah navigasi: reset total style button global/framework */
+#elemental-combat .combat-bottom-control > button#combat-prev,
+#elemental-combat .combat-bottom-control > button#combat-next {
+    all: unset !important;
+    box-sizing: border-box !important;
+
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 44px !important;
+    width: 44px !important;
+    min-width: 44px !important;
+    max-width: 44px !important;
+    height: 44px !important;
+    min-height: 44px !important;
+    max-height: 44px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid transparent !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+
+    color: #dcb15c !important;
+    font-family: inherit !important;
+    font-size: 32px !important;
+    font-weight: 400 !important;
+    line-height: 1 !important;
+    text-align: center !important;
+
+    cursor: pointer !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+
+    transform: translateX(0) scale(1);
+    transition:
+        transform .36s cubic-bezier(.22, 1, .36, 1),
+        color .28s ease,
+        border-color .28s ease,
+        background-color .28s ease,
+        filter .28s ease !important;
+}
+
+/* Hover panah: rasa seperti kontrol game */
+#elemental-combat .combat-bottom-control > button#combat-prev:hover {
+    color: #ffe39a !important;
+    background: rgba(220,177,92,.07) !important;
+    border-color: rgba(220,177,92,.2) !important;
+    transform: translateX(-4px) scale(1.08);
+    filter: drop-shadow(0 0 8px rgba(220,177,92,.55));
+}
+
+#elemental-combat .combat-bottom-control > button#combat-next:hover {
+    color: #ffe39a !important;
+    background: rgba(220,177,92,.07) !important;
+    border-color: rgba(220,177,92,.2) !important;
+    transform: translateX(4px) scale(1.08);
+    filter: drop-shadow(0 0 8px rgba(220,177,92,.55));
+}
+
+/* Tekan: feedback cepat */
+#elemental-combat .combat-bottom-control > button#combat-prev:active,
+#elemental-combat .combat-bottom-control > button#combat-next:active {
+    color: #fff0c4 !important;
+    transform: scale(.88);
+    filter: drop-shadow(0 0 4px rgba(220,177,92,.4));
+}
+
+#elemental-combat .combat-bottom-control > button#combat-prev:focus-visible,
+#elemental-combat .combat-bottom-control > button#combat-next:focus-visible {
+    outline: 2px solid #dcb15c !important;
+    outline-offset: 3px !important;
+}
+
+/* Titik indikator ikut terasa lembut */
+#elemental-combat .combat-dot {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0;
+    box-shadow: none;
+    transition:
+        transform .32s cubic-bezier(.22, 1, .36, 1),
+        background-color .28s ease,
+        box-shadow .28s ease,
+        opacity .28s ease;
+}
+
+#elemental-combat .combat-dot.active {
+    box-shadow: 0 0 9px rgba(220,177,92,.55);
+}
+
+/* Responsif */
+@media (max-width: 1024px) {
+    #elemental-combat .combat-bottom-control > button#combat-prev,
+    #elemental-combat .combat-bottom-control > button#combat-next {
+        font-size: 22px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    #elemental-combat .combat-bottom-control > button#combat-prev,
+    #elemental-combat .combat-bottom-control > button#combat-next {
+        flex-basis: 36px !important;
+        width: 36px !important;
+        min-width: 36px !important;
+        max-width: 36px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+        max-height: 36px !important;
+        font-size: 19px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #elemental-combat .combat-bottom-control > button#combat-prev,
+    #elemental-combat .combat-bottom-control > button#combat-next {
+        flex-basis: 30px !important;
+        width: 30px !important;
+        min-width: 30px !important;
+        max-width: 30px !important;
+        height: 30px !important;
+        min-height: 30px !important;
+        max-height: 30px !important;
+        font-size: 16px !important;
+    }
+}
+
+@media (max-width: 360px) {
+    #elemental-combat .combat-bottom-control > button#combat-prev,
+    #elemental-combat .combat-bottom-control > button#combat-next {
+        flex-basis: 26px !important;
+        width: 26px !important;
+        min-width: 26px !important;
+        max-width: 26px !important;
+        height: 26px !important;
+        min-height: 26px !important;
+        max-height: 26px !important;
+        font-size: 14px !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #elemental-combat .combat-elements .combat-element,
+    #elemental-combat .combat-elements .combat-element img,
+    #elemental-combat .combat-bottom-control > button#combat-prev,
+    #elemental-combat .combat-bottom-control > button#combat-next,
+    #elemental-combat .combat-dot {
+        transition: none !important;
+        animation: none !important;
+    }
+}
 
 /* =========================================================
-   TABLET
+   CLEAN GAME STYLE FINAL OVERRIDE
 ========================================================= */
+
+#elemental-combat .combat-element,
+#elemental-combat .combat-arrow {
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#elemental-combat .combat-element {
+    transform-origin: center;
+    transition:
+        transform .45s cubic-bezier(.22,1,.36,1),
+        opacity .35s ease,
+        filter .45s ease !important;
+}
+
+#elemental-combat .combat-element img {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#elemental-combat .combat-element.active {
+    background: transparent !important;
+    box-shadow: none !important;
+    transform: scale(1.08) translateY(-5px) !important;
+    filter:
+        grayscale(0)
+        drop-shadow(0 0 10px rgba(255,255,255,.75))
+        drop-shadow(0 0 25px rgba(220,177,92,.45)) !important;
+    animation: activeElementGlow 2.2s infinite ease-in-out;
+}
+
+@keyframes activeElementGlow {
+    0%,100% {
+        filter:
+        grayscale(0)
+        drop-shadow(0 0 8px rgba(255,255,255,.7))
+        drop-shadow(0 0 18px rgba(220,177,92,.35));
+    }
+    50% {
+        filter:
+        grayscale(0)
+        drop-shadow(0 0 15px rgba(255,255,255,.9))
+        drop-shadow(0 0 32px rgba(220,177,92,.55));
+    }
+}
+
+#elemental-combat .combat-element:not(.active) {
+    opacity: .35 !important;
+    filter: grayscale(100%) brightness(.7) !important;
+    transform: scale(.9);
+}
+
+#elemental-combat .combat-element:not(.active):hover {
+    opacity: .75 !important;
+    transform: scale(1) translateY(-3px);
+    filter: grayscale(40%) brightness(1) !important;
+}
+
+#elemental-combat #combat-prev,
+#elemental-combat #combat-next {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 44px !important;
+    height: 44px !important;
+    display:flex !important;
+    align-items:center;
+    justify-content:center;
+    color:#dcb15c !important;
+    font-size:34px !important;
+    transition:
+        transform .35s cubic-bezier(.22,1,.36,1),
+        color .3s ease,
+        filter .3s ease !important;
+}
+
+#elemental-combat #combat-prev:hover {
+    color:#ffe7a3 !important;
+    transform:translateX(-5px) scale(1.15);
+    filter:drop-shadow(0 0 10px rgba(220,177,92,.7));
+}
+
+#elemental-combat #combat-next:hover {
+    color:#ffe7a3 !important;
+    transform:translateX(5px) scale(1.15);
+    filter:drop-shadow(0 0 10px rgba(220,177,92,.7));
+}
+
+#elemental-combat #combat-prev:active,
+#elemental-combat #combat-next:active {
+    transform:scale(.85);
+}
+
+/* =========================================================
+   NON ACTIVE ELEMENT - SOFT GRAY
+========================================================= */
+
+#elemental-combat .combat-element:not(.active) img {
+
+    filter:
+        grayscale(100%)
+        brightness(.85)
+        contrast(1.05) !important;
+
+    opacity: .75 !important;
+
+    transition:
+        transform .35s ease,
+        filter .35s ease,
+        opacity .35s ease;
+
+}
+
+/* Hover tetap abu, hanya sedikit membesar */
+
+#elemental-combat .combat-element:not(.active):hover img {
+
+    filter:
+        grayscale(100%)
+        brightness(1)
+        contrast(1.05) !important;
+
+    opacity: .9 !important;
+
+    transform: scale(1.08);
+
+}
+
+/* Active tetap full color */
+
+#elemental-combat .combat-element.active img {
+
+    filter: none !important;
+
+    opacity: 1 !important;
+
+}
+
+#combat-elements.switch-next {
+    animation: slideNext .35s ease;
+}
+
+#combat-elements.switch-prev {
+    animation: slidePrev .35s ease;
+}
+
+@keyframes slideNext {
+
+    from {
+        opacity: .4;
+        transform: translateX(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+@keyframes slidePrev {
+
+    from {
+        opacity: .4;
+        transform: translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+}
+
+/* =========================================
+   CENTER ELEMENT - SOFT FLOAT ANIMATION
+========================================= */
+
+#elemental-combat .combat-element.active {
+
+    animation: centerFloat 3s ease-in-out infinite;
+
+}
+
+/* gerakan halus seperti melayang */
+
+@keyframes centerFloat {
+
+    0%, 100% {
+
+        transform:
+            scale(1.08)
+            translateY(-5px);
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.1)
+            translateY(-9px);
+
+    }
+
+}
+/* Animasi masuk saat element jadi center */
+
+.combat-element.element-enter {
+
+    animation:
+        elementPop .45s cubic-bezier(.22,1,.36,1);
+
+}
+
+@keyframes elementPop {
+
+    0% {
+
+        opacity: .3;
+
+        transform:
+            scale(.75)
+            translateY(10px);
+
+    }
+
+    70% {
+
+        transform:
+            scale(1.15)
+            translateY(-8px);
+
+    }
+
+    100% {
+
+        opacity: 1;
+
+        transform:
+            scale(1.08)
+            translateY(-5px);
+
+    }
+
+}
+
+/* =========================================================
+   FINAL CENTER ELEMENT FIX
+   - no continuous movement
+   - pulse once when activated
+========================================================= */
+
+#elemental-combat .combat-element.active {
+    animation: none !important;
+}
+
+/* JS dapat menambahkan class ini saat pindah element */
+#elemental-combat .combat-element.element-pulse {
+
+    animation:
+        centerPulse .45s cubic-bezier(.22,1,.36,1) !important;
+
+}
+
+@keyframes centerPulse {
+
+    0% {
+
+        transform:
+            scale(1.08)
+            translateY(-5px);
+
+    }
+
+    40% {
+
+        transform:
+            scale(1.16)
+            translateY(-8px);
+
+    }
+
+    100% {
+
+        transform:
+            scale(1.08)
+            translateY(-5px);
+
+    }
+
+}
+
+/* Carousel hanya transisi, icon tidak ikut melayang */
+#combat-elements.switch-next,
+#combat-elements.switch-prev {
+
+    animation: none !important;
+
+}
+
+/* =========================================
+   CENTER ELEMENT WHITE GLOW EXPAND
+========================================= */
+
+.combat-element.element-glow {
+
+    position: relative;
+
+}
+
+/* cahaya melebar */
+
+.combat-element.element-glow::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 50%;
+
+    width: 100%;
+    height: 100%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(.7);
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.45),
+            rgba(255,255,255,0)
+            70%
+        );
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    animation:
+        elementWhiteGlow .6s ease-out;
+
+}
+
+@keyframes elementWhiteGlow {
+
+    0% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(.7);
+
+        opacity: 0;
+
+    }
+
+    35% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.1);
+
+        opacity: .8;
+
+    }
+
+    100% {
+
+        transform:
+            translate(-50%, -50%)
+            scale(1.6);
+
+        opacity: 0;
+
+    }
+
+}
+
+/* ==========================
+   GIF / VIDEO AREA
+========================== */
+
+#elemental-combat .combat-media {
+
+    position: relative;
+    overflow: hidden;
+
+    border-radius: 18px;
+
+}
+
+#elemental-combat .combat-media img,
+#elemental-combat .combat-media video {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        opacity .35s ease,
+        transform .35s ease;
+
+}
+
+/* ==========================
+   DARK HUD GRADIENT
+   BAGIAN BAWAH GIF
+========================== */
+
+#elemental-combat .combat-media::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    height: 45%;
+
+    background:
+
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,0),
+            rgba(0,0,0,.88)
+        );
+
+    pointer-events: none;
+
+    z-index: 2;
+
+}
+
+/* ==========================
+   REACTION HUD
+========================== */
+
+#elemental-combat .combat-reaction-wrapper {
+
+    position: relative;
+
+    z-index: 3;
+
+}
+
+#elemental-combat .combat-reaction.show {
+
+    display: block;
+
+    animation:
+
+        reactionHUD .45s cubic-bezier(.22,1,.36,1) both;
+
+}
+
+@keyframes reactionHUD {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+
+            translateY(20px)
+
+            scale(.88);
+
+        filter:
+
+            blur(4px);
+
+    }
+
+    60% {
+
+        opacity: 1;
+
+        transform:
+
+            translateY(-4px)
+
+            scale(1.04);
+
+        filter:
+
+            blur(0);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+
+            translateY(0)
+
+            scale(1);
+
+    }
+
+}
+
+/* ==========================
+   REACTION ICON EFFECT
+========================== */
+
+#elemental-combat .combat-reaction-icon img {
+
+    animation:
+
+        reactionIconIdle 2s ease-in-out infinite;
+
+}
+
+@keyframes reactionIconIdle {
+
+    0%,
+    100% {
+
+        transform: scale(1);
+
+        filter:
+
+            drop-shadow(
+                0 0 5px rgba(255,255,255,.35)
+            );
+
+    }
+
+    50% {
+
+        transform: scale(1.07);
+
+        filter:
+
+            drop-shadow(
+                0 0 12px rgba(220,177,92,.7)
+            );
+
+    }
+
+}
+
+/* ==========================
+   REMOVE EXCESS CARD FEEL
+========================== */
+
+#elemental-combat .combat-reaction {
+
+    background: transparent !important;
+
+    border: none !important;
+
+    box-shadow: none !important;
+
+}
+
+/* ==========================
+   MEDIA CHANGE SUPPORT
+========================== */
+
+#elemental-combat #combat-image.media-change {
+
+    opacity: .35;
+
+    transform: scale(1.03);
+
+}
+
+/* =========================================================
+   ELEMENTAL COMBAT RESPONSIVE FINAL SMALL CENTER
+========================================================= */
+
+/* =========================
+   TABLET
+========================= */
 
 @media (max-width:1024px){
 
     .elemental-combat {
 
-        width: 100%;
+        width:100%;
 
-        padding: 35px 12px;
+        padding:35px 15px;
 
-        overflow: hidden;
-
-    }
-
-    .combat-title {
-
-        margin-bottom: 8px;
-
-    }
-
-    .combat-title h2 {
-
-        font-size: 1.7rem;
+        overflow:hidden;
 
     }
 
     .combat-element-carousel {
 
-        height: 140px;
+        height:100px;
+
+        width:100%;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        overflow:visible;
 
     }
 
     .combat-elements {
 
-        gap: 18px;
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        gap:16px;
+
+        transform:none !important;
 
     }
 
     .combat-element {
 
-        width: 55px;
+        width:42px;
 
-        height: 55px;
+        height:42px;
+
+        flex-shrink:0;
+
+        transition:none !important;
+
+        animation:none !important;
 
     }
 
     .combat-element.active {
 
-        width: 95px;
+        width:52px;
 
-        height: 95px;
+        height:52px;
+
+        transform:none !important;
 
     }
 
-    .combat-active-element {
+    .combat-element img {
 
-        margin-bottom: 8px;
+        width:100%;
+
+        height:100%;
+
+        object-fit:contain;
+
+        transition:none !important;
+
+    }
+
+    .combat-element:not(.active) img {
+
+        filter:grayscale(100%);
+
+        opacity:.6;
+
+    }
+
+    .combat-element.active img {
+
+        filter:none;
+
+        opacity:1;
 
     }
 
     .combat-active-element h3 {
 
-        font-size: 1.1rem;
-
-    }
-
-    .combat-bottom-control {
-
-        gap: 10px;
-
-        margin-bottom: 10px;
-
-    }
-
-    .combat-arrow {
-
-        font-size: 22px;
-
-    }
-
-    .combat-indicators {
-
-        gap: 7px;
-
-    }
-
-    .combat-dot {
-
-        width: 7px;
-
-        height: 7px;
+        font-size:1rem;
 
     }
 
     .combat-media {
 
-        height: 280px;
+        height:260px;
 
     }
 
 }
 
-
-/* =========================================================
-   SMALL TABLET / LARGE PHONE
-========================================================= */
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width:768px){
 
     .elemental-combat {
 
-        padding: 25px 10px;
-
-    }
-
-    .combat-title {
-
-        margin-bottom: 4px;
+        padding:25px 10px;
 
     }
 
     .combat-title h2 {
 
-        font-size: 1.35rem;
+        font-size:1.3rem;
 
     }
 
     .combat-element-carousel {
 
-        height: 105px;
+        height:85px;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        overflow:visible;
 
     }
 
     .combat-elements {
 
-        gap: 12px;
+        gap:10px;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+        transform:none !important;
 
     }
 
     .combat-element {
 
-        width: 36px;
+        width:30px;
 
-        height: 36px;
+        height:30px;
 
     }
 
     .combat-element.active {
 
-        width: 65px;
+        width:45px;
 
-        height: 65px;
+        height:45px;
 
     }
 
-    .combat-active-element {
+    .combat-element img {
 
-        margin-bottom: 6px;
+        width:100%;
+
+        height:100%;
+
+        object-fit:contain;
+
+    }
+
+    .combat-element:not(.active) img {
+
+        filter:grayscale(100%);
+
+        opacity:.6;
+
+    }
+
+    .combat-element.active img {
+
+        filter:none;
+
+        opacity:1;
 
     }
 
     .combat-active-element h3 {
 
-        font-size: .95rem;
+        font-size:.85rem;
 
     }
 
     .combat-bottom-control {
 
-        gap: 8px;
-
-        margin-bottom: 8px;
+        gap:8px;
 
     }
 
     .combat-arrow {
 
-        font-size: 19px;
-
-    }
-
-    .combat-indicators {
-
-        gap: 5px;
+        font-size:16px;
 
     }
 
     .combat-dot {
 
-        width: 5px;
+        width:5px;
 
-        height: 5px;
+        height:5px;
 
     }
 
     .combat-media {
 
-        height: 190px;
+        height:180px;
+
+    }
+
+    /* =========================
+       REACTION 1 BARIS
+    ========================= */
+
+    .combat-reactions {
+
+        display:flex;
+
+        flex-direction:row;
+
+        flex-wrap:nowrap;
+
+        justify-content:center;
+
+        align-items:center;
+
+        gap:6px;
+
+        overflow:hidden;
+
+    }
+
+    .combat-reaction {
+
+        flex:0 0 auto;
+
+        max-width:50px;
+
+        text-align:center;
+
+    }
+
+    .combat-reaction-icon img {
+
+        width:12px;
+
+        height:12px;
+
+    }
+
+    .reaction-plus {
+
+        font-size:7px;
+
+    }
+
+    .combat-reaction h3 {
+
+        font-size:.4rem;
+
+        white-space:nowrap;
+
+    }
+
+    .combat-reaction p {
+
+        display:none;
 
     }
 
 }
 
-
-/* =========================================================
+/* =========================
    SMALL PHONE
-========================================================= */
+========================= */
 
 @media (max-width:480px){
 
     .elemental-combat {
 
-        width: 100%;
-
-        max-width: 100%;
-
-        padding: 16px 6px;
-
-        overflow: hidden;
-
-        box-sizing: border-box;
-
-    }
-
-    .combat-title {
-
-        margin-bottom: 2px;
+        padding:16px 6px;
 
     }
 
     .combat-title h2 {
 
-        font-size: 1rem;
-
-        line-height: 1.2;
+        font-size:1rem;
 
     }
 
     .combat-element-carousel {
 
-        width: 100%;
-
-        height: 78px;
-
-        overflow: hidden;
+        height:65px;
 
     }
 
     .combat-elements {
 
-        gap: 7px;
+        gap:7px;
 
     }
 
     .combat-element {
 
-        width: 25px;
+        width:24px;
 
-        height: 25px;
-
-        flex-shrink: 0;
+        height:24px;
 
     }
 
     .combat-element.active {
 
-        width: 45px;
+        width:36px;
 
-        height: 45px;
+        height:36px;
 
     }
 
-    .combat-active-element {
+    .combat-element:not(.active) img {
 
-        margin-top: 0;
+        filter:grayscale(100%);
 
-        margin-bottom: 4px;
+        opacity:.55;
+
+    }
+
+    .combat-element.active img {
+
+        filter:none;
+
+        opacity:1;
 
     }
 
     .combat-active-element h3 {
 
-        font-size: .75rem;
-
-        line-height: 1.1;
-
-    }
-
-    .combat-bottom-control {
-
-        gap: 6px;
-
-        margin-bottom: 5px;
+        font-size:.7rem;
 
     }
 
     .combat-arrow {
 
-        font-size: 16px;
-
-        line-height: 1;
-
-    }
-
-    .combat-indicators {
-
-        gap: 4px;
-
-    }
-
-    .combat-dot {
-
-        width: 4px;
-
-        height: 4px;
+        font-size:14px;
 
     }
 
     .combat-media {
 
-        width: 100%;
-
-        height: 135px;
-
-        max-height: 135px;
-
-        overflow: hidden;
-
-    }
-
-    .combat-media img,
-    .combat-media video {
-
-        max-width: 100%;
-
-        max-height: 100%;
-
-        object-fit: contain;
-
-    }
-
-    .combat-reaction-wrapper {
-
-        position: relative;
-
-        width: 100%;
-
-        margin: 0 auto;
-
-        padding: 0 2px 6px;
-
-        overflow: visible;
-
-        box-sizing: border-box;
+        height:140px;
 
     }
 
     .combat-reactions {
 
-        display: flex;
-
-        flex-direction: row;
-
-        flex-wrap: wrap;
-
-        justify-content: center;
-
-        align-items: flex-start;
-
-        width: 100%;
-
-        gap: 5px 2px;
-
-        margin: 0 auto;
-
-        padding: 2px 0 4px;
-
-        box-sizing: border-box;
+        gap:4px;
 
     }
 
     .combat-reaction {
 
-        display: none;
-
-        flex: 0 0 calc((100% - 6px) / 4);
-
-        width: calc((100% - 6px) / 4);
-
-        max-width: 48px;
-
-        min-width: 0;
-
-        text-align: center;
-
-        box-sizing: border-box;
-
-    }
-
-    .combat-reaction.show {
-
-        display: block;
-
-        animation: reactionAppear .45s ease-out both;
-
-    }
-
-    .combat-reaction-icon {
-
-        display: flex;
-
-        justify-content: center;
-
-        align-items: center;
-
-        gap: 1px;
-
-        min-height: 14px;
-
-        margin-bottom: 1px;
+        max-width:42px;
 
     }
 
     .combat-reaction-icon img {
 
-        width: 12px;
+        width:10px;
 
-        height: 12px;
-
-        object-fit: contain;
+        height:10px;
 
     }
 
     .reaction-plus {
 
-        font-size: 6px;
-
-        line-height: 1;
-
-    }
-
-    .reaction-state {
-
-        font-size: .3rem;
-
-        line-height: 1;
+        font-size:5px;
 
     }
 
     .combat-reaction h3 {
 
-        margin-top: 1px;
-
-        font-size: .4rem;
-
-        line-height: 1.05;
-
-        overflow-wrap: anywhere;
-
-    }
-
-    .combat-reaction p {
-
-        margin-top: 1px;
-
-        font-size: .34rem;
-
-        line-height: 1.05;
-
-        overflow-wrap: anywhere;
+        font-size:.32rem;
 
     }
 
 }
 
-
-/* =========================================================
+/* =========================
    EXTRA SMALL PHONE
-========================================================= */
+========================= */
 
 @media (max-width:360px){
 
     .elemental-combat {
 
-        padding: 12px 4px;
-
-    }
-
-    .combat-title h2 {
-
-        font-size: .85rem;
+        padding:12px 4px;
 
     }
 
     .combat-element-carousel {
 
-        height: 65px;
+        height:55px;
 
     }
 
     .combat-elements {
 
-        gap: 5px;
+        gap:5px;
 
     }
 
     .combat-element {
 
-        width: 21px;
+        width:21px;
 
-        height: 21px;
+        height:21px;
 
     }
 
     .combat-element.active {
 
-        width: 38px;
+        width:32px;
 
-        height: 38px;
+        height:32px;
 
     }
 
     .combat-active-element h3 {
 
-        font-size: .65rem;
-
-    }
-
-    .combat-bottom-control {
-
-        gap: 4px;
-
-        margin-bottom: 4px;
-
-    }
-
-    .combat-arrow {
-
-        font-size: 14px;
-
-    }
-
-    .combat-dot {
-
-        width: 3px;
-
-        height: 3px;
+        font-size:.6rem;
 
     }
 
     .combat-media {
 
-        height: 110px;
-
-        max-height: 110px;
+        height:110px;
 
     }
 
     .combat-reactions {
 
-        gap: 4px 1px;
+        gap:3px;
 
     }
 
     .combat-reaction {
 
-        flex-basis: calc((100% - 3px) / 4);
-
-        width: calc((100% - 3px) / 4);
-
-        max-width: 40px;
-
-    }
-
-    .combat-reaction-icon {
-
-        min-height: 12px;
+        max-width:35px;
 
     }
 
     .combat-reaction-icon img {
 
-        width: 10px;
+        width:8px;
 
-        height: 10px;
+        height:8px;
 
     }
 
     .reaction-plus {
 
-        font-size: 5px;
-
-    }
-
-    .reaction-state {
-
-        font-size: .26rem;
+        font-size:4px;
 
     }
 
     .combat-reaction h3 {
 
-        font-size: .35rem;
-
-        line-height: 1;
-
-    }
-
-    .combat-reaction p {
-
-        font-size: .3rem;
-
-        line-height: 1;
+        font-size:.28rem;
 
     }
 
 }
+
+/* =========================
+   STATIC FINAL
+========================= */
+
+.combat-element,
+.combat-element img,
+.combat-elements {
+
+    transition:none !important;
+
+    animation:none !important;
+
+}
+
+.combat-element.active {
+
+    transform:none !important;
+
+}
+
+/* =========================================================
+   QUEST JOURNEY SECTION
+========================================================= */
+
+.quest-section {
+
+    width:100%;
+
+    background:#000;
+
+    color:white;
+
+    padding:90px 0;
+
+    overflow:hidden;
+
+}
+
+/* =========================================================
+   FINAL MOBILE CENTER ELEMENT FIX
+   PREVENT CUT OFF
+========================================================= */
+
+@media(max-width:768px){
+
+    #elemental-combat .combat-element.active {
+
+        width:40px !important;
+
+        height:40px !important;
+
+        transform:none !important;
+
+        animation:none !important;
+
+        filter:none !important;
+
+    }
+
+    #elemental-combat .combat-element.active img {
+
+    width:100% !important;
+
+    height:100% !important;
+
+    object-fit:contain;
+
+    transform:none !important;
+
+     filter:
+
+    drop-shadow(0 0 2px rgba(255,255,255,.5))
+
+    drop-shadow(0 0 4px rgba(220,177,92,.2)) !important;
+
+}
+
+    #elemental-combat .combat-element-carousel {
+
+        height:70px !important;
+
+        overflow:hidden !important;
+
+    }
+
+    #elemental-combat .combat-elements {
+
+        align-items:center !important;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    #elemental-combat .combat-element.active {
+
+        width:32px !important;
+
+        height:32px !important;
+
+    }
+
+    #elemental-combat .combat-element-carousel {
+
+        height:55px !important;
+
+    }
+
+}
+
+@media(max-width:360px){
+
+    #elemental-combat .combat-element.active {
+
+        width:28px !important;
+
+        height:28px !important;
+
+    }
+
+}
+
+/* =========================================================
+   FINAL REACTION MOBILE SPACING FIX
+========================================================= */
+
+@media(max-width:768px){
+
+    #elemental-combat .combat-reaction-icon {
+
+        min-height:0 !important;
+
+        height:20px !important;
+
+        margin-bottom:2px !important;
+
+        gap:3px;
+
+        display:flex;
+
+        justify-content:center;
+
+        align-items:center;
+
+    }
+
+    #elemental-combat .combat-reaction-icon img {
+
+        width:12px !important;
+
+        height:12px !important;
+
+    }
+
+    #elemental-combat .reaction-plus {
+
+        font-size:7px !important;
+
+        line-height:1;
+
+    }
+
+    #elemental-combat .combat-reaction h3 {
+
+        margin-top:0 !important;
+
+        padding-top:0 !important;
+
+        font-size:.45rem !important;
+
+        line-height:1 !important;
+
+        white-space:nowrap;
+
+    }
+
+    #elemental-combat .combat-reactions {
+
+        gap:8px !important;
+
+        align-items:flex-start;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    #elemental-combat .combat-reaction-icon {
+
+        height:16px !important;
+
+    }
+
+    #elemental-combat .combat-reaction-icon img {
+
+        width:10px !important;
+
+        height:10px !important;
+
+    }
+
+    #elemental-combat .reaction-plus {
+
+        font-size:6px !important;
+
+    }
+
+    #elemental-combat .combat-reaction h3 {
+
+        font-size:.35rem !important;
+
+        margin-top:0 !important;
+
+    }
+
+}
+
+@media(max-width:360px){
+
+    #elemental-combat .combat-reaction-icon {
+
+        height:14px !important;
+
+    }
+
+    #elemental-combat .combat-reaction-icon img {
+
+        width:8px !important;
+
+        height:8px !important;
+
+    }
+
+    #elemental-combat .combat-reaction h3 {
+
+        font-size:.3rem !important;
+
+    }
+
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.quest-title {
+
+    text-align:center;
+
+    margin-bottom:55px;
+
+}
+
+.quest-title p {
+
+    color:#dcb15c;
+
+    font-size:.75rem;
+
+    letter-spacing:5px;
+
+    margin-bottom:10px;
+
+}
+
+.quest-title h2 {
+
+    font-family:var(--font-display);
+
+    font-size:3rem;
+
+    margin:0 0 15px;
+
+}
+
+.quest-title span {
+
+    color:#aaa;
+
+    font-size:1rem;
+
+}
+
+/* =========================================================
+   QUEST GRID
+========================================================= */
+
+.quest-track {
+
+    width:85%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:40px;
+
+}
+
+/* =========================================================
+   QUEST CARD
+========================================================= */
+
+.quest-card {
+
+    position:relative;
+
+    background:
+
+    linear-gradient(
+
+        145deg,
+
+        rgba(255,255,255,.08),
+
+        rgba(255,255,255,.02)
+
+    );
+
+    border:1px solid rgba(220,177,92,.25);
+
+    border-radius:22px;
+
+    padding:20px;
+
+    transition:.35s ease;
+
+    overflow:hidden;
+
+}
+
+.quest-card:hover {
+
+    transform:translateY(-8px);
+
+    border-color:#dcb15c;
+
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.quest-header {
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+.quest-number {
+
+    font-family:var(--font-display);
+
+    font-size:2.5rem;
+
+    color:#dcb15c;
+
+    opacity:.8;
+
+}
+
+.quest-type {
+
+    color:#aaa;
+
+    font-size:.7rem;
+
+    letter-spacing:4px;
+
+}
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.quest-image {
+
+    width:100%;
+
+    height:250px;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+}
+
+.quest-image img {
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.5s ease;
+
+}
+
+.quest-card:hover .quest-image img {
+
+    transform:scale(1.06);
+
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.quest-content {
+
+    text-align:center;
+
+    padding:20px 10px 10px;
+
+}
+
+.quest-content h3 {
+
+    font-family:var(--font-display);
+
+    font-size:2rem;
+
+    margin:5px 0 10px;
+
+}
+
+.quest-content h4 {
+
+    color:#dcb15c;
+
+    font-size:1rem;
+
+    font-weight:400;
+
+    margin-bottom:15px;
+
+}
+
+.quest-content p {
+
+    color:#aaa;
+
+    font-size:.9rem;
+
+    line-height:1.6;
+
+}
+
+/* =========================================================
+   CARD LINE DETAIL
+========================================================= */
+
+.quest-card::before {
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:2px;
+
+    background:
+
+    linear-gradient(
+
+        90deg,
+
+        transparent,
+
+        #dcb15c,
+
+        transparent
+
+    );
+
+    opacity:.6;
+
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:1024px){
+
+    .quest-track {
+
+        width:90%;
+
+        gap:25px;
+
+    }
+
+    .quest-image {
+
+        height:210px;
+
+    }
+
+    .quest-content h3 {
+
+        font-size:1.6rem;
+
+    }
+
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:768px){
+
+    .quest-section {
+
+        padding:60px 0;
+
+    }
+
+    .quest-title h2 {
+
+        font-size:2rem;
+
+    }
+
+    .quest-title span {
+
+        display:block;
+
+        width:85%;
+
+        margin:0 auto;
+
+        padding:0;
+
+        font-size:.8rem;
+
+        line-height:1.5;
+
+        color:#aaa;
+
+    }
+
+    .quest-track {
+
+        width:90%;
+
+        grid-template-columns:1fr;
+
+        gap:25px;
+
+    }
+
+    .quest-card {
+
+        padding:15px;
+
+    }
+
+    .quest-image {
+
+        height:220px;
+
+    }
+
+    .quest-content h3 {
+
+        font-size:1.5rem;
+
+    }
+
+}
+
+/* =========================================================
+   SMALL PHONE
+========================================================= */
+
+@media(max-width:480px){
+
+    .quest-title h2 {
+
+        font-size:1.5rem;
+
+    }
+
+    .quest-title span {
+
+        width:90%;
+
+        font-size:.7rem;
+
+        line-height:1.4;
+
+    }
+
+    .quest-image {
+
+        height:170px;
+
+    }
+
+    .quest-number {
+
+        font-size:2rem;
+
+    }
+
+    .quest-type {
+
+        font-size:.6rem;
+
+    }
+
+    .quest-content h3 {
+
+        font-size:1.25rem;
+
+    }
+
+    .quest-content h4 {
+
+        font-size:.85rem;
+
+    }
+
+    .quest-content p {
+
+        font-size:.75rem;
+
+    }
+
 }

@@ -4,25 +4,41 @@
 
 @section('content')
 
+
+    {{-- SPLASH SCREEN --}}
+    @include('components.splash')
+
+
+
+    {{-- HERO --}}
     @include('components.hero')
+
+
+    {{-- STORY --}}
     @include('components.story')
+
+
+    {{-- REGION MAP --}}
     @include('components.region-map')
-    @include('components.explore')
-<<<<<<< HEAD
+
+
 
     {{-- GAMEPLAY --}}
 
-    @include('gameplay.partials.explore')
-    @include('gameplay.partials.combat')
-    @include('gameplay.partials.quests')
+    @include('components.gameplay.partials.explore')
 
+    @include('components.gameplay.partials.combat')
+
+    @include('components.gameplay.partials.quests')
+
+
+
+    {{-- TRAILER --}}
     @include('components.trailer')
+
+
+    {{-- DOWNLOAD --}}
     @include('components.download')
 
 
-=======
-    @include('components.trailer')
-    @include('components.download')
-
->>>>>>> origin/develop
 @endsection
