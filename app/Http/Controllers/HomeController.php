@@ -16,9 +16,8 @@ class HomeController extends Controller
     {
         $regions = Region::all();
 
-
+        // Koordinat dan tampilan region pada Teyvat Map
         $coordinates = [
-
             'Mondstadt' => [
                 'x' => 4353,
                 'y' => 2846,
@@ -74,15 +73,11 @@ class HomeController extends Controller
                 'color' => '#131536',
                 'gradients' => 'linear-gradient(180deg, #032C6E 13%, #AA9148 40%, #002595 75%, #000281 100%)',
             ],
-
         ];
 
-
-
+        // Tambahkan data koordinat ke setiap region
         $regions = $regions->map(function ($region) use ($coordinates) {
-
             return [
-
                 'name' => $region->name,
                 'slug' => $region->slug,
                 'short_description' => $region->short_description,
@@ -92,80 +87,62 @@ class HomeController extends Controller
 
                 'x' => $coordinates[$region->name]['x'] ?? 0,
                 'y' => $coordinates[$region->name]['y'] ?? 0,
-
                 'color' => $coordinates[$region->name]['color'] ?? '#fff',
-
                 'gradients' => $coordinates[$region->name]['gradients'] ?? '',
-
             ];
-
         });
 
-
-
+        // Characters
         $characters = Character::whereNotNull('additional_image')
             ->where('additional_image', '!=', '')
             ->inRandomOrder()
             ->take(4)
             ->get();
 
-
-
+        // =========================
         // Gameplay - Explore
+        // =========================
 
         $experiences = GameplayExperience::where('is_active', true)
             ->orderBy('order')
             ->get();
 
-
-
+        // =========================
         // Gameplay - Elemental Combat
+        // =========================
 
         $elements = Element::orderBy('id')
             ->get();
 
-
-
         $combatReactions = CombatReaction::with([
-
             'combinations.elementOne',
             'combinations.elementTwo',
             'combinations.stateOne',
             'combinations.stateTwo',
-
         ])
-
-        ->where('is_active', true)
-
-        ->orderBy('order')
-
-        ->get();
-
-
+            ->where('is_active', true)
+            ->orderBy('order')
+            ->get();
 
         $combatStates = CombatState::all();
 
-
-
+        // =========================
         // Gameplay - Quest
+        // =========================
 
         $quests = Quest::with([
-
             'region',
             'scenes',
-
         ])
+            ->where('is_active', true)
+            ->orderBy('order')
+            ->get();
 
-        ->where('is_active', true)
-
-        ->orderBy('order')
-
-        ->get();
-
-
+        // =========================
+        // Kirim data ke Home
+        // =========================
 
         return view('home', compact(
-
             'regions',
             'characters',
             'experiences',
@@ -173,8 +150,6 @@ class HomeController extends Controller
             'combatReactions',
             'combatStates',
             'quests'
-
         ));
-
     }
 }

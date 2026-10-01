@@ -1,7 +1,13 @@
 const exploreButton = document.getElementById('explore-btn');
 const introSection = document.getElementById('intro');
 
+
+// =====================================================
+// TEYVAT MAP
+// =====================================================
+
 document.addEventListener('DOMContentLoaded', () => {
+
     const viewport = document.getElementById('map-viewport');
     const canvas = document.getElementById('map-canvas');
     const map = document.getElementById('teyvat-map');
@@ -25,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function clampPosition() {
+
         const vw = viewport.clientWidth;
         const vh = viewport.clientHeight;
         const mw = map.offsetWidth * scale;
@@ -40,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     viewport.addEventListener('pointerdown', (event) => {
+
         // Jangan mulai drag kalau klik bagian card
         if (event.target.closest('#region-card')) {
             return;
@@ -60,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     viewport.addEventListener('pointermove', (event) => {
+
         if (!isDragging) return;
 
         const newX = event.clientX - startX;
@@ -80,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     const stopDragging = () => {
+
         isDragging = false;
 
         canvas.classList.remove('cursor-grabbing');
@@ -96,6 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     viewport.addEventListener('pointerup', stopDragging);
 
     viewport.addEventListener('pointercancel', () => {
+
         isDragging = false;
         activePin = null;
 
@@ -103,7 +114,9 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.classList.add('cursor-grab');
     });
 
-    map.addEventListener('dragstart', (e) => e.preventDefault());
+    map.addEventListener('dragstart', (event) => {
+        event.preventDefault();
+    });
 
     function initializeMap() {
         clampPosition();
@@ -120,576 +133,427 @@ document.addEventListener('DOMContentLoaded', () => {
         clampPosition();
         updateMap();
     });
-});
-
-
-document.addEventListener(
-"DOMContentLoaded",
-()=>{
-
-
-const carousel =
-document.getElementById(
-"explore-carousel"
-);
-
-
-
-const cards =
-document.querySelectorAll(
-".explore-card"
-);
-
-
-
-const buttons =
-document.querySelectorAll(
-".explore-indicator button"
-);
-
-
-
-if(!carousel) return;
-
-
-
-
-
-
-function goSlide(index){
-
-
-const card =
-cards[index];
-
-
-if(card){
-
-
-carousel.scrollTo({
-
-left:card.offsetLeft -
-carousel.offsetLeft,
-
-behavior:"smooth"
 
 });
 
 
-}
+// =====================================================
+// EXPLORE CAROUSEL
+// =====================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const carousel =
+        document.getElementById('explore-carousel');
+
+    const cards =
+        document.querySelectorAll('.explore-card');
+
+    const buttons =
+        document.querySelectorAll('.explore-indicator button');
+
+    if (!carousel) return;
 
 
-}
+    function goSlide(index) {
+
+        const card = cards[index];
+
+        if (card) {
+
+            carousel.scrollTo({
+                left: card.offsetLeft - carousel.offsetLeft,
+                behavior: 'smooth'
+            });
+
+        }
+    }
 
 
+    buttons.forEach((button, index) => {
+
+        button.onclick = () => {
+            goSlide(index);
+        };
+
+    });
 
 
+    function update() {
 
-buttons.forEach(
-(button,index)=>{
+        let active = 0;
+        let distance = Infinity;
 
+        cards.forEach((card, index) => {
 
-button.onclick=()=>{
+            const diff =
+                Math.abs(
+                    card.offsetLeft - carousel.scrollLeft
+                );
 
-goSlide(index);
+            if (diff < distance) {
 
-};
+                distance = diff;
+                active = index;
 
+            }
 
-});
-
-
-
-
-
-
-
-function update(){
-
-
-let active=0;
-
-let distance=Infinity;
+        });
 
 
+        buttons.forEach((button, index) => {
 
-cards.forEach(
-(card,index)=>{
+            button.classList.toggle(
+                'active',
+                index === active
+            );
 
+        });
 
-const diff =
-Math.abs(
-card.offsetLeft -
-carousel.scrollLeft
-);
-
-
-
-if(diff < distance){
-
-distance=diff;
-
-active=index;
-
-}
+    }
 
 
-});
+    carousel.addEventListener('scroll', update);
 
-
-
-
-
-buttons.forEach(
-(btn,index)=>{
-
-
-btn.classList.toggle(
-"active",
-index===active
-);
-
-
-});
-
-
-}
-
-
-
-
-
-carousel.addEventListener(
-"scroll",
-update
-);
-
-
-
-update();
-
-
+    update();
 
 });
 
+
+// =====================================================
 // ELEMENTAL COMBAT
-document.addEventListener("DOMContentLoaded", () => {
+// =====================================================
 
-    const container = document.getElementById("combat-elements");
+document.addEventListener('DOMContentLoaded', () => {
+
+    const container =
+        document.getElementById('combat-elements');
 
     const items = [
-        ...document.querySelectorAll(".combat-element")
+        ...document.querySelectorAll('.combat-element')
     ];
 
     const dots = [
-        ...document.querySelectorAll(".combat-dot")
+        ...document.querySelectorAll('.combat-dot')
     ];
 
     const reactions = [
-        ...document.querySelectorAll(".combat-reaction")
+        ...document.querySelectorAll('.combat-reaction')
     ];
 
+    const next =
+        document.getElementById('combat-next');
 
-    const next = document.getElementById("combat-next");
-    const prev = document.getElementById("combat-prev");
+    const prev =
+        document.getElementById('combat-prev');
 
-    const elementName = document.getElementById("active-element-name");
+    const elementName =
+        document.getElementById('active-element-name');
 
-    const media = document.getElementById("combat-image");
+    const media =
+        document.getElementById('combat-image');
 
 
     if (!container || items.length === 0) return;
 
 
-
-    let activeIndex = Math.min(5, items.length - 1);
+    let activeIndex =
+        Math.min(5, items.length - 1);
 
     let animationFrame = null;
 
 
-
-    // =========================
+    // =================================================
     // FILTER REACTION PER ELEMENT
-    // =========================
+    // =================================================
 
     function updateReaction(elementId) {
 
-
-        if(animationFrame !== null){
+        if (animationFrame !== null) {
             cancelAnimationFrame(animationFrame);
         }
-
 
         const matchedReactions = [];
 
 
-        reactions.forEach((reaction)=>{
+        reactions.forEach((reaction) => {
 
-
-            const name = reaction.dataset.reactionName;
+            const name =
+                reaction.dataset.reactionName;
 
             let show = false;
 
 
-
-            if(elementId == 1){
-
-                show = name === "Swirl";
-
-            }
-
-
-            else if(elementId == 2){
-
-                show = name === "Crystallize";
-
-            }
-
-
-            else if(elementId == 3){
+            // ANEMO
+            if (elementId == 1) {
 
                 show =
-                    name === "Overloaded" ||
-                    name === "Electro-Charged" ||
-                    name === "Superconduct" ||
-                    name === "Quicken" ||
-                    name === "Aggravate";
+                    name === 'Swirl';
 
             }
 
 
-            else if(elementId == 4){
+            // GEO
+            else if (elementId == 2) {
 
                 show =
-                    name === "Burning" ||
-                    name === "Bloom" ||
-                    name === "Quicken" ||
-                    name === "Spread";
+                    name === 'Crystallize';
 
             }
 
 
-            else if(elementId == 5){
+            // ELECTRO
+            else if (elementId == 3) {
 
                 show =
-                    name === "Vaporize" ||
-                    name === "Electro-Charged" ||
-                    name === "Bloom" ||
-                    name === "Frozen";
+                    name === 'Overloaded' ||
+                    name === 'Electro-Charged' ||
+                    name === 'Superconduct' ||
+                    name === 'Quicken' ||
+                    name === 'Aggravate';
 
             }
 
 
-            else if(elementId == 6){
+            // DENDRO
+            else if (elementId == 4) {
 
                 show =
-                    name === "Vaporize" ||
-                    name === "Melt" ||
-                    name === "Overloaded" ||
-                    name === "Burning";
+                    name === 'Burning' ||
+                    name === 'Bloom' ||
+                    name === 'Quicken' ||
+                    name === 'Spread';
 
             }
 
 
-            else if(elementId == 7){
+            // HYDRO
+            else if (elementId == 5) {
 
                 show =
-                    name === "Melt" ||
-                    name === "Superconduct" ||
-                    name === "Frozen";
+                    name === 'Vaporize' ||
+                    name === 'Electro-Charged' ||
+                    name === 'Bloom' ||
+                    name === 'Frozen';
 
             }
 
 
+            // PYRO
+            else if (elementId == 6) {
 
-            reaction.classList.remove("show");
+                show =
+                    name === 'Vaporize' ||
+                    name === 'Melt' ||
+                    name === 'Overloaded' ||
+                    name === 'Burning';
+
+            }
 
 
-            if(show){
+            // CRYO
+            else if (elementId == 7) {
+
+                show =
+                    name === 'Melt' ||
+                    name === 'Superconduct' ||
+                    name === 'Frozen';
+
+            }
+
+
+            reaction.classList.remove('show');
+
+
+            if (show) {
                 matchedReactions.push(reaction);
             }
 
-
         });
 
 
+        animationFrame =
+            requestAnimationFrame(() => {
 
-        animationFrame = requestAnimationFrame(()=>{
+                matchedReactions.forEach((reaction) => {
 
+                    reaction.classList.add('show');
 
-            matchedReactions.forEach((reaction)=>{
+                });
 
-                reaction.classList.add("show");
+                animationFrame = null;
 
             });
-
-
-            animationFrame = null;
-
-
-        });
-
 
     }
 
 
-
-
-
-
-
-    // =========================
+    // =================================================
     // ELEMENT CAROUSEL
-    // =========================
+    // =================================================
 
-
-    function render(){
-
+    function render() {
 
         const total = items.length;
-
         const order = [];
 
 
-
-        for(let offset=-3; offset<=3; offset++){
-
+        for (let offset = -3; offset <= 3; offset++) {
 
             const index =
-            (activeIndex + offset + total) % total;
+                (activeIndex + offset + total) % total;
 
-
-
-            if(!order.includes(index)){
-
+            if (!order.includes(index)) {
                 order.push(index);
-
             }
 
         }
 
 
+        container.innerHTML = '';
 
 
-
-        container.innerHTML="";
-
-
-
-        order.forEach((index)=>{
-
+        order.forEach((index) => {
 
             const item = items[index];
 
-
-
             item.classList.toggle(
-                "active",
+                'active',
                 index === activeIndex
             );
-
 
             container.appendChild(item);
 
-
         });
 
 
-
-
-
-
-        dots.forEach((dot,index)=>{
-
+        // UPDATE DOTS
+        dots.forEach((dot, index) => {
 
             dot.classList.toggle(
-                "active",
+                'active',
                 index === activeIndex
             );
 
-
         });
 
 
+        const activeElement =
+            items[activeIndex];
 
-
-
-
-        const activeElement = items[activeIndex];
-
-
-        if(!activeElement) return;
-
-
-
+        if (!activeElement) return;
 
 
         const name =
-        activeElement.dataset.elementName;
-
-
+            activeElement.dataset.elementName;
 
         const id =
-        activeElement.dataset.elementId;
-
-
-
-
+            activeElement.dataset.elementId;
 
         const gif =
-        activeElement.dataset.media;
+            activeElement.dataset.media;
 
 
-
-
-
-        if(elementName){
+        // UPDATE ELEMENT NAME
+        if (elementName) {
 
             elementName.textContent = name;
 
         }
 
 
-
-
-
         // UPDATE GIF DARI SUPABASE
-
-        if(media && gif){
-
+        if (media && gif) {
 
             media.src = gif;
 
             media.alt =
-            name + " Elemental Combat";
-
+                name + ' Elemental Combat';
 
         }
 
 
-
-
-
-
+        // UPDATE REACTIONS
         updateReaction(id);
 
-
-
     }
 
 
-
-
-
-
-
-
+    // =================================================
     // NEXT
+    // =================================================
 
-    if(next){
+    if (next) {
 
-        next.addEventListener("click",()=>{
-
+        next.addEventListener('click', () => {
 
             activeIndex =
-            (activeIndex + 1) % items.length;
-
+                (activeIndex + 1) % items.length;
 
             render();
-
 
         });
 
     }
 
 
-
-
-
-
+    // =================================================
     // PREV
+    // =================================================
 
-    if(prev){
+    if (prev) {
 
-
-        prev.addEventListener("click",()=>{
-
+        prev.addEventListener('click', () => {
 
             activeIndex =
-            (activeIndex - 1 + items.length) % items.length;
-
+                (activeIndex - 1 + items.length) % items.length;
 
             render();
 
-
         });
-
 
     }
 
 
-
-
-
-
-
+    // =================================================
     // CLICK ELEMENT
+    // =================================================
 
-    items.forEach((item,index)=>{
+    items.forEach((item, index) => {
 
+        item.addEventListener('click', () => {
 
-        item.addEventListener("click",()=>{
-
-
-            activeIndex=index;
-
+            activeIndex = index;
 
             render();
 
-
-
         });
-
 
     });
 
 
-
-
-
-
-
+    // =================================================
     // CLICK DOT
+    // =================================================
 
-    dots.forEach((dot,index)=>{
+    dots.forEach((dot, index) => {
 
+        dot.addEventListener('click', () => {
 
-        dot.addEventListener("click",()=>{
+            if (index < items.length) {
 
-
-            if(index < items.length){
-
-
-                activeIndex=index;
-
+                activeIndex = index;
 
                 render();
 
-
             }
 
-
         });
-
 
     });
 
 
-
-
-
+    // INITIAL RENDER
     render();
-
-
 
 });

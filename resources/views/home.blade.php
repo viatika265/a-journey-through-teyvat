@@ -8,6 +8,7 @@
     @include('components.story')
     @include('components.region-map')
     @include('components.explore')
+<<<<<<< HEAD
 
     {{-- GAMEPLAY --}}
 
@@ -19,4 +20,9 @@
     @include('components.download')
 
 
+=======
+    @include('components.trailer')
+    @include('components.download')
+
+>>>>>>> origin/develop
 @endsection
