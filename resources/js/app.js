@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!viewport || !canvas || !map) return;
 
-    let scale = 0.3;
+    let scale = 1;
     let translateX = 0;
     let translateY = 0;
     let isDragging = false;
@@ -26,26 +26,36 @@ document.addEventListener("DOMContentLoaded", () => {
             `translate(${translateX}px, ${translateY}px) scale(${scale})`;
     }
 
+    function calculateScale() {
+        const naturalW = map.naturalWidth || map.offsetWidth;
+        const naturalH = map.naturalHeight || map.offsetHeight;
+        const vw = viewport.clientWidth;
+        const vh = viewport.clientHeight;
+
+        // COVER: map selalu menutupi seluruh viewport
+        scale = Math.max(vw / naturalW, vh / naturalH);
+    }
+
     function clampPosition() {
         const vw = viewport.clientWidth;
         const vh = viewport.clientHeight;
         const mw = map.offsetWidth * scale;
         const mh = map.offsetHeight * scale;
 
-        translateX = mw < vw
-            ? (vw - mw) / 2
-            : Math.min(0, Math.max(translateX, vw - mw));
+        translateX =
+            mw < vw
+                ? (vw - mw) / 2
+                : Math.min(0, Math.max(translateX, vw - mw));
 
-        translateY = mh < vh
-            ? (vh - mh) / 2
-            : Math.min(0, Math.max(translateY, vh - mh));
+        translateY =
+            mh < vh
+                ? (vh - mh) / 2
+                : Math.min(0, Math.max(translateY, vh - mh));
     }
 
     viewport.addEventListener("pointerdown", (event) => {
-        // Jangan mulai drag kalau user sedang berinteraksi dengan region card.
-        if (event.target.closest("#region-card")) {
-            return;
-        }
+        // Jangan mulai drag ketika user berinteraksi dengan card.
+        if (event.target.closest("#region-card")) return;
 
         isDragging = true;
         hasMoved = false;
@@ -113,6 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function initializeMap() {
+        if (!map.naturalWidth) {
+            map.addEventListener("load", initializeMap, { once: true });
+            return;
+        }
+
+        calculateScale();
         clampPosition();
         updateMap();
     }
@@ -120,10 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (map.complete) {
         initializeMap();
     } else {
-        map.addEventListener("load", initializeMap);
+        map.addEventListener("load", initializeMap, { once: true });
     }
 
+    // Recalculate scale setiap resize.
     window.addEventListener("resize", () => {
+        calculateScale();
         clampPosition();
         updateMap();
     });

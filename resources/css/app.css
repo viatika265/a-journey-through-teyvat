@@ -100,6 +100,39 @@
         width: 160px;
         height: 160px;
     }
+
+    .nav-link {
+        @apply relative transition-all duration-300 ease-out;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+        @apply -translate-y-0.5;
+
+        color: #DEB76C;
+    }
+
+    .nav-link.active {
+        text-shadow: 0 2px 8px rgba(222, 183, 108, 0.4);
+    }
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        bottom: -8px;
+        width: 0;
+        height: 2px;
+        transform: translateX(-50%);
+        border-radius: 999px;
+        background: #DEB76C;
+        transition: width 300ms ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link:active::after {
+        width: 100%;
+    }
 }
 
 @keyframes moveClouds {

@@ -33,7 +33,7 @@ class ElementSeeder extends Seeder
             [
                 'name' => 'Hydro',
                 'slug' => 'hydro',
-                'icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/element/Geo.png',
+                'icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/element/Hydro.png',
             ],
             [
                 'name' => 'Pyro',

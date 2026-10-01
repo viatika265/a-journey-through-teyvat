@@ -5,7 +5,7 @@
     <div
         id="map-viewport"
         class="relative w-full overflow-hidden select-none touch-none"
-        style="height: 700px;"
+        style="height: 100vh;"
     >
 
         <div
@@ -37,12 +37,15 @@
                 <div
                     class="region-pin group z-10 cursor-pointer"
                     data-region="{{ $region['name'] }}"
-                    data-slug="{{ $region['slug'] }}"
                     data-name="{{ $region['name'] }}"
+                    data-slug="{{ $region['slug'] }}"
                     data-desc="{{ $region['short_description'] }}"
                     data-image="{{ $region['card_image'] }}"
                     data-icon1="{{ $region['icon'] }}"
                     data-gradients="{{ $region['gradients'] }}"
+                    data-element-name="{{ $region['element_name'] ?? '' }}"
+                    data-element-icon="{{ $region['element_icon'] ?? '' }}"
+                    data-archon-icon="{{ $region['archon_icon'] ?? '' }}"
                     style="left: {{ $region['x'] }}px; top: {{ $region['y'] }}px;"
                 >
 
@@ -81,7 +84,14 @@
 <script>
     function openCard(element) {
         const card = document.getElementById('region-card');
-        const regionSlug = element.getAttribute('data-slug');
+
+        const slug = element.getAttribute('data-slug');
+
+        const cardLink = document.getElementById('card-link');
+
+        if (cardLink && slug) {
+            cardLink.href = `/regions/${encodeURIComponent(slug)}`;
+        }
 
         document.getElementById('card-title').innerText =
             element.getAttribute('data-name');
@@ -98,11 +108,30 @@
         card.style.background =
             element.getAttribute('data-gradients');
 
-        const cardLink = document.getElementById('card-link');
+        const elementIcon = document.getElementById('card-icon-2');
+        const elementIconUrl = element.getAttribute('data-element-icon');
 
-        if (cardLink && regionSlug) {
-            cardLink.href =
-                `/regions/${encodeURIComponent(regionSlug)}`;
+        if (elementIcon && elementIconUrl && elementIconUrl !== 'null') {
+            elementIcon.src = elementIconUrl;
+            elementIcon.alt =
+                element.getAttribute('data-element-name') || '';
+            elementIcon.style.display = '';
+        } else if (elementIcon) {
+            elementIcon.style.display = 'none';
+        }
+
+        const archonIcon = document.getElementById('card-icon-3');
+        const archonIconUrl = element.getAttribute('data-archon-icon');
+
+        if (
+            archonIcon &&
+            archonIconUrl &&
+            archonIconUrl !== 'null'
+        ) {
+            archonIcon.src = archonIconUrl;
+            archonIcon.style.display = '';
+        } else if (archonIcon) {
+            archonIcon.style.display = 'none';
         }
 
         const screenWidth = window.innerWidth;
