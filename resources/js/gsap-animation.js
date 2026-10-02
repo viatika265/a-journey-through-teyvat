@@ -1041,6 +1041,164 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     });
 }
 
+// ==================================================
+// PREMIUM SCROLL REVEAL
+// ==================================================
+
+const premiumSections = [
+    "#explore",
+    "#elemental-combat",
+    "#quests-stories",
+    "#update",
+    "#download"
+];
+
+
+premiumSections.forEach((section)=>{
+
+    const container = document.querySelector(section);
+
+    if(!container) return;
+
+
+    const items = container.querySelectorAll(
+        "img, h1, h2, h3, h4, p, a, .card"
+    );
+
+
+    gsap.fromTo(
+        items,
+
+        {
+            autoAlpha:0,
+            y:45
+        },
+
+        {
+
+            autoAlpha:1,
+            y:0,
+
+            duration:.8,
+
+            stagger:.08,
+
+            ease:"power3.out",
+
+            scrollTrigger:{
+
+                trigger:container,
+
+                start:"top 80%",
+
+                toggleActions:
+                "play none none reverse"
+
+            }
+
+        }
+
+    );
+
+});
+
+
+
+
+// ==================================================
+// IMAGE DEPTH EFFECT
+// ==================================================
+
+document.querySelectorAll(
+    ".image-depth img"
+)
+.forEach((image)=>{
+
+
+    gsap.to(image,{
+
+        yPercent:-8,
+
+        ease:"none",
+
+        scrollTrigger:{
+
+            trigger:image,
+
+            start:"top bottom",
+
+            end:"bottom top",
+
+            scrub:1
+
+        }
+
+    });
+
+
+});
+
+
+
+
+// ==================================================
+// CARD PREMIUM HOVER
+// ==================================================
+
+document.querySelectorAll(
+    ".news-card, .region-card, .quest-card"
+)
+.forEach(card=>{
+
+
+    card.addEventListener(
+        "mouseenter",
+        ()=>{
+
+
+            gsap.to(card,{
+
+                y:-8,
+
+                scale:1.02,
+
+                duration:.3,
+
+                ease:"power2.out"
+
+            });
+
+
+        }
+    );
+
+
+
+    card.addEventListener(
+        "mouseleave",
+        ()=>{
+
+
+            gsap.to(card,{
+
+                y:0,
+
+                scale:1,
+
+                duration:.35,
+
+                ease:"power2.out"
+
+            });
+
+
+        }
+    );
+
+
+});
+
+
 
 // ==================================================
 // REFRESH SCROLLTRIGGER
