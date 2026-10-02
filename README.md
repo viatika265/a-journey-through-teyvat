@@ -24,23 +24,17 @@ The website is designed to provide an engaging user experience through modern we
 
 ## Teyvat Map
 
-![Teyvat Map Preview](./screenshots/teyvat-map.png)
+![Teyvat Map Preview](<img width="786" height="426" alt="image" src="https://github.com/user-attachments/assets/234d07e9-5838-4e2b-9531-416951c261a0" />)
 
 ## Gameplay Section
 
-![Gameplay Preview](./screenshots/gameplay.png)
-
-## Elemental Combat
-
-![Elemental Combat Preview](./screenshots/combat.png)
+![Gameplay Preview](<img width="784" height="427" alt="image" src="https://github.com/user-attachments/assets/f413c403-55f7-49f0-9f6b-b9d2c4478781" />)
 
 ## News & Update
 
-![News Preview](./screenshots/news.png)
+![News Preview](<img width="785" height="389" alt="image" src="https://github.com/user-attachments/assets/24b92d38-6536-4979-b760-b9f62abdb9e4" />)
 
-## Mobile Responsive
-
-![Mobile Preview](./screenshots/mobile.png)
+  q
 
 ---
 
