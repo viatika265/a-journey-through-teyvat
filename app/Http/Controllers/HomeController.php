@@ -126,13 +126,13 @@ class HomeController extends Controller
             ->orderBy('order')
             ->get();
 
-        $questImages = $quests
-            ->flatMap(function ($quest) {
-                return $quest->scenes->pluck('image');
-            })
-            ->filter()
-            ->values()
-            ->all();
+        $questImages = [
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Book%20Quest.png', 
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Event%20Quest.png',
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Pembukaan%20Archon%20Quest.png',
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Penutupan%20Archon%20Quest.png',
+        ];
+            
 
         return view('home', compact(
             'regions',
