@@ -15,23 +15,14 @@
     @include('components.region-map')
 
     {{-- CLOUD TRANSITION + MAP --}}
-    <div class="relative isolate">
-        <div class="relative z-10 w-full">
-            <x-region-map :regions="$regions" />
-        </div>
-
-        <div class="absolute left-0 -top-[500px] z-50 w-full h-[1200px] pointer-events-none">
-            <img
-                src="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/landing-page/Cloud.png"
-                alt=""
-                class="absolute inset-0 w-full h-full object-cover object-bottom"
-            >
-        </div>
+    <x-cloud-divider />
+    {{-- Region Map --}}
+    <div class="relative z-10 w-full">
+        <x-region-map :regions="$regions" />
     </div>
 
-    {{-- GAMEPLAY --}}
-    @include('components.gameplay.partials.explore')
-    @include('components.gameplay.partials.combat')
+    
+
 
     {{-- Quests & Stories Component --}}
     <section id="quests-stories">

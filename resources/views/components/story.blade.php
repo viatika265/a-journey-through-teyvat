@@ -1,10 +1,10 @@
 <section id="story">
-    <div class="min-h-screen bg-no-repeat bg-cover z-0"
+    <div class="relative min-h-screen bg-no-repeat bg-cover"
         style=" background-image: url('https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/landing-page/Mondstadt.webp'); background-position: 100% 40%;">
 
-        <div class="absolute inset-x-0 top h-3/4 bg-gradient-to-b from-black/100 to-transparent pointer-events-none"></div>
+        <div class="absolute inset-x-0 top-0 h-3/4 bg-gradient-to-b from-black/100 to-transparent pointer-events-none"></div>
 
-        <div class="min-h-screen relative z-10 flex flex-col justify-between pt-12 md:pt-20 pb-12">
+        <div class="min-h-screen relative z-30 flex flex-col justify-between pt-12 md:pt-20 pb-[50vw] md:pb-[26vw]">
           <div class="flex flex-col md:flex-row items-center justify-center gap-2 w-full px-4 md:px-10">
             <svg class="w-0 sm:w-16 md:w-32 lg:w-[270px] h-auto shrink-0" viewBox="0 0 271 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M262.646 5.19863L263.836 4.25209L262.665 2.75098L261.47 4.30328L262.646 5.19863ZM272.746 18.1418L273.971 18.9701L274.604 18.0508L273.937 17.1952L272.746 18.1418ZM265.323 28.9186L264.102 29.824L265.329 31.5176L266.548 29.7469L265.323 28.9186ZM251.81 19.2726L252.986 20.168L263.822 6.09398L262.646 5.19863L261.47 4.30328L250.634 18.3773L251.81 19.2726ZM262.646 5.19863L261.456 6.14517L271.556 19.0883L272.746 18.1418L273.937 17.1952L263.836 4.25209L262.646 5.19863ZM272.746 18.1418L271.521 17.3134L264.099 28.0903L265.323 28.9186L266.548 29.7469L273.971 18.9701L272.746 18.1418ZM265.323 28.9186L266.545 28.0132L262.929 23.0206L261.707 23.926L260.486 24.8314L264.102 29.824L265.323 28.9186Z" fill="#DEB76C"/>
@@ -12,7 +12,7 @@
               <line y1="-1.5" x2="20.1609" y2="-1.5" transform="matrix(0.617188 -0.786816 0.500564 0.8657 247.29 18.46)" stroke="#DEB76C" stroke-width="3"/>
             </svg>
 
-            <p class="font-display text-3xl md:text-display text-neutral-light">
+            <p class="font-display text-3xl md:text-display text-yellow-normal">
                 Where The Story Begin
             </p>
 
@@ -33,7 +33,7 @@
                   Alongside Paimon, you embark on a journey across Teyvat to find your twin, seeking clues from <span class="text-yellow-normal">the Seven Archons</span> while helping people in there.
               </p>
 
-              <p class="font-display text-3xl md:text-heading-1 text-neutral-light">
+              <p class="font-display text-3xl md:text-heading-1 text-yellow-normal">
                   a World Awaits
               </p>
             </div>
