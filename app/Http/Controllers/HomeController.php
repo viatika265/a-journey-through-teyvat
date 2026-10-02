@@ -141,23 +141,12 @@ class HomeController extends Controller
         $combatStates = CombatState::all();
 
 
-
-        // Gameplay - Quest
-
-        $quests = Quest::with([
-
-            'region',
-            'scenes',
-
-        ])
-
-        ->where('is_active', true)
-
-        ->orderBy('order')
-
-        ->get();
-
-
+        $questImages = [
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Book%20Quest.png', 
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Event%20Quest.png',
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Pembukaan%20Archon%20Quest.png',
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Penutupan%20Archon%20Quest.png',
+        ];
 
         return view('home', compact(
 
@@ -167,7 +156,7 @@ class HomeController extends Controller
             'elements',
             'combatReactions',
             'combatStates',
-            'quests'
+            'questImages'
 
         ));
 

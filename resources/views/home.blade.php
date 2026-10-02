@@ -18,8 +18,10 @@
         <x-quest :questImages="$questImages" />
     </section>
 
+    @include('components.trailer')
+
     {{-- What's New Section --}}
-    <section id="whats-new" class="w-full bg-black py-16 px-6 md:px-16 lg:px-24">
+    <section id="update" class="w-full bg-black py-16 px-6 md:px-16 lg:px-24">
     
         {{-- Section Title --}}
         <div class="w-full flex justify-center mb-12">
@@ -32,7 +34,7 @@
             <x-featured-news 
                 version="Version 7.0 Out Now" 
                 title="Everwinter Without Mercy" 
-                description="Dear traveler, new region Snezaa, Tevat's seventh nation is now can be explored alongside wit new caracter, Odette and Alosa will join our journe." 
+                description="Dear Traveler, new region Snezhnaya, Teyvat's seventh nation is now can be explored alongside wit new caracter, Odette and Aloysa will join your journey." 
                 date="12 August 2026" 
                 image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-featuredNews.png"
             />
@@ -55,8 +57,6 @@
     </section>
 
     {{-- Other Sections --}}
-    @include('components.explore')
-    @include('components.trailer')
     @include('components.download')
 
 @endsection

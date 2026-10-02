@@ -34,14 +34,9 @@
 
                 <div
                     class="region-pin group z-10 cursor-pointer"
-                    data-region="{{ $region['name'] }}"
-<<<<<<< HEAD
-                    data-slug="{{ $region['slug'] }}"
                     style="left: {{ $region['x'] }}px; top: {{$region['y'] }}px;"
-=======
                     style="left: {{ $region['x'] }}px; top: {{ $region['y'] }}px;"
                     
->>>>>>> origin/feature/hero-section
                     data-name="{{ $region['name'] }}"
                     data-slug="{{ $region['slug'] }}"
                     data-desc="{{ $region['short_description'] }}"
@@ -52,7 +47,6 @@
                     data-element-icon="{{ $region['element_icon'] }}"
                     data-archon-icon="{{ $region['archon_icon'] }}"
                     onclick="openCard(this)"
-<<<<<<< HEAD
                 >
 
                     {{-- SVG Pin dengan warna dinamis --}}
@@ -61,8 +55,6 @@
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         class="absolute inset-0 w-full h-full"
-=======
->>>>>>> origin/feature/hero-section
                     >
                         <path
                             d="M100 50.0006C100 81.2073 65.3812 113.708 53.7562 123.745C52.6733 124.56 51.355 125 50 125C48.645 125 47.3267 124.56 46.2438 123.745C34.6188 113.708 0 81.2073 0 50.0006C0 36.7396 5.26784 24.0218 14.6447 14.6448C24.0215 5.26791 36.7392 0 50 0C63.2608 0 75.9785 5.26791 85.3553 14.6448C94.7322 24.0218 100 36.7396 100 50.0006Z"
@@ -105,9 +97,12 @@
         card.style.background = element.getAttribute('data-gradients');
         
         const cardLink = document.getElementById('card-link');
+
         if (cardLink) {
-            cardLink.href = `/regions/${encodeURIComponent(regionSlug)}`;
+            cardLink.href = `/regions/${encodeURIComponent(slug)}`;
         }
+
+
 
         const elementIcon = document.getElementById('card-icon-2');
         const elementIconUrl = element.getAttribute('data-element-icon');

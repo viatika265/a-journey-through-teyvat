@@ -12,16 +12,9 @@ class RegionController extends Controller
 
         $characters = $region->characters;
 
-        return view('regions.show', compact(
+        return view('region', compact(
             'region',
             'characters'
         ));
-    }
-
-    public function visited(string $slug)
-    {
-        $region = Region::where('slug', $slug)->firstOrFail();
-
-        return view('region', compact('region'));
     }
 }
