@@ -1,58 +1,342 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# A Journey Through Teyvat
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  A fan-made interactive website inspired by the fantasy world of Genshin Impact.
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📌 Project Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**A Journey Through Teyvat** is a fan-made interactive website inspired by the world of **Genshin Impact**.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This project presents an immersive journey through Teyvat by combining cinematic visuals, interactive sections, and informative content about regions, gameplay features, elemental combat, quests, trailers, and updates.
 
-## Learning Laravel
+The website is designed to provide an engaging user experience through modern web technologies, smooth animations, GSAP effects, and responsive design.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# 📸 Website Preview
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+## Homepage
 
-## Agentic Development
+![Homepage Preview](./screenshots/homepage.png)
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Teyvat Map
 
-```bash
-composer require laravel/boost --dev
+![Teyvat Map Preview](./screenshots/teyvat-map.png)
 
-php artisan boost:install
+## Gameplay Section
+
+![Gameplay Preview](./screenshots/gameplay.png)
+
+## Elemental Combat
+
+![Elemental Combat Preview](./screenshots/combat.png)
+
+## News & Update
+
+![News Preview](./screenshots/news.png)
+
+## Mobile Responsive
+
+![Mobile Preview](./screenshots/mobile.png)
+
+---
+
+# ✨ Features
+
+## 🌎 Teyvat Map
+
+An interactive map section that introduces the nations of Teyvat.
+
+Features:
+- Region information display
+- Region icons and visual elements
+- Interactive exploration experience
+- Nation-based presentation
+
+---
+
+## 🎮 Gameplay Experience
+
+A dedicated section showcasing various gameplay experiences in Teyvat.
+
+Includes:
+
+### Exploration
+- Discover the world of Teyvat
+- Experience adventure elements
+
+### Elemental Combat
+- Elemental reaction showcase
+- Element combinations
+- Combat information
+
+### Quest & Story
+- Story-driven adventure presentation
+- Quest information
+
+---
+
+## ⚔️ Elemental Combat System
+
+A showcase of the elemental reaction system.
+
+Features:
+- Different elemental abilities
+- Element combinations
+- Reaction explanations
+- Visual media presentation
+
+---
+
+## 📖 Quest & Story Section
+
+A section that highlights the adventure and storytelling aspects of Teyvat.
+
+Features:
+- Quest categories
+- Story information
+- Adventure presentation
+
+---
+
+## 🎬 Trailer Showcase
+
+A cinematic trailer section featuring embedded video content.
+
+Purpose:
+- Provide visual storytelling
+- Enhance user immersion
+- Present the atmosphere of Teyvat
+
+---
+
+## 📰 News & Updates
+
+A news section displaying the latest information.
+
+Features:
+- Featured news
+- Character trailers
+- Update information
+- Visual card presentation
+
+---
+
+## 📱 Responsive Navigation
+
+The website includes a responsive navigation system.
+
+Features:
+- Desktop navigation
+- Mobile hamburger menu
+- Smooth toggle animation
+- Section-based navigation
+
+---
+
+# 🛠️ Technologies Used
+
+## Backend
+
+- **Laravel**
+
+Used as the main backend framework for handling routing, controllers, models, and database interaction.
+
+---
+
+## Frontend
+
+- **Blade Template Engine**
+
+Used for creating reusable components and organizing website layouts.
+
+- **Tailwind CSS**
+
+Used for responsive styling and modern UI implementation.
+
+- **JavaScript**
+
+Used for interactive components and dynamic features.
+
+- **GSAP (GreenSock Animation Platform)**
+
+Used to create smooth animations and enhance the cinematic experience.
+
+- **Vite**
+
+Used for frontend asset bundling and development workflow.
+
+---
+
+## Database & Storage
+
+- **PostgreSQL**
+
+Used for storing structured application data.
+
+- **Supabase Storage**
+
+Used for managing website assets such as images and media files.
+
+---
+
+# 📂 Project Structure
+
+```text
+a-journey-through-teyvat
+│
+├── app
+│   ├── Http
+│   └── Models
+│
+├── database
+│   ├── migrations
+│   └── seeders
+│
+├── resources
+│   ├── views
+│   │   ├── components
+│   │   ├── gameplay
+│   │   └── layouts
+│   │
+│   ├── css
+│   └── js
+│
+├── routes
+│   └── web.php
+│
+└── public
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+# 🚀 Installation & Setup
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 1. Clone Repository
 
-## Code of Conduct
+```bash
+git clone https://github.com/[username]/a-journey-through-teyvat.git
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+---
 
-## Security Vulnerabilities
+## 2. Install Dependencies
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Install Laravel dependencies:
 
-## License
+```bash
+composer install
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Install frontend dependencies:
+
+```bash
+npm install
+```
+
+---
+
+## 3. Configure Environment
+
+Copy environment file:
+
+```bash
+cp .env.example .env
+```
+
+Generate application key:
+
+```bash
+php artisan key:generate
+```
+
+Configure your database settings inside `.env`.
+
+---
+
+## 4. Setup Database
+
+Run migration and seeder:
+
+```bash
+php artisan migrate --seed
+```
+
+---
+
+## 5. Run Application
+
+Start Laravel server:
+
+```bash
+php artisan serve
+```
+
+Run Vite:
+
+```bash
+npm run dev
+```
+
+Open:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+# 🎨 Design Concept
+
+The design concept of **A Journey Through Teyvat** is inspired by:
+
+- Fantasy adventure websites
+- Cinematic game presentation
+- Interactive storytelling experiences
+- Genshin Impact visual atmosphere
+
+The interface combines dark fantasy aesthetics, gold accents, smooth transitions, and immersive layouts to create a journey-like experience.
+
+---
+
+# 👥 Team Members
+
+This project was developed by:
+
+| No | Name | Role |
+|----|------|------|
+| 1 | [Member Name] | [Role] |
+| 2 | [Member Name] | [Role] |
+| 3 | [Member Name] | [Role] |
+| 4 | [Member Name] | [Role] |
+
+---
+
+# ⚠️ Disclaimer & Asset Credits
+
+**A Journey Through Teyvat** is a fan-made project created for educational and portfolio purposes.
+
+This website is not affiliated with, endorsed by, or connected to **HoYoverse**.
+
+All Genshin Impact-related assets, including characters, images, icons, logos, and other visual materials, belong to HoYoverse and their respective owners.
+
+Some visual assets used in this project are sourced from official HoYoverse platforms and community resources such as **HoYoLAB**.
+
+This project does not claim ownership of third-party assets and is intended for non-commercial and educational use only.
+
+---
+
+# 👤 Developer
+
+Created by:
+
+**[Your Name / Team Name]**
+
+---
+
+# 📜 License
+
+This project is developed for educational and non-commercial purposes.
