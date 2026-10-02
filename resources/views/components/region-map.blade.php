@@ -12,7 +12,7 @@
         >
 
             <img
-                src="{{ asset('images/teyvat-maps.png') }}"
+                src="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/landing-page/teyfat-maps.png"
                 alt="Map of Teyvat"
                 id="teyvat-map"
                 class="pointer-events-none block max-w-none"
@@ -22,7 +22,7 @@
             <div
                 class="absolute inset-0 pointer-events-none animate-clouds"
                 style="
-                    background-image: url('{{ asset('images/cloud_maps.png') }}');
+                    background-image: url('https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/landing-page/cloud_maps.png');
                     background-repeat: repeat;
                     mix-blend-mode: screen;
                     opacity: 0.7;

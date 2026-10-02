@@ -1,6 +1,6 @@
 <section id="story">
     <div class="min-h-screen bg-no-repeat bg-cover z-0"
-        style=" background-image: url('https://static.wikia.nocookie.net/gensin-impact/images/b/b9/Mondstadt.png/revision/latest/scale-to-width-down/1000?cb=20230818202148'); background-position: 100% 40%;">
+        style=" background-image: url('https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/landing-page/Mondstadt.webp'); background-position: 100% 40%;">
 
         <div class="absolute inset-x-0 top h-3/4 bg-gradient-to-b from-black/100 to-transparent pointer-events-none"></div>
 

@@ -1,6 +1,6 @@
 <section id="teyvat">
     <div class="min-h-screen bg-no-repeat bg-cover" 
-        style=" background-image: url('https://static.wikia.nocookie.net/gensin-impact/images/8/8e/Version_4.7_Full_Wallpaper_1_Vertical.png/revision/latest/scale-to-width-down/1000?cb=20240606071615'); background-position: 100% 20%;">
+        style=" background-image: url('https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/landing-page/Lumine%20&%20Aether.webp'); background-position: 100% 20%;">
 
         {{-- Gradient Overlay --}}
         <div class="absolute inset-x-0 bottom-0 h-2/3 md:h-1/2 bg-gradient-to-t from-black/100 to-transparent z-0"></div>

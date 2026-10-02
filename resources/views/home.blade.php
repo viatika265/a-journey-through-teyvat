@@ -7,11 +7,26 @@
     {{-- Hero & Story Sections --}}
     @include('components.hero')
     @include('components.story')
+    {{-- CLOUD TRANSITION + MAP --}}
+<div class="relative isolate">
 
-    {{-- Region Map Component --}}
-    <div class="w-full">
+    {{-- Region Map --}}
+    <div class="relative z-10 w-full">
         <x-region-map :regions="$regions" />
     </div>
+
+    {{-- Cloud Transition --}}
+    <div
+        class="absolute left-0 -top-[500px] z-50 w-full h-[1200px] pointer-events-none"
+    >
+        <img
+            src="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/landing-page/Cloud.png"
+            alt=""
+            class="absolute inset-0 w-full h-full object-cover object-bottom"
+        >
+    </div>
+
+</div>
 
     {{-- Quests & Stories Component --}}
     <section id="quests-stories">
