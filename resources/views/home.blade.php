@@ -64,14 +64,15 @@
                     title="Character Trailer - Vodyanitsa"
                     date="22 September 2026"
                     image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-trailerVodyanista.png"
+                    video="https://www.youtube.com/embed/8Ty-Btue6OI?si=RvNgWPvUpHVxXJzy"
                 />
 
                 <x-news-card
                     title="Character Trailer - Vesna"
                     date="21 September 2026"
                     image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-trailerVesna.png"
+                    video="https://www.youtube.com/embed/DBgFuu5Lrww?si=pHXROsT9TvH1lf0K"
                 />
-
             </div>
         </div>
     </section>
