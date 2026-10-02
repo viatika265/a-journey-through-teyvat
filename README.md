@@ -218,7 +218,7 @@ a-journey-through-teyvat
 ## 1. Clone Repository
 
 ```bash
-git clone https://github.com/[username]/a-journey-through-teyvat.git
+git clone https://https://github.com/viatika265/a-journey-through-teyvat.git
 ```
 
 ---
@@ -308,10 +308,10 @@ This project was developed by:
 
 | No | Name | Role |
 |----|------|------|
-| 1 | [Member Name] | [Role] |
-| 2 | [Member Name] | [Role] |
-| 3 | [Member Name] | [Role] |
-| 4 | [Member Name] | [Role] |
+| 1 | [Member Name] |
+| 2 | [Member Name] | 
+| 3 | [Member Name] | 
+| 4 | [Member Name] | 
 
 ---
 
@@ -333,7 +333,7 @@ This project does not claim ownership of third-party assets and is intended for 
 
 Created by:
 
-**[Your Name / Team Name]**
+**[Dingin Tetapi Tidak Kejam]**
 
 ---
 
