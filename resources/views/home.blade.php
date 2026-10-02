@@ -11,9 +11,6 @@
     @include('components.hero')
     @include('components.story')
 
-    {{-- Region Map & Explore --}}
-    @include('components.region-map')
-
     {{-- CLOUD TRANSITION + MAP --}}
         <div class="relative">
         <x-cloud-divider />
