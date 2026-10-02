@@ -11,8 +11,11 @@
     @include('components.hero')
     @include('components.story')
 
+    {{-- Region Map & Explore --}}
+    @include('components.region-map')
+
     {{-- CLOUD TRANSITION + MAP --}}
-    <div class="relative">
+        <div class="relative">
         <x-cloud-divider />
 
         <div class="relative z-10 w-full">
@@ -31,17 +34,25 @@
         <x-quest :questImages="$questImages" />
     </section>
 
+    {{-- TRAILER --}}
     @include('components.trailer')
 
-    {{-- What's New Section --}}
+    {{-- WHAT'S NEW SECTION --}}
     <section id="update" class="w-full bg-black py-16 px-6 md:px-16 lg:px-24">
-        <div class="w-full flex justify-center mb-12">
+
+        {{-- TITLE --}}
+        <div class="w-full flex flex-col items-center justify-center mb-12">
             <h2 class="font-display text-[40px] md:text-[64px] leading-tight text-[#F6F6F6]">
                 What’s new
             </h2>
+
+            {{-- GOLD UNDERLINE --}}
+            <div class="mt-3 h-px w-36 bg-gradient-to-r from-transparent via-[#c9ad63] to-transparent"></div>
         </div>
 
+        {{-- NEWS CONTENT --}}
         <div class="w-full max-w-[1280px] mx-auto flex flex-col gap-12">
+
             <x-featured-news
                 version="Version 7.0 Out Now"
                 title="Everwinter Without Mercy"
@@ -51,6 +62,7 @@
             />
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
                 <x-news-card
                     title="Character Trailer - Vodyanitsa"
                     date="22 September 2026"
@@ -62,10 +74,12 @@
                     date="21 September 2026"
                     image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-trailerVesna.png"
                 />
+
             </div>
         </div>
     </section>
 
+    {{-- DOWNLOAD --}}
     @include('components.download')
 
 @endsection
