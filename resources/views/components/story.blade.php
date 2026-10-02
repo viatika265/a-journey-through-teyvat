@@ -4,7 +4,7 @@
 
         <div class="absolute inset-x-0 top-0 h-3/4 bg-gradient-to-b from-black/100 to-transparent pointer-events-none"></div>
 
-        <div class="min-h-screen relative z-30 flex flex-col justify-between pt-12 md:pt-20 pb-[50vw] md:pb-[26vw]">
+        <div class="min-h-screen relative z-30 flex flex-col justify-between pt-12 md:pt-20 pb-[50vw] md:pb-[30vw]">
           <div class="flex flex-col md:flex-row items-center justify-center gap-2 w-full px-4 md:px-10">
             <svg class="w-0 sm:w-16 md:w-32 lg:w-[270px] h-auto shrink-0" viewBox="0 0 271 32" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M262.646 5.19863L263.836 4.25209L262.665 2.75098L261.47 4.30328L262.646 5.19863ZM272.746 18.1418L273.971 18.9701L274.604 18.0508L273.937 17.1952L272.746 18.1418ZM265.323 28.9186L264.102 29.824L265.329 31.5176L266.548 29.7469L265.323 28.9186ZM251.81 19.2726L252.986 20.168L263.822 6.09398L262.646 5.19863L261.47 4.30328L250.634 18.3773L251.81 19.2726ZM262.646 5.19863L261.456 6.14517L271.556 19.0883L272.746 18.1418L273.937 17.1952L263.836 4.25209L262.646 5.19863ZM272.746 18.1418L271.521 17.3134L264.099 28.0903L265.323 28.9186L266.548 29.7469L273.971 18.9701L272.746 18.1418ZM265.323 28.9186L266.545 28.0132L262.929 23.0206L261.707 23.926L260.486 24.8314L264.102 29.824L265.323 28.9186Z" fill="#DEB76C"/>

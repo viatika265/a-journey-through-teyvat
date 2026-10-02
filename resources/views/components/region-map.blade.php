@@ -1,5 +1,5 @@
 @props(['regions'])
-<section id="region-map" class="relative w-full overflow-hidden pt-[5vw] bg-[#1F5A67]">
+<section id="region-map" class="relative w-full overflow-hidden pt-[20vw] md:pt-[10vw] bg-[#1F5A67]">
     <div
         id="map-viewport"
         class="relative w-full overflow-hidden select-none touch-none"

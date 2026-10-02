@@ -1,4 +1,4 @@
-<div class="relative z-20 w-full -my-[40vw] md:-my-[23vw] overflow-x-clip pointer-events-none">
+<div class="pointer-events-none absolute inset-x-0 top-0 z-40 -translate-y-1/2 overflow-x-clip">
     <img
         src="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/landing-page/Cloud.png"
         alt=""

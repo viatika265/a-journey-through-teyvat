@@ -11,14 +11,13 @@
     @include('components.hero')
     @include('components.story')
 
-    {{-- Region Map & Explore --}}
-    @include('components.region-map')
-
     {{-- CLOUD TRANSITION + MAP --}}
-    <x-cloud-divider />
-    {{-- Region Map --}}
-    <div class="relative z-10 w-full">
-        <x-region-map :regions="$regions" />
+    <div class="relative">
+        <x-cloud-divider />
+
+        <div class="relative z-10 w-full">
+            <x-region-map :regions="$regions" />
+        </div>
     </div>
 
     @include('components.why-play')
