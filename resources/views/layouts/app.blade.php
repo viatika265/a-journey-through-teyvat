@@ -19,11 +19,26 @@
             </div>
             
             {{-- Hamburger Menu --}}
-            <button id="mobile-menu-button" class="md:hidden text-[#F6F6F6] focus:outline-none z-50 relative">
-                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
+            <button 
+                    id="mobile-menu-button" 
+                    class="md:hidden text-[#F6F6F6] focus:outline-none z-50 relative"
+                >
+                    <svg 
+                        id="menu-icon"
+                        class="w-7 h-7 transition-transform duration-300"
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                    >
+                        <path 
+                            id="menu-line"
+                            stroke-linecap="round" 
+                            stroke-linejoin="round" 
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16">
+                        </path>
+                    </svg>
+                </button>
 
             {{-- Navigation Links (Perhatikan tambahan md:flex di sini) --}}
             <div 
@@ -41,7 +56,7 @@
                 <a href="/#gameplay-explore" class="nav-link" data-section="gameplay-explore">
                     Gameplay
                 </a>
-                </a>
+
 
                 <a href="/#trailer" class="nav-link" data-section="trailer">
                     Trailer
@@ -105,52 +120,34 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const sections = document.querySelectorAll('section[id]'); // Cukup deklarasikan 1 kali saja
-            const navLinks = document.querySelectorAll('.nav-link');
+
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const navMenu = document.getElementById('nav-menu');
+            const menuLine = document.getElementById('menu-line');
 
-            // 1. Logika Toggle Menu Mobile
+            let menuOpen = false;
+
             mobileMenuButton.addEventListener('click', () => {
+
+                menuOpen = !menuOpen;
+
                 navMenu.classList.toggle('hidden');
-                navMenu.classList.toggle('flex'); // Typo nav.Menu diperbaiki
-            });
+                navMenu.classList.toggle('flex');
 
-            // Menutup menu mobile saat link diklik
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (!navMenu.classList.contains('hidden')) {
-                        navMenu.classList.add('hidden');
-                        navMenu.classList.remove('flex');
-                    }
-                });
-            });
-
-            // 2. Logika Intersection Observer
-            const observer = new IntersectionObserver(
-                (entries) => {
-                    entries.forEach((entry) => {
-                        if (entry.isIntersecting) {
-                            navLinks.forEach((link) => {
-                                link.classList.remove('active');
-                            });
-            
-                            const activeLink = document.querySelector(
-                                `.nav-link[data-section="${entry.target.id}"]`
-                            );
-            
-                            if (activeLink) {
-                                activeLink.classList.add('active');
-                            }
-                        }
-                    });
-                },
-                {
-                    threshold: 0.5
+                if (menuOpen) {
+                    menuLine.setAttribute(
+                        "d",
+                        "M6 18L18 6M6 6l12 12"
+                    );
+                } else {
+                    menuLine.setAttribute(
+                        "d",
+                        "M4 6h16M4 12h16M4 18h16"
+                    );
                 }
-            );
-            
-            sections.forEach((section) => observer.observe(section));
+
+            });
+
         });
     </script>
 </body>
