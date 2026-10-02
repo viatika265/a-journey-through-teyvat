@@ -79,7 +79,7 @@
 
     <div id="site-footer" class="w-full bg-white/5 backdrop-blur-md flex flex-col items-center pt-12 md:mt-25 overflow-hidden">
 
-        <div class="w-[500px] flex flex-row mb-2 md:mb-4">
+        <div class="w-[90%] flex flex-row mb-2 md:mb-4">
         <svg class="mx-auto w-[100px] sm:w-[100px] md:w-[150px] h-auto"
             viewBox="0 0 500 180"
             fill="none"
