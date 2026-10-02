@@ -21,8 +21,11 @@
         <x-region-map :regions="$regions" />
     </div>
 
-    
+    @include('components.why-play')
 
+    {{-- GAMEPLAY --}}
+    @include('components.gameplay.partials.explore')
+    @include('components.gameplay.partials.combat')
 
     {{-- Quests & Stories Component --}}
     <section id="quests-stories">
