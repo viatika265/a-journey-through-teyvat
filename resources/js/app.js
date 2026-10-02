@@ -1,3 +1,5 @@
+import "./gsap-animation.js";
+
 const exploreButton = document.getElementById("explore-btn");
 const introSection = document.getElementById("intro");
 
@@ -16,10 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let startX = 0;
     let startY = 0;
     let activePin = null;
+
     const DRAG_THRESHOLD = 5;
 
     function updateMap() {
-        canvas.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+        canvas.style.transform =
+            `translate(${translateX}px, ${translateY}px) scale(${scale})`;
     }
 
     function calculateScale() {
@@ -27,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const naturalH = map.naturalHeight || map.offsetHeight;
         const vw = viewport.clientWidth;
         const vh = viewport.clientHeight;
-        // COVER: ambil rasio terbesar supaya map selalu menutupi seluruh viewport
+
         scale = Math.max(vw / naturalW, vh / naturalH);
     }
 
@@ -49,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     viewport.addEventListener("pointerdown", (event) => {
-        // Jangan mulai drag kalau klik bagian card
         if (event.target.closest("#region-card")) return;
 
         isDragging = true;
@@ -92,9 +95,10 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.classList.remove("cursor-grabbing");
         canvas.classList.add("cursor-grab");
 
-        // Kalau cuma klik pin, buka region card
         if (!hasMoved && activePin) {
-            openCard(activePin);
+            if (typeof openCard === "function") {
+                openCard(activePin);
+            }
         }
 
         activePin = null;
@@ -110,13 +114,16 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.classList.add("cursor-grab");
     });
 
-    map.addEventListener("dragstart", (e) => e.preventDefault());
+    map.addEventListener("dragstart", (event) => {
+        event.preventDefault();
+    });
 
     function initializeMap() {
         if (!map.naturalWidth) {
             map.addEventListener("load", initializeMap, { once: true });
             return;
         }
+
         calculateScale();
         clampPosition();
         updateMap();
@@ -128,19 +135,32 @@ document.addEventListener("DOMContentLoaded", () => {
         map.addEventListener("load", initializeMap, { once: true });
     }
 
-    // Recalculate scale setiap resize — bukan cuma clamp ulang
     window.addEventListener("resize", () => {
         calculateScale();
         clampPosition();
         updateMap();
     });
+
+    viewport.addEventListener("dblclick", (event) => {
+        const rect = canvas.getBoundingClientRect();
+        const currentScale = rect.width / canvas.offsetWidth;
+
+        const originalX =
+            (event.clientX - rect.left) / currentScale;
+
+        const originalY =
+            (event.clientY - rect.top) / currentScale;
+
+        console.log(
+            `left: ${Math.round(originalX)}px; top: ${Math.round(originalY)}px;`
+        );
+    });
 });
 
+// EXPLORE CAROUSEL
 document.addEventListener("DOMContentLoaded", () => {
     const carousel = document.getElementById("explore-carousel");
-
     const cards = document.querySelectorAll(".explore-card");
-
     const buttons = document.querySelectorAll(".explore-indicator button");
 
     if (!carousel) return;
@@ -151,7 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (card) {
             carousel.scrollTo({
                 left: card.offsetLeft - carousel.offsetLeft,
-
                 behavior: "smooth",
             });
         }
@@ -165,15 +184,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function update() {
         let active = 0;
-
         let distance = Infinity;
 
         cards.forEach((card, index) => {
-            const diff = Math.abs(card.offsetLeft - carousel.scrollLeft);
+            const diff = Math.abs(
+                card.offsetLeft - carousel.scrollLeft
+            );
 
             if (diff < distance) {
                 distance = diff;
-
                 active = index;
             }
         });
@@ -184,36 +203,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     carousel.addEventListener("scroll", update);
-
     update();
 });
 
 // ELEMENTAL COMBAT
 document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById("combat-elements");
-
     const items = [...document.querySelectorAll(".combat-element")];
-
     const dots = [...document.querySelectorAll(".combat-dot")];
-
     const reactions = [...document.querySelectorAll(".combat-reaction")];
-
     const next = document.getElementById("combat-next");
     const prev = document.getElementById("combat-prev");
-
     const elementName = document.getElementById("active-element-name");
-
     const media = document.getElementById("combat-image");
 
     if (!container || items.length === 0) return;
 
     let activeIndex = Math.min(5, items.length - 1);
-
     let animationFrame = null;
-
-    // =========================
-    // FILTER REACTION PER ELEMENT
-    // =========================
 
     function updateReaction(elementId) {
         if (animationFrame !== null) {
@@ -224,7 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         reactions.forEach((reaction) => {
             const name = reaction.dataset.reactionName;
-
             let show = false;
 
             if (elementId == 1) {
@@ -279,13 +285,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // =========================
-    // ELEMENT CAROUSEL
-    // =========================
-
     function render() {
         const total = items.length;
-
         const order = [];
 
         for (let offset = -3; offset <= 3; offset++) {
@@ -301,13 +302,19 @@ document.addEventListener("DOMContentLoaded", () => {
         order.forEach((index) => {
             const item = items[index];
 
-            item.classList.toggle("active", index === activeIndex);
+            item.classList.toggle(
+                "active",
+                index === activeIndex
+            );
 
             container.appendChild(item);
         });
 
         dots.forEach((dot, index) => {
-            dot.classList.toggle("active", index === activeIndex);
+            dot.classList.toggle(
+                "active",
+                index === activeIndex
+            );
         });
 
         const activeElement = items[activeIndex];
@@ -315,63 +322,48 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!activeElement) return;
 
         const name = activeElement.dataset.elementName;
-
         const id = activeElement.dataset.elementId;
-
         const gif = activeElement.dataset.media;
 
         if (elementName) {
             elementName.textContent = name;
         }
 
-        // UPDATE GIF DARI SUPABASE
-
         if (media && gif) {
             media.src = gif;
-
             media.alt = name + " Elemental Combat";
         }
 
         updateReaction(id);
     }
 
-    // NEXT
-
     if (next) {
         next.addEventListener("click", () => {
             activeIndex = (activeIndex + 1) % items.length;
-
             render();
         });
     }
-
-    // PREV
 
     if (prev) {
         prev.addEventListener("click", () => {
-            activeIndex = (activeIndex - 1 + items.length) % items.length;
+            activeIndex =
+                (activeIndex - 1 + items.length) % items.length;
 
             render();
         });
     }
-
-    // CLICK ELEMENT
 
     items.forEach((item, index) => {
         item.addEventListener("click", () => {
             activeIndex = index;
-
             render();
         });
     });
-
-    // CLICK DOT
 
     dots.forEach((dot, index) => {
         dot.addEventListener("click", () => {
             if (index < items.length) {
                 activeIndex = index;
-
                 render();
             }
         });

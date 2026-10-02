@@ -1,4 +1,5 @@
 @props(['regions'])
+
 <section id="region-map" class="relative w-full overflow-hidden pt-[20vw] md:pt-[10vw] bg-[#1F5A67]">
     <div
         id="map-viewport"
@@ -34,19 +35,17 @@
 
                 <div
                     class="region-pin group z-10 cursor-pointer"
-                    style="left: {{ $region['x'] }}px; top: {{$region['y'] }}px;"
-                    style="left: {{ $region['x'] }}px; top: {{ $region['y'] }}px;"
-                    
+                    data-region="{{ $region['name'] }}"
                     data-name="{{ $region['name'] }}"
                     data-slug="{{ $region['slug'] }}"
                     data-desc="{{ $region['short_description'] }}"
                     data-image="{{ $region['card_image'] }}"
                     data-icon1="{{ $region['icon'] }}"
                     data-gradients="{{ $region['gradients'] }}"
-                    data-element-name="{{ $region['element_name'] }}"
-                    data-element-icon="{{ $region['element_icon'] }}"
-                    data-archon-icon="{{ $region['archon_icon'] }}"
-                    onclick="openCard(this)"
+                    data-element-name="{{ $region['element_name'] ?? '' }}"
+                    data-element-icon="{{ $region['element_icon'] ?? '' }}"
+                    data-archon-icon="{{ $region['archon_icon'] ?? '' }}"
+                    style="left: {{ $region['x'] }}px; top: {{ $region['y'] }}px;"
                 >
 
                     {{-- SVG Pin dengan warna dinamis --}}
@@ -86,42 +85,54 @@
         const card = document.getElementById('region-card');
 
         const slug = element.getAttribute('data-slug');
-        document.getElementById('card-link').onclick = function () {
-            window.location.href = `/regions/${slug}`;
-        };
 
-        document.getElementById('card-title').innerText = element.getAttribute('data-name');
-        document.getElementById('card-desc').innerText = element.getAttribute('data-desc');
-        document.getElementById('card-image').src = element.getAttribute('data-image');
-        document.getElementById('card-icon-1').src = element.getAttribute('data-icon1');
-        card.style.background = element.getAttribute('data-gradients');
-        
         const cardLink = document.getElementById('card-link');
 
-        if (cardLink) {
+        if (cardLink && slug) {
             cardLink.href = `/regions/${encodeURIComponent(slug)}`;
         }
 
+        document.getElementById('card-title').innerText =
+            element.getAttribute('data-name');
 
+        document.getElementById('card-desc').innerText =
+            element.getAttribute('data-desc');
+
+        document.getElementById('card-image').src =
+            element.getAttribute('data-image');
+
+        document.getElementById('card-icon-1').src =
+            element.getAttribute('data-icon1');
+
+        card.style.background =
+            element.getAttribute('data-gradients');
 
         const elementIcon = document.getElementById('card-icon-2');
         const elementIconUrl = element.getAttribute('data-element-icon');
-        if (elementIconUrl && elementIconUrl !== 'null') {
+
+        if (elementIcon && elementIconUrl && elementIconUrl !== 'null') {
             elementIcon.src = elementIconUrl;
-            elementIcon.alt = element.getAttribute('data-element-name');
+            elementIcon.alt =
+                element.getAttribute('data-element-name') || '';
             elementIcon.style.display = '';
-        } else {
-            elementIcon.style.display = 'none'; // sembunyikan kalau region tidak punya element
+        } else if (elementIcon) {
+            elementIcon.style.display = 'none';
         }
-        
+
         const archonIcon = document.getElementById('card-icon-3');
         const archonIconUrl = element.getAttribute('data-archon-icon');
-        if (archonIconUrl && archonIconUrl !== 'null' && archonIconUrl !== '') {
+
+        if (
+            archonIcon &&
+            archonIconUrl &&
+            archonIconUrl !== 'null'
+        ) {
             archonIcon.src = archonIconUrl;
             archonIcon.style.display = '';
-        } else {
+        } else if (archonIcon) {
             archonIcon.style.display = 'none';
         }
+
         const screenWidth = window.innerWidth;
 
         if (screenWidth < 768) {

@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use App\Models\Region;
+use App\Models\Element;
+use App\Models\Weapon;
+use App\Models\Artifact;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

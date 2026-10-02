@@ -64,13 +64,14 @@
                     >
                 </div>
 
-                {{-- Detail Button --}}
-                <x-button 
-                    size="medium"
+                {{-- Region Detail Link --}}
+                <a
                     id="card-link"
+                    href="#"
+                    class="inline-flex items-center justify-center gap-2.5 rounded-full bg-yellow-normal px-6 py-3 font-body text-blue-darker transition-colors duration-200 hover:bg-yellow-normal-hover active:bg-yellow-normal-active"
                 >
-                Discover Region
-                </x-button>
+                    Discover Region
+                </a>
                
 
             </div>

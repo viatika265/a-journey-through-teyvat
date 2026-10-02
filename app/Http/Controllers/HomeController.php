@@ -8,6 +8,7 @@ use App\Models\GameplayExperience;
 use App\Models\Element;
 use App\Models\CombatReaction;
 use App\Models\CombatState;
+use App\Models\Quest;
 
 class HomeController extends Controller
 {
@@ -116,13 +117,22 @@ class HomeController extends Controller
 
         $combatStates = CombatState::all();
 
-        // Quest images
-        $questImages = [
-            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Book%20Quest.png',
-            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Event%20Quest.png',
-            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Pembukaan%20Archon%20Quest.png',
-            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Penutupan%20Archon%20Quest.png',
-        ];
+        // Gameplay - Quest
+        $quests = Quest::with([
+            'region',
+            'scenes',
+        ])
+            ->where('is_active', true)
+            ->orderBy('order')
+            ->get();
+
+        $questImages = $quests
+            ->flatMap(function ($quest) {
+                return $quest->scenes->pluck('image');
+            })
+            ->filter()
+            ->values()
+            ->all();
 
         return view('home', compact(
             'regions',
@@ -131,6 +141,7 @@ class HomeController extends Controller
             'elements',
             'combatReactions',
             'combatStates',
+            'quests',
             'questImages'
         ));
     }

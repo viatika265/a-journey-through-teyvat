@@ -12,7 +12,7 @@
     @include('components.story')
 
     {{-- CLOUD TRANSITION + MAP --}}
-        <div class="relative">
+    <div class="relative">
         <x-cloud-divider />
 
         <div class="relative z-10 w-full">
@@ -58,6 +58,7 @@
                 image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-featuredNews.png"
             />
 
+            {{-- Secondary News Grid --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 
                 <x-news-card
@@ -70,9 +71,10 @@
                 <x-news-card
                     title="Character Trailer - Vesna"
                     date="21 September 2026"
-                    image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-trailerVesna.png"
+                    image="https://grbirqasbp.supabase.co/storage/v1/object/public/news-media/news-image-trailerVesna.png"
                     video="https://www.youtube.com/embed/DBgFuu5Lrww?si=pHXROsT9TvH1lf0K"
                 />
+
             </div>
         </div>
     </section>
