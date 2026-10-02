@@ -37,7 +37,9 @@
     <div class="w-full mt-16">
         <x-region-map :regions="$regions" />
     </div>
-
+    <section id="quests-stories">
+        <x-quest :questImages="$questImages"/>
+    </section>
     <!-- Menguji komponen news-card -->
     <section id="whats-new" class="w-full bg-black py-16 px-6 md:px-16 lg:px-24">
     
