@@ -4,9 +4,57 @@
 
 @section('content')
 
+    {{-- Hero & Story Sections --}}
     @include('components.hero')
     @include('components.story')
-    @include('components.region-map')
+
+    {{-- Region Map Component --}}
+    <div class="w-full">
+        <x-region-map :regions="$regions" />
+    </div>
+
+    {{-- Quests & Stories Component --}}
+    <section id="quests-stories">
+        <x-quest :questImages="$questImages" />
+    </section>
+
+    {{-- What's New Section --}}
+    <section id="whats-new" class="w-full bg-black py-16 px-6 md:px-16 lg:px-24">
+    
+        {{-- Section Title --}}
+        <div class="w-full flex justify-center mb-12">
+            <h2 class="font-display text-[40px] md:text-[64px] leading-tight text-[#F6F6F6]">
+                What’s new
+            </h2>
+        </div>
+
+        <div class="w-full max-w-[1280px] mx-auto flex flex-col gap-12">
+            <x-featured-news 
+                version="Version 7.0 Out Now" 
+                title="Everwinter Without Mercy" 
+                description="Dear traveler, new region Snezaa, Tevat's seventh nation is now can be explored alongside wit new caracter, Odette and Alosa will join our journe." 
+                date="12 August 2026" 
+                image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-featuredNews.png"
+            />
+            
+            {{-- Secondary News Grid --}}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <x-news-card 
+                    title="Character Trailer - Vodyanitsa" 
+                    date="22 September 2026" 
+                    image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-trailerVodyanista.png" 
+                />
+                
+                <x-news-card 
+                    title="Character Trailer - Vesna" 
+                    date="21 September 2026" 
+                    image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-trailerVesna.png" 
+                />
+            </div>
+        </div>
+    </section>
+
+    {{-- Other Sections --}}
     @include('components.explore')
     @include('components.trailer')
     @include('components.download')

@@ -1,11 +1,9 @@
 @props(['regions'])
-
-<section id="region-map" class="relative w-full overflow-hidden">
-
+<section id="region-map" class="relative w-full overflow-hidden" style="height: 100%;">
     <div
         id="map-viewport"
         class="relative w-full overflow-hidden select-none touch-none"
-        style="height: 700px;"
+        style="height: 100vh;"
     >
 
         <div
@@ -38,12 +36,16 @@
                     class="region-pin group z-10 cursor-pointer"
                     data-region="{{ $region['name'] }}"
                     data-slug="{{ $region['slug'] }}"
-                    style="left: {{ $region['x'] }}px; top: {{ $region['y'] }}px;"
+                    style="left: {{ $region['x'] }}px; top: {{$region['y'] }}px;"
                     data-name="{{ $region['name'] }}"
                     data-desc="{{ $region['short_description'] }}"
                     data-image="{{ $region['card_image'] }}"
                     data-icon1="{{ $region['icon'] }}"
                     data-gradients="{{ $region['gradients'] }}"
+                    data-element-name="{{ $region['element_name'] }}"
+                    data-element-icon="{{ $region['element_icon'] }}"
+                    data-archon-icon="{{ $region['archon_icon'] }}"
+                    onclick="openCard(this)"
                 >
 
                     {{-- SVG Pin dengan warna dinamis --}}
@@ -83,23 +85,35 @@
         const card = document.getElementById('region-card');
         const regionSlug = element.getAttribute('data-slug');
 
-        document.getElementById('card-title').innerText =
-            element.getAttribute('data-name');
+        document.getElementById('card-title').innerText = element.getAttribute('data-name');
+        document.getElementById('card-desc').innerText = element.getAttribute('data-desc');
+        document.getElementById('card-image').src = element.getAttribute('data-image');
+        document.getElementById('card-icon-1').src = element.getAttribute('data-icon1');
+        card.style.background = element.getAttribute('data-gradients');
+        
+        const cardLink = document.getElementById('card-link');
+        if (cardLink) {
+            cardLink.href = `/regions/${encodeURIComponent(regionSlug)}`;
+        }
 
-        document.getElementById('card-desc').innerText =
-            element.getAttribute('data-desc');
-
-        document.getElementById('card-image').src =
-            element.getAttribute('data-image');
-
-        document.getElementById('card-icon-1').src =
-            element.getAttribute('data-icon1');
-
-        card.style.background =
-            element.getAttribute('data-gradients');
-
-        document.getElementById('card-link').href =
-            `/regions/${encodeURIComponent(regionSlug)}`;
+        const elementIcon = document.getElementById('card-icon-2');
+        const elementIconUrl = element.getAttribute('data-element-icon');
+        if (elementIconUrl && elementIconUrl !== 'null') {
+            elementIcon.src = elementIconUrl;
+            elementIcon.alt = element.getAttribute('data-element-name');
+            elementIcon.style.display = '';
+        } else {
+            elementIcon.style.display = 'none'; // sembunyikan kalau region tidak punya element
+        }
+        
+        const archonIcon = document.getElementById('card-icon-3');
+        const archonIconUrl = element.getAttribute('data-archon-icon');
+        if (archonIconUrl && archonIconUrl !== 'null' && archonIconUrl !== '') {
+            archonIcon.src = archonIconUrl;
+            archonIcon.style.display = '';
+        } else {
+            archonIcon.style.display = 'none';
+        }
 
         const screenWidth = window.innerWidth;
 

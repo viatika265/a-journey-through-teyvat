@@ -63,6 +63,7 @@ class HomeController extends Controller
         ];
 
         $regions = $regions->map(function ($region) use ($coordinates) {
+            
             return [
                 'name' => $region->name,
                 'slug' => $region->slug,
@@ -71,19 +72,37 @@ class HomeController extends Controller
                 'icon' => $region->icon,
                 'emblem' => $region->icon,
 
+                // Masukkan icon element yang sudah dikonversi
+                'element_icon' => $region->element->icon ?? null,
+                'element_name' => $region->element->name ?? null,
+
+                // masukkan archon 
+                'archon_icon' => $region->archon_icon ?? null,
+
                 'x' => $coordinates[$region->name]['x'],
                 'y' => $coordinates[$region->name]['y'],
                 'color' => $coordinates[$region->name]['color'],
                 'gradients' => $coordinates[$region->name]['gradients'],
+
             ];
         });
 
+        // 1. Data gambar Quest
+        $questImages = [
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Book%20Quest.png', 
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Event%20Quest.png',
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Pembukaan%20Archon%20Quest.png',
+            'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/quests-stories/Penutupan%20Archon%20Quest.png',
+        ];
+
+        // 2. Data karakter acak
         $characters = Character::whereNotNull('additional_image')
             ->where('additional_image', '!=', '')
             ->inRandomOrder()
             ->take(4)
             ->get();
 
-        return view('home', compact('regions', 'characters'));
+        // 3. Gabungkan semuanya di compact()
+        return view('home', compact('regions', 'questImages', 'characters'));
     }
 }

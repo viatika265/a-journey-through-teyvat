@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!viewport || !canvas || !map) return;
 
-    let scale = 0.3;
+    let scale = 1;
     let translateX = 0;
     let translateY = 0;
     let isDragging = false;
@@ -16,12 +16,20 @@ document.addEventListener('DOMContentLoaded', () => {
     let startX = 0;
     let startY = 0;
     let activePin = null;
-
     const DRAG_THRESHOLD = 5;
 
     function updateMap() {
         canvas.style.transform =
             `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+    }
+
+    function calculateScale() {
+        const naturalW = map.naturalWidth || map.offsetWidth;
+        const naturalH = map.naturalHeight || map.offsetHeight;
+        const vw = viewport.clientWidth;
+        const vh = viewport.clientHeight;
+        // COVER: ambil rasio terbesar supaya map selalu menutupi seluruh viewport
+        scale = Math.max(vw / naturalW, vh / naturalH);
     }
 
     function clampPosition() {
@@ -41,9 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     viewport.addEventListener('pointerdown', (event) => {
         // Jangan mulai drag kalau klik bagian card
-        if (event.target.closest('#region-card')) {
-            return;
-        }
+        if (event.target.closest('#region-card')) return;
 
         isDragging = true;
         hasMoved = false;
@@ -106,6 +112,11 @@ document.addEventListener('DOMContentLoaded', () => {
     map.addEventListener('dragstart', (e) => e.preventDefault());
 
     function initializeMap() {
+        if (!map.naturalWidth) {
+            map.addEventListener('load', initializeMap, { once: true });
+            return;
+        }
+        calculateScale();
         clampPosition();
         updateMap();
     }
@@ -113,10 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (map.complete) {
         initializeMap();
     } else {
-        map.addEventListener('load', initializeMap);
+        map.addEventListener('load', initializeMap, { once: true });
     }
 
+    // Recalculate scale setiap resize — bukan cuma clamp ulang
     window.addEventListener('resize', () => {
+        calculateScale();
         clampPosition();
         updateMap();
     });

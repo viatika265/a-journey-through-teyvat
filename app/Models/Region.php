@@ -16,9 +16,15 @@ class Region extends Model
         'landmark',
         'image_path',
     ];
+    protected $table = 'regions';
 
+    public function element()
+    {
+        return $this->belongsTo(Element::class, 'element_id');
+    }
     public function characters(): HasMany
     {
         return $this->hasMany(Character::class);
     }
+
 }
