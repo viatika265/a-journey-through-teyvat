@@ -214,17 +214,29 @@ a-journey-through-teyvat
 
 # 🚀 Installation & Setup
 
+Follow the steps below to run **A Journey Through Teyvat** locally.
+
+---
+
 ## 1. Clone Repository
 
+Clone this repository:
+
 ```bash
-git clone https://https://github.com/viatika265/a-journey-through-teyvat.git
+git clone https://github.com/viatika265/a-journey-through-teyvat.git
+```
+
+Move into the project directory:
+
+```bash
+cd a-journey-through-teyvat
 ```
 
 ---
 
 ## 2. Install Dependencies
 
-Install Laravel dependencies:
+Install Laravel backend dependencies:
 
 ```bash
 composer install
@@ -240,35 +252,170 @@ npm install
 
 ## 3. Configure Environment
 
-Copy environment file:
+Create a copy of the environment configuration file:
 
 ```bash
 cp .env.example .env
 ```
 
-Generate application key:
+Generate the Laravel application key:
 
 ```bash
 php artisan key:generate
 ```
 
-Configure your database settings inside `.env`.
+Configure your database and Supabase settings inside the `.env` file.
+
+Example:
+
+```env
+APP_NAME="A Journey Through Teyvat"
+APP_ENV=local
+APP_DEBUG=true
+
+DB_CONNECTION=pgsql
+DB_HOST=
+DB_PORT=
+DB_DATABASE=
+DB_USERNAME=
+DB_PASSWORD=
+```
 
 ---
 
 ## 4. Setup Database
 
-Run migration and seeder:
+Run database migration:
+
+```bash
+php artisan migrate
+```
+
+Run migration with seed data:
 
 ```bash
 php artisan migrate --seed
 ```
 
+The seeder will insert the required application data, including:
+- Regions
+- Elements
+- Gameplay data
+- Other resources
+
 ---
 
-## 5. Run Application
+## 5. Configure Storage & Cache
 
-Start Laravel server:
+Clear Laravel cache:
+
+```bash
+php artisan optimize:clear
+```
+
+Create storage link:
+
+```bash
+php artisan storage:link
+```
+
+Make sure all required media assets are properly connected through Supabase Storage.
+
+---
+
+## 6. Run Development Server
+
+Start Laravel development server:
+
+```bash
+php artisan serve
+```
+
+The application will run at:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## 7. Run Frontend Development Server
+
+Start Vite:
+
+```bash
+npm run dev
+```
+
+Vite will compile:
+
+- Tailwind CSS
+- JavaScript
+- GSAP animations
+- Frontend assets
+
+---
+
+# 🏗️ Production Build
+
+Before deployment, generate optimized assets:
+
+```bash
+npm run build
+```
+
+This will create optimized CSS and JavaScript files for production.
+
+---
+
+# 🌐 Deployment Preparation
+
+Before deploying the application:
+
+1. Update environment settings:
+
+```env
+APP_ENV=production
+APP_DEBUG=false
+```
+
+2. Configure production database settings.
+
+3. Optimize Laravel:
+
+```bash
+php artisan optimize
+```
+
+4. Build frontend assets:
+
+```bash
+npm run build
+```
+
+---
+
+# 🛠️ Common Commands
+
+Clear cache:
+
+```bash
+php artisan optimize:clear
+```
+
+Run migration:
+
+```bash
+php artisan migrate
+```
+
+Refresh database with seed data:
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+Run Laravel server:
 
 ```bash
 php artisan serve
@@ -280,11 +427,24 @@ Run Vite:
 npm run dev
 ```
 
-Open:
+Build production assets:
 
-```text
-http://127.0.0.1:8000
+```bash
+npm run build
 ```
+
+---
+
+# ✅ Requirements
+
+Before installing this project, make sure you have:
+
+- PHP >= 8.2
+- Composer
+- Node.js & npm
+- PostgreSQL
+- Laravel Framework
+- Supabase Account (for asset storage)
 
 ---
 
@@ -305,12 +465,12 @@ The interface combines dark fantasy aesthetics, gold accents, smooth transitions
 
 This project was developed by:
 
-| No | Name | Role |
-|----|------|------|
-| 1 | [Member Name] |
-| 2 | [Member Name] | 
-| 3 | [Member Name] | 
-| 4 | [Member Name] | 
+| No | Name | Responsibilities |
+|----|------|------------------|
+| 1 | Devi Atika Putri | Project Lead, Backend Development, Database Design & Management, Frontend Development |
+| 2 | Layla Fatiha Laksmana | Frontend Development and User Interface Implementation |
+| 3 | Aryanti Puspita Sari | Frontend Development, Database Integration, and Data Management |
+| 4 | Shelly Pasaribu | Asset Preparation, Visual Resources Management, and GSAP Animation Implementation |
 
 ---
 
