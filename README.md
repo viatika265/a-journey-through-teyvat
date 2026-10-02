@@ -20,7 +20,7 @@ The website is designed to provide an engaging user experience through modern we
 
 ## Homepage
 
-![Homepage Preview](<img width="790" height="443" alt="image" src="https://github.com/user-attachments/assets/5d27f176-0777-46d7-a30a-6931a811bc2d" />)
+<img width="790" height="443" alt="image" src="https://github.com/user-attachments/assets/5d27f176-0777-46d7-a30a-6931a811bc2d" />
 
 ## Teyvat Map
 
