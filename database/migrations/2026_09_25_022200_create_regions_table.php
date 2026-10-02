@@ -28,6 +28,7 @@ return new class extends Migration
                 ->constrained('elements')
                 ->cascadeOnDelete();
 
+            $table->text('party_background')->nullable();
             $table->timestamps();
         });
     }

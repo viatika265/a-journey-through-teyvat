@@ -29,6 +29,7 @@ class RegionSeeder extends Seeder
                 'icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/mondstadt/icon.png',
                 'archon_icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/mondstadt/Mondstadt%20Archon.png',
                 'element_id' => Element::where('slug', 'anemo')->firstOrFail()->id,
+                'party_background' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/mondstadt/party_background.png',
             ],
 
             // =========================
@@ -47,6 +48,7 @@ class RegionSeeder extends Seeder
                 'icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/liyue/icon.png',
                 'archon_icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/liyue/archon.png',
                 'element_id' => Element::where('slug', 'geo')->firstOrFail()->id,
+                'party_background' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/liyue/party_background.png',
             ],
 
             // =========================
@@ -65,6 +67,7 @@ class RegionSeeder extends Seeder
                 'icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/inazuma/icon.png',
                 'archon_icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/inazuma/archon.png',
                 'element_id' => Element::where('slug', 'electro')->firstOrFail()->id,
+                'party_background' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/inazuma/party_background.png',
             ],
 
             // =========================
@@ -83,6 +86,7 @@ class RegionSeeder extends Seeder
                 'icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/sumeru/icon.png',
                 'archon_icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/sumeru/archon.png',
                 'element_id' => Element::where('slug', 'dendro')->firstOrFail()->id,
+                'party_background' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/sumeru/party_background.png',
             ],
 
             // =========================
@@ -101,6 +105,7 @@ class RegionSeeder extends Seeder
                 'icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/fontaine/icon.png',
                 'archon_icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/fontaine/archon.png',
                 'element_id' => Element::where('slug', 'hydro')->firstOrFail()->id,
+                'party_background' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/fontaine/party_background.png',
             ],
 
             // =========================
@@ -119,6 +124,7 @@ class RegionSeeder extends Seeder
                 'icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/natlan/icon.png',
                 'archon_icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/natlan/archon.png',
                 'element_id' => Element::where('slug', 'pyro')->firstOrFail()->id,
+                'party_background' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/natlan/party_background.png',
             ],
 
             // =========================
@@ -137,6 +143,7 @@ class RegionSeeder extends Seeder
                 'icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/nodkrai/icon.png',
                 'archon_icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/nodkrai/archon.png',
                 'element_id' => Element::where('slug', 'cryo')->firstOrFail()->id,
+                'party_background' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/nodkrai/party_background.png',
             ],
 
             // =========================
@@ -155,6 +162,7 @@ class RegionSeeder extends Seeder
                 'icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/snezhnaya/icon.png',
                 'archon_icon' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/snezhnaya/archon.png',
                 'element_id' => Element::where('slug', 'cryo')->firstOrFail()->id,
+                'party_background' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/regions/snezhnaya/party_background.png',
             ],
 
         ];

@@ -1,28 +1,78 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('title')
 
 @section('content')
 
+    {{-- SPLASH SCREEN --}}
+    @include('components.splash')
+
+    {{-- Hero & Story Sections --}}
     @include('components.hero')
     @include('components.story')
+
+    {{-- Region Map & Explore --}}
     @include('components.region-map')
-    @include('components.explore')
-<<<<<<< HEAD
+
+    {{-- CLOUD TRANSITION + MAP --}}
+    <div class="relative isolate">
+        <div class="relative z-10 w-full">
+            <x-region-map :regions="$regions" />
+        </div>
+
+        <div class="absolute left-0 -top-[500px] z-50 w-full h-[1200px] pointer-events-none">
+            <img
+                src="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/landing-page/Cloud.png"
+                alt=""
+                class="absolute inset-0 w-full h-full object-cover object-bottom"
+            >
+        </div>
+    </div>
 
     {{-- GAMEPLAY --}}
+    @include('components.gameplay.partials.explore')
+    @include('components.gameplay.partials.combat')
 
-    @include('gameplay.partials.explore')
-    @include('gameplay.partials.combat')
-    @include('gameplay.partials.quests')
+    {{-- Quests & Stories Component --}}
+    <section id="quests-stories">
+        <x-quest :questImages="$questImages" />
+    </section>
 
     @include('components.trailer')
+
+    {{-- What's New Section --}}
+    <section id="update" class="w-full bg-black py-16 px-6 md:px-16 lg:px-24">
+        <div class="w-full flex justify-center mb-12">
+            <h2 class="font-display text-[40px] md:text-[64px] leading-tight text-[#F6F6F6]">
+                What’s new
+            </h2>
+        </div>
+
+        <div class="w-full max-w-[1280px] mx-auto flex flex-col gap-12">
+            <x-featured-news
+                version="Version 7.0 Out Now"
+                title="Everwinter Without Mercy"
+                description="Dear Traveler, new region Snezhnaya, Teyvat's seventh nation is now can be explored alongside wit new caracter, Odette and Aloysa will join your journey."
+                date="12 August 2026"
+                image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-featuredNews.png"
+            />
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                <x-news-card
+                    title="Character Trailer - Vodyanitsa"
+                    date="22 September 2026"
+                    image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-trailerVodyanista.png"
+                />
+
+                <x-news-card
+                    title="Character Trailer - Vesna"
+                    date="21 September 2026"
+                    image="https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/news-media/news-image-trailerVesna.png"
+                />
+            </div>
+        </div>
+    </section>
+
     @include('components.download')
 
-
-=======
-    @include('components.trailer')
-    @include('components.download')
-
->>>>>>> origin/develop
 @endsection

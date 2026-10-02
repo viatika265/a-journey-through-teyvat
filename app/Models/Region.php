@@ -22,9 +22,11 @@ class Region extends Model
         'element_id',
     ];
 
+    protected $table = 'regions';
+
     public function element(): BelongsTo
     {
-        return $this->belongsTo(Element::class);
+        return $this->belongsTo(Element::class, 'element_id');
     }
 
     public function characters(): HasMany
