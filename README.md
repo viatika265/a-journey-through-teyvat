@@ -26,15 +26,24 @@ The website is designed to provide an engaging user experience through modern we
 
 <img width="786" height="426" alt="image" src="https://github.com/user-attachments/assets/234d07e9-5838-4e2b-9531-416951c261a0" />
 
+## Region
+
+<img width="791" height="391" alt="image" src="https://github.com/user-attachments/assets/ad8a8d4c-fe70-4a6b-9610-c887fe1f7e58" />
+
+##Character
+
+<img width="795" height="395" alt="image" src="https://github.com/user-attachments/assets/94a92803-b060-4f3a-9db1-4860364dc64a" />
+
 ## Gameplay Section
 
 <img width="784" height="427" alt="image" src="https://github.com/user-attachments/assets/f413c403-55f7-49f0-9f6b-b9d2c4478781" />
+<img width="776" height="250" alt="image" src="https://github.com/user-attachments/assets/392b3f26-b885-4099-a29f-35d18cf10e5e" />
+<img width="789" height="293" alt="image" src="https://github.com/user-attachments/assets/b4c0471f-b2e6-493f-9407-9045675fc0be" />
+<img width="780" height="245" alt="image" src="https://github.com/user-attachments/assets/41293046-249b-43aa-88c5-02a3945b7b88" />
 
 ## News & Update
 
 (<img width="785" height="389" alt="image" src="https://github.com/user-attachments/assets/24b92d38-6536-4979-b760-b9f62abdb9e4" />
-
-  q
 
 ---
 
