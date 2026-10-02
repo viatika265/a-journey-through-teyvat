@@ -1,4 +1,4 @@
-<img width="1043" height="586" alt="image" src="https://github.com/user-attachments/assets/221b7dff-c920-41c3-bfb3-390e8d77ba79" /># A Journey Through Teyvat
+<img width="1043" height="586" alt="image" src="<img width="790" height="397" alt="image" src="https://github.com/user-attachments/assets/dcbc9305-fc3e-497a-b9f6-014e669871a1" />" /># A Journey Through Teyvat
 
 <p align="center">
   A fan-made interactive website inspired by the fantasy world of Genshin Impact.
@@ -20,19 +20,19 @@ The website is designed to provide an engaging user experience through modern we
 
 ## Homepage
 
-<img width="790" height="443" alt="image" src="https://github.com/user-attachments/assets/5d27f176-0777-46d7-a30a-6931a811bc2d" />
+<img width="790" height="443" alt="image" src="<img width="790" height="397" alt="image" src="https://github.com/user-attachments/assets/0ab050ed-3deb-4013-8e3f-1b7f08a9db49" />" />
 
 ## Teyvat Map
 
-![Teyvat Map Preview](<img width="786" height="426" alt="image" src="https://github.com/user-attachments/assets/234d07e9-5838-4e2b-9531-416951c261a0" />)
+<img width="786" height="426" alt="image" src="https://github.com/user-attachments/assets/234d07e9-5838-4e2b-9531-416951c261a0" />
 
 ## Gameplay Section
 
-![Gameplay Preview](<img width="784" height="427" alt="image" src="https://github.com/user-attachments/assets/f413c403-55f7-49f0-9f6b-b9d2c4478781" />)
+<img width="784" height="427" alt="image" src="https://github.com/user-attachments/assets/f413c403-55f7-49f0-9f6b-b9d2c4478781" />
 
 ## News & Update
 
-![News Preview](<img width="785" height="389" alt="image" src="https://github.com/user-attachments/assets/24b92d38-6536-4979-b760-b9f62abdb9e4" />)
+(<img width="785" height="389" alt="image" src="https://github.com/user-attachments/assets/24b92d38-6536-4979-b760-b9f62abdb9e4" />
 
   q
 
