@@ -199,7 +199,6 @@ a-journey-through-teyvat
 ├── resources
 │   ├── views
 │   │   ├── components
-│   │   ├── gameplay
 │   │   └── layouts
 │   │
 │   ├── css
