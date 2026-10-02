@@ -32,7 +32,7 @@ class GameplayExperienceSeeder extends Seeder
                 'title' => 'Climbing',
                 'slug' => 'climbing',
                 'description' => 'Climb mountains, cliffs, and other places to discover new paths.',
-                'media_url' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/sign/gameplay-media/explore/swimming/swimming.gif?token=eyJraWQiOiJjMTYwYzA0MS0zNTNkLTQ0NWMtOWIxNS1jZjEyYzkyMjBhMGIiLCJhbGciOiJIUzUxMiJ9.eyJ1cmwiOiJnYW1lcGxheS1tZWRpYS9leHBsb3JlL3N3aW1taW5nL3N3aW1taW5nLmdpZiIsInNjb3BlIjoiZG93bmxvYWQiLCJpYXQiOjE3OTA3NDQ5NDIsImV4cCI6MzE1NTM5MDc0NDk0Mn0.VxfS8Q6JGLJNHQ2JR_DJSUiKcT5lppEy3aIFlMtS-LMMGmstE2eykD10yU8-Dho0zc7VArhgK8L9WzhX4BwjvA',
+                'media_url' => 'https://grbirqasbpissybggxhq.supabase.co/storage/v1/object/public/gameplay-media/explore/climbing/memanjat.gif',
                 'media_type' => 'gif',
                 'order' => 3,
                 'is_active' => true,
