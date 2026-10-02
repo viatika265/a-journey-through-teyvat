@@ -77,10 +77,9 @@
 
     @yield('content')
 
-    <div class="w-full bg-white/5 backdrop-blur-md flex flex-col items-center pt-12 mt-5 md:mt-25">
-        <div class="flex flex-row gap-8 mb-2 md:mb-4">
+    <div id="site-footer" class="w-full bg-white/5 backdrop-blur-md flex flex-col items-center pt-12 md:mt-25 overflow-hidden">
 
-        <div class="flex flex-row gap-8 mb-2 md:mb-4">
+        <div class="w-[500px] flex flex-row mb-2 md:mb-4">
         <svg class="mx-auto w-[100px] sm:w-[100px] md:w-[150px] h-auto"
             viewBox="0 0 500 180"
             fill="none"
@@ -99,10 +98,10 @@
         </svg>
         </div>
 
-        <p class="font-body text-body-small text-white leading-relaxed mb-6">Copyright © HOYOVERSE. All Rights Reserved.</p>
+        <p id="site-footer" class="font-body text-body-small text-white leading-relaxed mb-6">Copyright © HOYOVERSE. All Rights Reserved.</p>
 
         
-        <p class="font-body text-body-small text-neutral-normal leading-relaxed">Presented by</p>
+        <p id="site-footer" class="font-body text-body-small text-neutral-normal leading-relaxed">Presented by</p>
         <svg class="mx-auto w-[100px] sm:w-[100px] md:w-[130px] h-auto mb-2 md:mb-4"
             viewBox="0 0 287 282" 
             fill="none" 
@@ -116,7 +115,7 @@
             </defs>
         </svg>
 
-        <p class="font-body text-body-small text-neutral-normal leading-relaxed pb-12 text-center">A Journey Through Teyvat is a fan-made website. <br>Website is not affiliated with miHoYo, all assets files are property of their original owners.</p>
+        <p id="site-footer" class="font-body text-body-small text-neutral-normal leading-relaxed pb-12 text-center">A Journey Through Teyvat is a fan-made website. <br>Website is not affiliated with miHoYo, all assets files are property of their original owners.</p>
 
     </div>
 
