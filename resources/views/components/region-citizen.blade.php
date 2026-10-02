@@ -63,6 +63,47 @@
         opacity: 1 !important;
         transform: scale(1.5) !important;
     }
+
+    .party-background::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 140px;
+
+    background: linear-gradient(
+        to bottom,
+        #000 0%,
+        rgba(0, 0, 0, 0.65) 35%,
+        rgba(0, 0, 0, 0.2) 75%,
+        transparent 100%
+    );
+
+    pointer-events: none;
+    z-index: 2;
+    }
+
+    .party-background::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 160px;
+
+        background: linear-gradient(
+            to top,
+            #000 0%,
+            rgba(0, 0, 0, 0.65) 35%,
+            rgba(0, 0, 0, 0.2) 75%,
+            transparent 100%
+        );
+
+        pointer-events: none;
+        z-index: 2;
+    }
+
+    .party-background .character-swiper {
+        position: relative;
+        z-index: 3;
+    }
 </style>
 
 
@@ -75,13 +116,15 @@
     >
 
         <!-- TITLE -->
-        <h2 class="font-display text-heading-3 md:text-heading-1 text-neutral-light mb-20 md:mb-30">
-            Meet the Citizen
-        </h2>
+        <div class="citizen-title">
+    <h2>
+        Meet the Citizen
+    </h2>
+</div>
 
 
         <!-- SWIPER -->
-        <div class="relative w-full py-6 xl:py-10 bg-cover" style=" background-image: url('{{ $region->party_background }}'); background-position: 100% 70%;">
+        <div class="party-background relative w-full py-6 xl:py-48 bg-cover" style=" background-image: url('{{ $region->party_background }}'); background-position: 100% 90%;">
             <div class="swiper character-swiper w-full max-w-[1319px] mx-auto overflow-visible">
                 <div class="swiper-wrapper h-[260px] md:h-[340px] xl:h-[420px]">
                     @foreach($region->characters as $character)
@@ -97,6 +140,7 @@
                     @endforeach
                 </div>
             </div>
+        </div>
 
             <!-- NAVIGATION -->
             <div class="flex items-center justify-center gap-4 mt-6 xl:mt-8">
@@ -134,7 +178,7 @@
                     </svg>
                 </button>
             </div>
-        </div>
+        
 
         <!-- CHARACTER INFORMATION -->
         <div class="mt-8 w-full max-w-[500px] text-center px-4">
@@ -306,3 +350,204 @@ document.addEventListener('DOMContentLoaded', function () {
 
 });
 </script>
+
+<style>
+    /* =====================================================
+   CITIZEN TITLE
+===================================================== */
+
+#citizen .citizen-title {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-bottom: 30px;
+    isolation: isolate;
+}
+
+#citizen .citizen-title::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 50%;
+    width: min(560px, 90%);
+    height: 120px;
+    transform: translate(-50%, -50%);
+
+    background: radial-gradient(
+        ellipse at center,
+        rgba(222,183,108,.11) 0%,
+        rgba(40,63,121,.055) 38%,
+        transparent 72%
+    );
+
+    filter: blur(12px);
+    pointer-events: none;
+}
+
+#citizen .citizen-title h2 {
+    position: relative;
+    display: inline-block;
+
+    margin: 0;
+    padding: 12px 28px 16px;
+
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 2.8rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+
+    animation:
+        citizenTitleShine 4s ease-in-out infinite,
+        citizenTitleEntrance .8s ease-out both;
+}
+
+/* SUBTITLE DI ATAS */
+#citizen .citizen-title h2::before {
+    content: "SOULS OF THE REGION";
+
+    display: block;
+    margin-bottom: 7px;
+
+    color: rgba(222,183,108,.82);
+    font-family: var(--font-body);
+    font-size: .72rem;
+    font-weight: 400;
+    letter-spacing: 5px;
+    line-height: 1.4;
+}
+
+/* GARIS EMAS */
+#citizen .citizen-title h2::after {
+    content: "";
+
+    display: block;
+    width: 145px;
+    height: 2px;
+
+    margin: 12px auto 0;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(222,183,108,.9) 25%,
+        rgba(252,248,240,.95) 50%,
+        rgba(222,183,108,.9) 75%,
+        transparent
+    );
+
+    box-shadow: 0 0 12px rgba(222,183,108,.35);
+
+    transform-origin: center;
+
+    animation: citizenTitleLineReveal 1s .25s ease-out both;
+}
+
+/* SUBTITLE DI BAWAH */
+#citizen .citizen-title::after {
+    content: "DISCOVER THE PEOPLE OF THIS REGION";
+
+    display: block;
+    margin-top: 2px;
+
+    color: rgba(246,246,246,.48);
+    font-family: var(--font-body);
+    font-size: .78rem;
+    letter-spacing: 2.5px;
+
+    animation: citizenSubtitleIn .9s .2s ease-out both;
+}
+
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+@keyframes citizenTitleShine {
+    0%, 100% {
+        text-shadow: 0 0 0 rgba(222,183,108,0);
+    }
+
+    50% {
+        text-shadow: 0 0 18px rgba(222,183,108,.22);
+    }
+}
+
+@keyframes citizenTitleEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+        filter: blur(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes citizenTitleLineReveal {
+    from {
+        transform: scaleX(.15);
+        opacity: 0;
+    }
+
+    to {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+@keyframes citizenSubtitleIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 600px) {
+
+    #citizen .citizen-title {
+        margin-bottom: 20px;
+    }
+
+    #citizen .citizen-title h2 {
+        padding: 10px 12px 14px;
+        font-size: 2.15rem;
+        letter-spacing: 1px;
+    }
+
+    #citizen .citizen-title h2::before {
+        font-size: .62rem;
+        letter-spacing: 3.5px;
+    }
+
+    #citizen .citizen-title::after {
+        font-size: .65rem;
+        letter-spacing: 1.5px;
+    }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+
+    #citizen .citizen-title h2,
+    #citizen .citizen-title h2::after,
+    #citizen .citizen-title::after {
+        animation: none !important;
+    }
+
+}
+</style>
