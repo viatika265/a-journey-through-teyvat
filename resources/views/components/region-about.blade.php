@@ -7,7 +7,7 @@
     </div>
 
     <div class="w-[50%] md:w-[65%] text-right absolute z-30 right-0 pr-10 md:pr-20">
-      <p class="font-body text-body-small md:text-heading-5 lg:text-heading-4 text-neutral-light">
+      <p class="font-body text-xs md:text-heading-5 lg:text-heading-4 text-neutral-light">
           {{ $region->long_description }}
       </p>
     </div>
