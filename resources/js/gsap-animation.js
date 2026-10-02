@@ -1,8 +1,8 @@
 import { gsap } from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(ScrollToPlugin, ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 console.log("GSAP berhasil dimuat:", gsap.version);
 
@@ -13,7 +13,54 @@ console.log("GSAP berhasil dimuat:", gsap.version);
 
 const hero = document.querySelector("#teyvat");
 
+const playHeroWiggle = (target) => {
+    if (!(target instanceof Element)) return;
+
+    const timers = target.__heroWiggleTimers || [];
+    timers.forEach(clearTimeout);
+
+    target.style.transformOrigin = "center center";
+    target.style.transform = "rotate(0deg)";
+
+    const steps = [
+        { angle: -0.9, delay: 0 },
+        { angle: 0.9, delay: 110 },
+        { angle: -0.5, delay: 120 },
+        { angle: 0, delay: 120 }
+    ];
+
+    const nextTimers = [];
+    let elapsed = 0;
+
+    steps.forEach(({ angle, delay }) => {
+        nextTimers.push(
+            setTimeout(() => {
+                target.style.transform = `rotate(${angle}deg)`;
+            }, elapsed)
+        );
+        elapsed += delay;
+    });
+
+    target.__heroWiggleTimers = nextTimers;
+};
+
+const animateHeroLogoGlow = (target, active = true) => {
+    if (!(target instanceof Element)) return;
+
+    gsap.to(target, {
+        scale: active ? 1.04 : 1,
+        filter: active
+            ? "drop-shadow(0 0 10px rgba(246, 246, 246, 0.72)) drop-shadow(0 0 18px rgba(222, 183, 108, 0.7))"
+            : "none",
+        duration: 0.22,
+        ease: "power2.out",
+        overwrite: "auto"
+    });
+};
+
 if (hero) {
+    gsap.set(hero, { position: "relative" });
+
     const heroLogo = hero.querySelector("svg");
     const heroTitle = hero.querySelector("h1");
     const heroSubtitle = hero.querySelector("p");
@@ -30,12 +77,12 @@ if (hero) {
             heroLogo,
             {
                 opacity: 0,
-                y: -40,
+                y: 50,
                 scale: 0.9
             },
             {
                 opacity: 1,
-                y: 28,
+                y: 0,
                 scale: 1,
                 duration: 1,
                 ease: "power3.out"
@@ -48,15 +95,17 @@ if (hero) {
             heroTitle,
             {
                 opacity: 0,
-                y: 50
+                y: 28,
+                scale: 0.96
             },
             {
                 opacity: 1,
                 y: 0,
-                duration: 1,
+                scale: 1,
+                duration: 0.8,
                 ease: "power3.out"
             },
-            "-=0.6"
+            "-=0.7"
         );
     }
 
@@ -95,6 +144,54 @@ if (hero) {
             "-=0.35"
         );
     }
+
+    if (heroLogo) {
+        heroLogo.addEventListener("pointerenter", () => {
+            playHeroWiggle(heroLogo);
+            animateHeroLogoGlow(heroLogo, true);
+        });
+        heroLogo.addEventListener("pointerleave", () => {
+            animateHeroLogoGlow(heroLogo, false);
+        });
+    }
+
+    if (heroTitle) {
+        heroTitle.addEventListener("pointerenter", () => {
+            gsap.killTweensOf(heroTitle, "rotate");
+            gsap.timeline()
+                .fromTo(
+                    heroTitle,
+                    { rotate: 0 },
+                    { rotate: -1.2, duration: 0.12, ease: "sine.inOut" }
+                )
+                .to(heroTitle, {
+                    rotate: 1.2,
+                    duration: 0.16,
+                    ease: "sine.inOut"
+                })
+                .to(heroTitle, {
+                    rotate: -0.7,
+                    duration: 0.12,
+                    ease: "sine.inOut"
+                })
+                .to(heroTitle, {
+                    rotate: 0,
+                    duration: 0.16,
+                    ease: "sine.out"
+                });
+        });
+    }
+
+    ScrollTrigger.create({
+        trigger: hero,
+        start: "top top",
+        end: "bottom top",
+        onEnterBack: () => {
+            heroTimeline.restart();
+            if (heroLogo) playHeroWiggle(heroLogo);
+            if (heroTitle) playHeroWiggle(heroTitle);
+        }
+    });
 
 
     // ----------------------------------------------
@@ -151,7 +248,7 @@ if (hero) {
                 trigger: hero,
                 start: "top top",
                 end: "bottom top",
-                scrub: 1
+                scrub: 0.2
             }
         });
     }
@@ -162,27 +259,23 @@ if (hero) {
     // ----------------------------------------------
 
     if (exploreButton) {
-
-        // Hapus behavior inline lama secara aman
         exploreButton.removeAttribute("onclick");
 
         exploreButton.addEventListener("click", (event) => {
             event.preventDefault();
 
             const story = document.querySelector("#story");
-
             if (!story) return;
 
+            const targetY = Math.max(0, story.getBoundingClientRect().top + window.scrollY - 28);
+
             gsap.to(window, {
-                duration: 1.1,
-                scrollTo: {
-                    y: story,
-                    offsetY: 0
-                },
-                ease: "power3.inOut"
+                duration: 1.6,
+                scrollTo: { y: targetY },
+                ease: "none",
+                overwrite: true
             });
         });
-
 
         // Hover
         exploreButton.addEventListener("mouseenter", () => {
@@ -233,10 +326,89 @@ if (hero) {
 // REGION SECTION
 // ==================================================
 
+const story = document.querySelector("#story");
+
+if (story) {
+    gsap.set(story, { position: "relative" });
+}
+
 const regionsSection = document.querySelector("#region-map");
 
 if (regionsSection) {
     const regionPins = regionsSection.querySelectorAll(".region-pin");
+    const regionCardIcons = document.querySelectorAll(
+        "#card-icon-1, #card-icon-2, #card-icon-3"
+    );
+    const regionProfileImage = document.querySelector("#card-image");
+
+    if (regionProfileImage) {
+        regionProfileImage.addEventListener("pointerenter", () => {
+            gsap.to(regionProfileImage, {
+                scale: 1.05,
+                transformOrigin: "center center",
+                duration: 0.25,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+
+        regionProfileImage.addEventListener("pointerleave", () => {
+            gsap.to(regionProfileImage, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+    }
+
+    regionCardIcons.forEach((icon) => {
+        icon.addEventListener("pointerenter", () => {
+            gsap.to(icon, {
+                scale: 1.16,
+                filter: "drop-shadow(0 0 8px rgba(222, 183, 108, 0.95)) drop-shadow(0 0 14px rgba(246, 246, 246, 0.7))",
+                transformOrigin: "center center",
+                duration: 0.2,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+
+        icon.addEventListener("pointerleave", () => {
+            gsap.to(icon, {
+                scale: 1,
+                filter: "none",
+                duration: 0.24,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+    });
+
+    const discoverRegionButton = document.querySelector("#card-link");
+
+    if (discoverRegionButton) {
+        discoverRegionButton.addEventListener("pointerenter", () => {
+            gsap.to(discoverRegionButton, {
+                scale: 1.06,
+                boxShadow: "0 0 12px rgba(222, 183, 108, 0.9), 0 0 22px rgba(246, 246, 246, 0.55)",
+                transformOrigin: "center center",
+                duration: 0.2,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+
+        discoverRegionButton.addEventListener("pointerleave", () => {
+            gsap.to(discoverRegionButton, {
+                scale: 1,
+                boxShadow: "none",
+                duration: 0.24,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+    }
 
     if (regionPins.length > 0) {
         gsap.fromTo(
@@ -313,6 +485,94 @@ if (regionsSection) {
 
 
 // ==================================================
+// DOWNLOAD PARTY CHARACTERS
+// ==================================================
+
+const downloadSection = document.querySelector("#download");
+const partyCharacters = downloadSection?.querySelectorAll(".grid > img");
+
+if (
+    downloadSection &&
+    partyCharacters?.length &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+    const partyFloat = gsap.timeline({ paused: true, repeat: -1, yoyo: true });
+
+    partyCharacters.forEach((character, index) => {
+        partyFloat.to(
+            character,
+            {
+                y: -10,
+                rotation: index % 2 === 0 ? 0.6 : -0.6,
+                duration: 1.5 + index * 0.12,
+                ease: "sine.inOut"
+            },
+            index * 0.12
+        );
+
+        character.addEventListener("pointerenter", () => {
+            gsap.to(character, {
+                scale: 1.045,
+                filter: "brightness(1.08) saturate(1.12)",
+                duration: 0.24,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+
+            partyCharacters.forEach((otherCharacter) => {
+                if (otherCharacter === character) return;
+
+                gsap.to(otherCharacter, {
+                    autoAlpha: 0.58,
+                    duration: 0.24,
+                    ease: "power2.out",
+                    overwrite: "auto"
+                });
+            });
+        });
+
+        character.addEventListener("pointerleave", () => {
+            gsap.to(character, {
+                scale: 1,
+                filter: "none",
+                duration: 0.3,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+
+            gsap.to(partyCharacters, {
+                autoAlpha: 1,
+                duration: 0.3,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+    });
+
+    gsap.fromTo(
+        partyCharacters,
+        { autoAlpha: 0, y: 34, scale: 0.97 },
+        {
+            autoAlpha: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.7,
+            stagger: 0.14,
+            ease: "power3.out",
+            onStart: () => partyFloat.pause(),
+            onComplete: () => partyFloat.restart(),
+            onReverseComplete: () => partyFloat.pause(0),
+            scrollTrigger: {
+                trigger: downloadSection,
+                start: "top 75%",
+                toggleActions: "play reverse play reverse"
+            }
+        }
+    );
+}
+
+
+// ==================================================
 // SECTION REVEALS
 // ==================================================
 
@@ -329,6 +589,10 @@ revealSections.forEach(({ section, targets }) => {
     if (!container || !elements?.length) return;
 
     elements.forEach((element) => {
+        const isStoryEnding =
+            section === "#story" && element.textContent.trim() === "a World Awaits";
+        if (isStoryEnding) return;
+
         const isStoryDecoration =
             section === "#story" && element.tagName === "svg";
 
@@ -358,6 +622,158 @@ revealSections.forEach(({ section, targets }) => {
         );
     });
 });
+
+
+// ==================================================
+// NAVIGATION ENTRANCE
+// ==================================================
+
+const navLinks = gsap.utils.toArray("#nav-menu .nav-link");
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    gsap.fromTo(
+        navLinks,
+        { autoAlpha: 0, y: -14 },
+        {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.45,
+            stagger: 0.12,
+            delay: 0.15,
+            ease: "power3.out"
+        }
+    );
+
+    navLinks.forEach((link) => {
+        const animateLink = (scale, textShadow) => {
+            gsap.to(link, {
+                scale,
+                textShadow,
+                duration: 0.16,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        };
+
+        link.addEventListener("pointerenter", () =>
+            animateLink(
+                1.08,
+                "0 0 8px rgba(246, 246, 246, 0.72), 0 0 14px rgba(222, 183, 108, 0.58)"
+            )
+        );
+        link.addEventListener("pointerleave", () => animateLink(1, "none"));
+
+        link.addEventListener("pointerdown", () => {
+            animateLink(
+                1.13,
+                "0 0 10px rgba(246, 246, 246, 0.8), 0 0 17px rgba(222, 183, 108, 0.7)"
+            );
+        });
+
+        link.addEventListener("pointerup", () =>
+            animateLink(
+                1.08,
+                "0 0 8px rgba(246, 246, 246, 0.72), 0 0 14px rgba(222, 183, 108, 0.58)"
+            )
+        );
+        link.addEventListener("pointercancel", () => {
+            animateLink(
+                link.matches(":hover") ? 1.08 : 1,
+                link.matches(":hover")
+                    ? "0 0 8px rgba(246, 246, 246, 0.72), 0 0 14px rgba(222, 183, 108, 0.58)"
+                    : "none"
+            );
+        });
+    });
+}
+
+
+// ==================================================
+// INTERACTIVE HEADINGS
+// ==================================================
+
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const extraWiggleTitles = [
+        ...document.querySelectorAll("#story p, #explore p")
+    ].filter((paragraph) =>
+        ["Where The Story Begin", "Quests & Stories"].includes(
+            paragraph.textContent.trim()
+        )
+    );
+    const heroTitle = document.querySelector("#teyvat h1");
+    const heroLogo = document.querySelector("#teyvat svg");
+    const versionLabel = [...document.querySelectorAll("#whats-new h4")].find(
+        (heading) => heading.textContent.trim() === "Version 7.0 Out Now"
+    );
+    const wiggleTargets = [
+        ...[...document.querySelectorAll("h1, h2, h3")].filter(
+            (heading) => heading !== heroTitle
+        ),
+        ...extraWiggleTitles,
+        ...(versionLabel ? [versionLabel] : [])
+    ];
+
+    if (heroLogo) {
+        heroLogo.addEventListener("pointerenter", () => playHeroWiggle(heroLogo));
+    }
+
+    wiggleTargets.forEach((heading) => {
+        heading.addEventListener("pointerenter", () => {
+            gsap.killTweensOf(heading, "rotate");
+
+            gsap.timeline()
+                .fromTo(
+                    heading,
+                    { rotate: 0 },
+                    { rotate: -1.2, duration: 0.1, ease: "sine.inOut" }
+                )
+                .to(heading, {
+                    rotate: 1.2,
+                    duration: 0.14,
+                    ease: "sine.inOut"
+                })
+                .to(heading, {
+                    rotate: -0.6,
+                    duration: 0.12,
+                    ease: "sine.inOut"
+                })
+                .to(heading, {
+                    rotate: 0,
+                    duration: 0.14,
+                    ease: "sine.out"
+                });
+        });
+    });
+
+    const interactiveText = [
+        ...document.querySelectorAll("p, h1, h2, h3"),
+        ...(versionLabel ? [versionLabel] : [])
+    ];
+
+    interactiveText.forEach((text) => {
+        text.addEventListener("pointerenter", () => {
+            gsap.to(text, {
+                scale: 1.025,
+                textShadow:
+                    "0 0 10px rgba(246, 246, 246, 0.72), 0 0 18px rgba(222, 183, 108, 0.58)",
+                transformOrigin: "center center",
+                duration: 0.22,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+
+        text.addEventListener("pointerleave", () => {
+            gsap.to(text, {
+                scale: 1,
+                textShadow: "none",
+                duration: 0.24,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+    });
+}
 
 
 // ==================================================

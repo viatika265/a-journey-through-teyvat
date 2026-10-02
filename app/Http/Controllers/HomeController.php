@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Region;
 use App\Models\Character;
+use App\Models\GameplayExperience;
+use App\Models\Element;
+use App\Models\CombatReaction;
+use App\Models\CombatState;
+use App\Models\Quest;
 
 class HomeController extends Controller
 {
@@ -60,9 +65,13 @@ class HomeController extends Controller
                 'color' => '#131536',
                 'gradients' => 'linear-gradient(180deg, #032C6E 13%, #AA9148 40%, #002595 75%, #000281 100%)',
             ],
+
         ];
 
+
+
         $regions = $regions->map(function ($region) use ($coordinates) {
+            
             return [
                 'name' => $region->name,
                 'slug' => $region->slug,
@@ -86,12 +95,86 @@ class HomeController extends Controller
             ];
         });
 
+
+
+
         $characters = Character::whereNotNull('additional_image')
             ->where('additional_image', '!=', '')
             ->inRandomOrder()
             ->take(4)
             ->get();
 
-        return view('home', compact('regions', 'characters'));
+
+
+        // Gameplay - Explore
+
+        $experiences = GameplayExperience::where('is_active', true)
+            ->orderBy('order')
+            ->get();
+
+
+
+        // Gameplay - Elemental Combat
+
+        $elements = Element::orderBy('id')
+            ->get();
+
+
+
+        $combatReactions = CombatReaction::with([
+
+            'combinations.elementOne',
+            'combinations.elementTwo',
+            'combinations.stateOne',
+            'combinations.stateTwo',
+
+        ])
+
+        ->where('is_active', true)
+
+        ->orderBy('order')
+
+        ->get();
+
+
+
+        $combatStates = CombatState::all();
+
+
+
+        // Gameplay - Quest
+
+        $quests = Quest::with([
+
+            'region',
+            'scenes',
+
+        ])
+
+        ->where('is_active', true)
+
+        ->orderBy('order')
+
+        ->get();
+
+        $questImages = $quests
+    ->flatMap(function ($quest) {
+        return $quest->scenes->pluck('image');
+    })
+    ->filter()
+    ->values()
+    ->all();
+
+        return view('home', compact(
+           'regions',
+           'characters',
+           'experiences',
+           'elements',
+           'combatReactions',
+           'combatStates',
+           'quests',
+           'questImages'
+        ));
+
     }
 }

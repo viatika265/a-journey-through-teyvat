@@ -9,21 +9,19 @@ return new class extends Migration
 
     public function up(): void
     {
-        Schema::create('elements', function (Blueprint $table) {
+        Schema::create('combat_reactions', function (Blueprint $table) {
 
             $table->id();
 
             $table->string('name');
 
-            $table->string('slug')->unique();
+            $table->string('category');
 
-            $table->text('icon')->nullable();
+            $table->text('description')->nullable();
 
-            // GIF / media element
-            $table->text('media_url')->nullable();
+            $table->unsignedInteger('order')->default(0);
 
-            $table->string('media_type')
-                ->nullable();
+            $table->boolean('is_active')->default(true);
 
             $table->timestamps();
 
@@ -33,7 +31,7 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('elements');
+        Schema::dropIfExists('combat_reactions');
     }
 
 };

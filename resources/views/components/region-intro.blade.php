@@ -1,15 +1,15 @@
 <section id="region-intro">
-  <div class="relative min-h-[140vh] bg-no-repeat bg-cover"
+  <div class="relative min-h-screen lg:min-h-[140vh] bg-no-repeat bg-cover"
         style=" background-image: url('{{ $region->background_image }}')">
 
         <div class="absolute inset-0 bg-black/10 z-0"></div>
         <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/100 to-transparent"></div>
 
         <div class="min-h-screen flex flex-col items-center justify-center space-y-6 relative z-10">
-          <div class="w-100 h-100 bg-contain bg-no-repeat bg-center"
+          <div class="w-50 h-50 md:w-70 md:h-70 lg:w-100 lg:h-100 bg-contain bg-no-repeat bg-center"
               style="background-image: url('{{ $region->icon }}');"></div>
 
-          <h1 class="font-display text-display text-neutral-light">
+          <h1 class="font-display text-heading-1 md:text-heading-1 lg:text-display text-neutral-light">
               {{ $region->name }}
           </h1>
 
@@ -23,7 +23,7 @@
             <line y1="-1.5" x2="26.6559" y2="-1.5" transform="matrix(0.803653 -0.595099 0.705499 0.708711 1015.71 19.8441)" stroke="#DEB76C" stroke-width="3"/>
           </svg>
 
-          <p class="font-display text-heading-2 text-neutral-light">
+          <p class="font-display text-heading-3 md:text-heading-3 lg:text-heading-2 text-neutral-light">
             {{ $region->title }}
           </p>
 

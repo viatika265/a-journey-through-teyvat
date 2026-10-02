@@ -8,14 +8,13 @@ class RegionController extends Controller
 {
     public function show(string $slug)
     {
-        $region = Region::where('slug', $slug)->firstOrFail();
+        $region = Region::with([
+            'characters.element',
+            'characters.weapon',
+            'characters.artifact',
+        ])->where('slug', $slug)->firstOrFail();
 
-        $characters = $region->characters;
-
-        return view('regions.show', compact(
-            'region',
-            'characters'
-        ));
+        return view('region', compact('region'));
     }
 
     public function visited($slug)

@@ -32,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const vw = viewport.clientWidth;
         const vh = viewport.clientHeight;
 
-        // COVER: map selalu menutupi seluruh viewport
         scale = Math.max(vw / naturalW, vh / naturalH);
     }
 
@@ -54,7 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     viewport.addEventListener("pointerdown", (event) => {
-        // Jangan mulai drag ketika user berinteraksi dengan card.
         if (event.target.closest("#region-card")) return;
 
         isDragging = true;
@@ -97,8 +95,6 @@ document.addEventListener("DOMContentLoaded", () => {
         canvas.classList.remove("cursor-grabbing");
         canvas.classList.add("cursor-grab");
 
-        // Kalau tidak benar-benar drag dan yang ditekan adalah pin,
-        // perlakukan sebagai klik untuk membuka card.
         if (!hasMoved && activePin) {
             if (typeof openCard === "function") {
                 openCard(activePin);
@@ -139,14 +135,12 @@ document.addEventListener("DOMContentLoaded", () => {
         map.addEventListener("load", initializeMap, { once: true });
     }
 
-    // Recalculate scale setiap resize.
     window.addEventListener("resize", () => {
         calculateScale();
         clampPosition();
         updateMap();
     });
 
-    // Double click digunakan untuk mendapatkan koordinat asli pada map.
     viewport.addEventListener("dblclick", (event) => {
         const rect = canvas.getBoundingClientRect();
         const currentScale = rect.width / canvas.offsetWidth;
@@ -161,4 +155,219 @@ document.addEventListener("DOMContentLoaded", () => {
             `left: ${Math.round(originalX)}px; top: ${Math.round(originalY)}px;`
         );
     });
+});
+
+// EXPLORE CAROUSEL
+document.addEventListener("DOMContentLoaded", () => {
+    const carousel = document.getElementById("explore-carousel");
+    const cards = document.querySelectorAll(".explore-card");
+    const buttons = document.querySelectorAll(".explore-indicator button");
+
+    if (!carousel) return;
+
+    function goSlide(index) {
+        const card = cards[index];
+
+        if (card) {
+            carousel.scrollTo({
+                left: card.offsetLeft - carousel.offsetLeft,
+                behavior: "smooth",
+            });
+        }
+    }
+
+    buttons.forEach((button, index) => {
+        button.onclick = () => {
+            goSlide(index);
+        };
+    });
+
+    function update() {
+        let active = 0;
+        let distance = Infinity;
+
+        cards.forEach((card, index) => {
+            const diff = Math.abs(
+                card.offsetLeft - carousel.scrollLeft
+            );
+
+            if (diff < distance) {
+                distance = diff;
+                active = index;
+            }
+        });
+
+        buttons.forEach((btn, index) => {
+            btn.classList.toggle("active", index === active);
+        });
+    }
+
+    carousel.addEventListener("scroll", update);
+    update();
+});
+
+// ELEMENTAL COMBAT
+document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById("combat-elements");
+    const items = [...document.querySelectorAll(".combat-element")];
+    const dots = [...document.querySelectorAll(".combat-dot")];
+    const reactions = [...document.querySelectorAll(".combat-reaction")];
+    const next = document.getElementById("combat-next");
+    const prev = document.getElementById("combat-prev");
+    const elementName = document.getElementById("active-element-name");
+    const media = document.getElementById("combat-image");
+
+    if (!container || items.length === 0) return;
+
+    let activeIndex = Math.min(5, items.length - 1);
+    let animationFrame = null;
+
+    function updateReaction(elementId) {
+        if (animationFrame !== null) {
+            cancelAnimationFrame(animationFrame);
+        }
+
+        const matchedReactions = [];
+
+        reactions.forEach((reaction) => {
+            const name = reaction.dataset.reactionName;
+            let show = false;
+
+            if (elementId == 1) {
+                show = name === "Swirl";
+            } else if (elementId == 2) {
+                show = name === "Crystallize";
+            } else if (elementId == 3) {
+                show =
+                    name === "Overloaded" ||
+                    name === "Electro-Charged" ||
+                    name === "Superconduct" ||
+                    name === "Quicken" ||
+                    name === "Aggravate";
+            } else if (elementId == 4) {
+                show =
+                    name === "Burning" ||
+                    name === "Bloom" ||
+                    name === "Quicken" ||
+                    name === "Spread";
+            } else if (elementId == 5) {
+                show =
+                    name === "Vaporize" ||
+                    name === "Electro-Charged" ||
+                    name === "Bloom" ||
+                    name === "Frozen";
+            } else if (elementId == 6) {
+                show =
+                    name === "Vaporize" ||
+                    name === "Melt" ||
+                    name === "Overloaded" ||
+                    name === "Burning";
+            } else if (elementId == 7) {
+                show =
+                    name === "Melt" ||
+                    name === "Superconduct" ||
+                    name === "Frozen";
+            }
+
+            reaction.classList.remove("show");
+
+            if (show) {
+                matchedReactions.push(reaction);
+            }
+        });
+
+        animationFrame = requestAnimationFrame(() => {
+            matchedReactions.forEach((reaction) => {
+                reaction.classList.add("show");
+            });
+
+            animationFrame = null;
+        });
+    }
+
+    function render() {
+        const total = items.length;
+        const order = [];
+
+        for (let offset = -3; offset <= 3; offset++) {
+            const index = (activeIndex + offset + total) % total;
+
+            if (!order.includes(index)) {
+                order.push(index);
+            }
+        }
+
+        container.innerHTML = "";
+
+        order.forEach((index) => {
+            const item = items[index];
+
+            item.classList.toggle(
+                "active",
+                index === activeIndex
+            );
+
+            container.appendChild(item);
+        });
+
+        dots.forEach((dot, index) => {
+            dot.classList.toggle(
+                "active",
+                index === activeIndex
+            );
+        });
+
+        const activeElement = items[activeIndex];
+
+        if (!activeElement) return;
+
+        const name = activeElement.dataset.elementName;
+        const id = activeElement.dataset.elementId;
+        const gif = activeElement.dataset.media;
+
+        if (elementName) {
+            elementName.textContent = name;
+        }
+
+        if (media && gif) {
+            media.src = gif;
+            media.alt = name + " Elemental Combat";
+        }
+
+        updateReaction(id);
+    }
+
+    if (next) {
+        next.addEventListener("click", () => {
+            activeIndex = (activeIndex + 1) % items.length;
+            render();
+        });
+    }
+
+    if (prev) {
+        prev.addEventListener("click", () => {
+            activeIndex =
+                (activeIndex - 1 + items.length) % items.length;
+
+            render();
+        });
+    }
+
+    items.forEach((item, index) => {
+        item.addEventListener("click", () => {
+            activeIndex = index;
+            render();
+        });
+    });
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener("click", () => {
+            if (index < items.length) {
+                activeIndex = index;
+                render();
+            }
+        });
+    });
+
+    render();
 });
