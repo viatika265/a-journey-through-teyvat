@@ -21,7 +21,7 @@
     {{-- REGION MAP --}}
     @include('components.region-map')
 
-
+    @include('components.why-genshin')
 
     {{-- GAMEPLAY --}}
 
