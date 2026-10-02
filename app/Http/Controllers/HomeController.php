@@ -16,6 +16,7 @@ class HomeController extends Controller
     {
         $regions = Region::all();
 
+        // Koordinat dan tampilan region pada Teyvat Map
         $coordinates = [
             'Mondstadt' => [
                 'x' => 4353,
@@ -65,13 +66,12 @@ class HomeController extends Controller
                 'color' => '#131536',
                 'gradients' => 'linear-gradient(180deg, #032C6E 13%, #AA9148 40%, #002595 75%, #000281 100%)',
             ],
-
         ];
 
-
-
+        // Tambahkan koordinat dan data terkait ke setiap region
         $regions = $regions->map(function ($region) use ($coordinates) {
-            
+            $coordinate = $coordinates[$region->name] ?? [];
+
             return [
                 'name' => $region->name,
                 'slug' => $region->slug,
@@ -80,23 +80,16 @@ class HomeController extends Controller
                 'icon' => $region->icon,
                 'emblem' => $region->icon,
 
-                // Masukkan icon element yang sudah dikonversi
                 'element_icon' => $region->element->icon ?? null,
                 'element_name' => $region->element->name ?? null,
-
-                // masukkan archon 
                 'archon_icon' => $region->archon_icon ?? null,
 
-                'x' => $coordinates[$region->name]['x'],
-                'y' => $coordinates[$region->name]['y'],
-                'color' => $coordinates[$region->name]['color'],
-                'gradients' => $coordinates[$region->name]['gradients'],
-
+                'x' => $coordinate['x'] ?? 0,
+                'y' => $coordinate['y'] ?? 0,
+                'color' => $coordinate['color'] ?? '#fff',
+                'gradients' => $coordinate['gradients'] ?? '',
             ];
         });
-
-
-
 
         $characters = Character::whereNotNull('additional_image')
             ->where('additional_image', '!=', '')
@@ -104,77 +97,52 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-
-
         // Gameplay - Explore
-
         $experiences = GameplayExperience::where('is_active', true)
             ->orderBy('order')
             ->get();
 
-
-
         // Gameplay - Elemental Combat
-
-        $elements = Element::orderBy('id')
-            ->get();
-
-
+        $elements = Element::orderBy('id')->get();
 
         $combatReactions = CombatReaction::with([
-
             'combinations.elementOne',
             'combinations.elementTwo',
             'combinations.stateOne',
             'combinations.stateTwo',
-
         ])
-
-        ->where('is_active', true)
-
-        ->orderBy('order')
-
-        ->get();
-
-
+            ->where('is_active', true)
+            ->orderBy('order')
+            ->get();
 
         $combatStates = CombatState::all();
 
-
-
         // Gameplay - Quest
-
         $quests = Quest::with([
-
             'region',
             'scenes',
-
         ])
-
-        ->where('is_active', true)
-
-        ->orderBy('order')
-
-        ->get();
+            ->where('is_active', true)
+            ->orderBy('order')
+            ->get();
 
         $questImages = $quests
-    ->flatMap(function ($quest) {
-        return $quest->scenes->pluck('image');
-    })
-    ->filter()
-    ->values()
-    ->all();
+            ->flatMap(function ($quest) {
+                return $quest->scenes->pluck('image');
+            })
+            ->filter()
+            ->values()
+            ->all();
 
         return view('home', compact(
-           'regions',
-           'characters',
-           'experiences',
-           'elements',
-           'combatReactions',
-           'combatStates',
-           'quests',
-           'questImages'
+            'regions',
+            'characters',
+            'experiences',
+            'elements',
+            'combatReactions',
+            'combatStates',
+            'quests',
+            'questImages'
         ));
-
     }
 }

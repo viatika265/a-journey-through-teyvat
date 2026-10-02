@@ -485,6 +485,88 @@ if (regionsSection) {
 
 
 // ==================================================
+// REGION CHARACTER FLOAT
+// ==================================================
+
+const citizenSection = document.querySelector("#citizen");
+const regionCharacterPortraits = citizenSection?.querySelectorAll(
+    ".character-swiper .swiper-slide img"
+);
+
+if (
+    citizenSection &&
+    regionCharacterPortraits?.length &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+    gsap.set(regionCharacterPortraits, { translate: "0px 0px" });
+
+    const characterFloat = gsap.timeline({ paused: true, repeat: -1, yoyo: true });
+
+    regionCharacterPortraits.forEach((portrait, index) => {
+        characterFloat.to(
+            portrait,
+            {
+                translate: "0px -10px",
+                duration: 1.15 + (index % 3) * 0.08,
+                ease: "sine.inOut"
+            },
+            index * 0.14
+        );
+    });
+
+    ScrollTrigger.create({
+        trigger: citizenSection,
+        start: "top 85%",
+        end: "bottom top",
+        onEnter: () => characterFloat.play(),
+        onEnterBack: () => characterFloat.play(),
+        onLeave: () => characterFloat.pause(),
+        onLeaveBack: () => characterFloat.pause(0)
+    });
+}
+
+
+// ==================================================
+// ELEMENTAL ICON FLOAT
+// ==================================================
+
+const combatSection = document.querySelector("#elemental-combat");
+const combatIcons = combatSection?.querySelectorAll(".combat-element-icon");
+
+if (
+    combatSection &&
+    combatIcons?.length &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+    gsap.set(combatIcons, { translate: "0px 0px" });
+
+    const combatIconFloat = gsap.timeline({ paused: true, repeat: -1, yoyo: true });
+
+    combatIcons.forEach((icon, index) => {
+        combatIconFloat.to(
+            icon,
+            {
+                translate: "0px -10px",
+                duration: 1.15 + (index % 3) * 0.08,
+                ease: "sine.inOut"
+            },
+            index * 0.14
+        );
+    });
+
+    ScrollTrigger.create({
+        trigger: combatSection,
+        start: "top 85%",
+        end: "bottom top",
+        onEnter: () => combatIconFloat.play(),
+        onEnterBack: () => combatIconFloat.play(),
+        onLeave: () => combatIconFloat.pause(),
+        onLeaveBack: () => combatIconFloat.pause(0)
+    });
+}
+
+
+// ==================================================
 // DOWNLOAD PARTY CHARACTERS
 // ==================================================
 
@@ -705,6 +787,57 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const versionLabel = [...document.querySelectorAll("#whats-new h4")].find(
         (heading) => heading.textContent.trim() === "Version 7.0 Out Now"
     );
+    const cloudDividerTitle = document.querySelector(".pointer-events-none > h2");
+    const combatTitle = document.querySelector("#elemental-combat .combat-title");
+
+    if (combatTitle) {
+        combatTitle.addEventListener("pointerenter", () => {
+            gsap.to(combatTitle, {
+                scale: 1.025,
+                filter: "drop-shadow(0 0 8px rgba(222, 183, 108, 0.72)) drop-shadow(0 0 14px rgba(246, 246, 246, 0.48))",
+                transformOrigin: "center center",
+                duration: 0.22,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+
+        combatTitle.addEventListener("pointerleave", () => {
+            gsap.to(combatTitle, {
+                scale: 1,
+                filter: "none",
+                duration: 0.24,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+    }
+
+    if (cloudDividerTitle) {
+        gsap.set(cloudDividerTitle, {
+            pointerEvents: "auto",
+            top: "50%",
+            right: "auto",
+            bottom: "auto",
+            left: "50%",
+            width: "max-content",
+            height: "auto",
+            xPercent: -50,
+            yPercent: -50
+        });
+    }
+
+    const standaloneTextSpans = [...document.querySelectorAll("span")].filter(
+        (span) =>
+            span.textContent.trim() &&
+            !span.childElementCount &&
+            !span.closest("p, h1, h2, h3, h4, h5, h6") &&
+            !span.matches(
+                ".wg-eyebrow-line, .wg-foot-icon, .wg-caption-star, .wg-card-spark, .wg-top-orbit, .wg-top-ring, .wg-top-star, .wg-top-spark, .wg-branch-dot, .wg-branch-leaf"
+            ) &&
+            !span.closest('[aria-hidden="true"]')
+    );
+
     const wiggleTargets = [
         ...[...document.querySelectorAll("h1, h2, h3")].filter(
             (heading) => heading !== heroTitle
@@ -746,8 +879,9 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     });
 
     const interactiveText = [
-        ...document.querySelectorAll("p, h1, h2, h3"),
-        ...(versionLabel ? [versionLabel] : [])
+        ...document.querySelectorAll("p, h1, h2, h3, h4, h5, h6"),
+        ...standaloneTextSpans,
+        ...(cloudDividerTitle ? [cloudDividerTitle] : [])
     ];
 
     interactiveText.forEach((text) => {

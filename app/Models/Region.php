@@ -11,17 +11,24 @@ class Region extends Model
     protected $fillable = [
         'name',
         'slug',
-        'element',
-        'description',
-        'landmark',
-        'image_path',
+        'title',
+        'short_description',
+        'long_description',
+        'card_image',
+        'background_image',
+        'landmark_image',
+        'icon',
+        'archon_icon',
+        'element_id',
     ];
+
     protected $table = 'regions';
 
-    public function element()
+    public function element(): BelongsTo
     {
         return $this->belongsTo(Element::class, 'element_id');
     }
+
     public function characters(): HasMany
     {
         return $this->hasMany(Character::class);

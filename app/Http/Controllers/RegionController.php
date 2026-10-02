@@ -14,7 +14,12 @@ class RegionController extends Controller
             'characters.artifact',
         ])->where('slug', $slug)->firstOrFail();
 
-        return view('region', compact('region'));
+        $characters = $region->characters;
+
+        return view('region', compact(
+            'region',
+            'characters'
+        ));
     }
 
     public function visited($slug)

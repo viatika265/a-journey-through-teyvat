@@ -29,12 +29,32 @@
             <div 
                 id="nav-menu" 
                 class="hidden absolute top-full left-0 w-full bg-black/80 backdrop-blur-md flex-col items-center gap-6 py-6 border-t border-white/10 md:static md:flex md:flex-row md:w-full md:justify-center md:bg-transparent md:border-none md:py-5 md:gap-10 font-body text-heading-5 text-neutral-light">
-                <a href="/#teyvat" class="nav-link" data-section="teyvat">Home</a>
-                <a href="/#region-map" class="nav-link" data-section="region-map">Teyvat Map</a>
-                <a href="/#explore" class="nav-link" data-section="explore">Explore Teyvat</a>
-                <a href="/#trailer" class="nav-link" data-section="trailer">Trailer</a>
-                <a href="/#update" class="nav-link" data-section="update">Update</a>
-                <a href="/#download" class="nav-link" data-section="download">Download</a>
+
+                <a href="/#teyvat" class="nav-link" data-section="teyvat">
+                    Home
+                </a>
+
+                <a href="/#region-map" class="nav-link" data-section="region-map">
+                    Teyvat Map
+                </a>
+
+                <a href="/#gameplay-explore" class="nav-link" data-section="gameplay-explore">
+                    Gameplay
+                </a>
+                </a>
+
+                <a href="/#trailer" class="nav-link" data-section="trailer">
+                    Trailer
+                </a>
+
+                <a href="/#update" class="nav-link" data-section="update">
+                    Update
+                </a>
+
+                <a href="/#download" class="nav-link" data-section="download">
+                    Download
+                </a>
+
             </div>
 
         </div>

@@ -46,5 +46,6 @@ class Element extends Model
             'element_2_id'
         );
     }
-
 }
+
+
