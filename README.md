@@ -1,4 +1,4 @@
-# A Journey Through Teyvat
+<img width="1043" height="586" alt="image" src="https://github.com/user-attachments/assets/221b7dff-c920-41c3-bfb3-390e8d77ba79" /># A Journey Through Teyvat
 
 <p align="center">
   A fan-made interactive website inspired by the fantasy world of Genshin Impact.
@@ -20,7 +20,7 @@ The website is designed to provide an engaging user experience through modern we
 
 ## Homepage
 
-![Homepage Preview](./screenshots/homepage.png)
+![Homepage Preview](<img width="790" height="443" alt="image" src="https://github.com/user-attachments/assets/5d27f176-0777-46d7-a30a-6931a811bc2d" />)
 
 ## Teyvat Map
 
