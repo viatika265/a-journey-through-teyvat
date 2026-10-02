@@ -5,8 +5,6 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 console.log("GSAP berhasil dimuat:", gsap.version);
-
-
 // ==================================================
 // HERO
 // ==================================================
@@ -333,6 +331,75 @@ if (story) {
 }
 
 const regionsSection = document.querySelector("#region-map");
+
+const regionIntro = document.querySelector("#region-intro");
+
+if (
+    regionIntro &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+    const regionLogo = regionIntro.querySelector(".bg-contain");
+    const regionName = regionIntro.querySelector("h1");
+    const regionDivider = regionIntro.querySelector("svg");
+    const regionSubtitle = regionIntro.querySelector("p");
+    const introTimeline = gsap.timeline();
+
+    if (regionLogo) {
+        introTimeline.fromTo(
+            regionLogo,
+            { autoAlpha: 0, y: 24, scale: 0.9 },
+            { autoAlpha: 1, y: 0, scale: 1, duration: 0.7, ease: "power3.out" }
+        );
+
+        regionLogo.addEventListener("pointerenter", () => {
+            gsap.to(regionLogo, {
+                scale: 1.08,
+                filter: "drop-shadow(0 0 10px rgba(222, 183, 108, 0.9)) drop-shadow(0 0 18px rgba(246, 246, 246, 0.65))",
+                transformOrigin: "center center",
+                duration: 0.22,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+
+        regionLogo.addEventListener("pointerleave", () => {
+            gsap.to(regionLogo, {
+                scale: 1,
+                filter: "none",
+                duration: 0.28,
+                ease: "power2.out",
+                overwrite: "auto"
+            });
+        });
+    }
+
+    if (regionName) {
+        introTimeline.fromTo(
+            regionName,
+            { autoAlpha: 0, y: 20 },
+            { autoAlpha: 1, y: 0, duration: 0.55, ease: "power3.out" },
+            "-=0.35"
+        );
+    }
+
+    if (regionDivider) {
+        introTimeline.fromTo(
+            regionDivider,
+            { autoAlpha: 0, scaleX: 0.85 },
+            { autoAlpha: 1, scaleX: 1, duration: 0.5, ease: "power2.out" },
+            "-=0.3"
+        );
+    }
+
+    if (regionSubtitle) {
+        introTimeline.fromTo(
+            regionSubtitle,
+            { autoAlpha: 0, y: 16 },
+            { autoAlpha: 1, y: 0, duration: 0.5, ease: "power3.out" },
+            "-=0.28"
+        );
+    }
+}
 
 if (regionsSection) {
     const regionPins = regionsSection.querySelectorAll(".region-pin");
@@ -711,8 +778,49 @@ revealSections.forEach(({ section, targets }) => {
 // ==================================================
 
 const navLinks = gsap.utils.toArray("#nav-menu .nav-link");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+navLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) return;
+
+        const destination = new URL(link.href, window.location.href);
+        if (
+            destination.origin !== window.location.origin ||
+            destination.pathname !== window.location.pathname ||
+            !destination.hash
+        ) {
+            return;
+        }
+
+        const target = document.getElementById(destination.hash.slice(1));
+        if (!target) return;
+
+        event.preventDefault();
+
+        const navHeight = document.querySelector("nav")?.getBoundingClientRect().height || 0;
+        const targetY = Math.max(
+            0,
+            target.getBoundingClientRect().top + window.scrollY - navHeight - 12
+        );
+
+        window.history.pushState(null, "", destination.hash);
+
+        if (prefersReducedMotion) {
+            window.scrollTo({ top: targetY, behavior: "auto" });
+            return;
+        }
+
+        gsap.to(window, {
+            duration: gsap.utils.clamp(0.8, 2, Math.abs(targetY - window.scrollY) / 1800),
+            scrollTo: { y: targetY },
+            ease: "power1.inOut",
+            overwrite: "auto"
+        });
+    });
+});
+
+if (!prefersReducedMotion) {
     gsap.fromTo(
         navLinks,
         { autoAlpha: 0, y: -14 },
@@ -787,6 +895,30 @@ if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const versionLabel = [...document.querySelectorAll("#whats-new h4")].find(
         (heading) => heading.textContent.trim() === "Version 7.0 Out Now"
     );
+    const cloudDividerImage = document.querySelector(
+        'img[src*="/landing-page/Cloud.png"]'
+    );
+
+    if (cloudDividerImage) {
+        gsap.set(cloudDividerImage, { x: 0, xPercent: -50 });
+
+        gsap.to(cloudDividerImage, {
+            x: 8,
+            y: 4,
+            opacity: 0.96,
+            duration: 16,
+            ease: "sine.inOut",
+            repeat: -1,
+            yoyo: true,
+            scrollTrigger: {
+                trigger: cloudDividerImage.parentElement,
+                start: "top bottom",
+                end: "bottom top",
+                toggleActions: "play pause resume pause"
+            }
+        });
+    }
+
     const cloudDividerTitle = document.querySelector(".pointer-events-none > h2");
     const combatTitle = document.querySelector("#elemental-combat .combat-title");
 
